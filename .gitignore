@@ -1,0 +1,30 @@
+
+# Configuración sensible
+.env
+.env.*
+!.env.example
+
+# Bases de datos locales SQLite
+*.sqlite
+*.sqlite3
+*.db
+
+# Logs y archivos temporales
+*.log
+*.tmp
+*.temp
+*.bak
+*.swp
+
+# Dependencias
+/node_modules/
+/vendor/
+
+# Configuración del editor
+.vscode/
+.idea/
+
+# Archivos del sistema operativo
+.DS_Store
+Thumbs.db
+Desktop.ini

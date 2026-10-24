@@ -1,11 +1,8 @@
+/* Reseteo global moderno */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-body {
-  zoom: 1;
 }
 
 #horarioHeader {
@@ -21,16 +18,20 @@ body {
 }
 
 #btnGuardarHorario {
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   width: 130px;
   height: 35px;
-  padding: 8px;
+  padding: 0 8px;
   color: #047857;
   background-color: #fff;
   border: 1px solid #047857;
   border-radius: 4px;
-  transition: 0.3s;
+  cursor: pointer;
+  overflow: hidden;
+  transition: color 0.3s ease;
 }
 
 #btnGuardarHorario span {
@@ -39,18 +40,17 @@ body {
 }
 
 #btnGuardarHorario::after {
-  position: absolute;
   content: "";
+  position: absolute;
   top: 0;
   left: 0;
   width: 0;
   height: 100%;
   background-color: #0e6b32;
-  transition: all 0.35s;
+  transition: width 0.35s ease;
 }
 
 #btnGuardarHorario:hover {
-  cursor: pointer;
   color: #fff;
 }
 
@@ -62,7 +62,7 @@ body {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   margin: 0 15px;
-  border: 1px solid red; /*temporal para guía*/
+  border: 1px solid red; /* temporal para guía */
 }
 
 #panelFuncionalidades {
@@ -89,61 +89,20 @@ body {
 
 #coloresFondo {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   background-color: #f7f8fa;
   border-radius: 14px;
-  padding: 10px;
+  padding: 15px 10px;
+  gap: 20px;
 }
 
 #listaColores {
   display: grid;
-  grid-template-columns: repeat(3, 90px);
-  column-gap: 15px;
-  row-gap: 10px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
 }
 
-/*Color Rojo*/
-#listaColores .cajaColor:nth-child(1) {
-  border: 1px solid #eb9ba4;
-  background-color: #fff1f2;
-  color: #9f399f;
-}
-
-/*Color Morado*/
-#listaColores .cajaColor:nth-child(2) {
-  border: 1px solid #713cec;
-  background-color: #eae3f8;
-  color: #3b1692;
-}
-
-/*Color Amarillo*/
-#listaColores .cajaColor:nth-child(3) {
-  border: 1px solid #eecb41;
-  background-color: #fffbeb;
-  color: #b37314;
-}
-
-/*Color Azul*/
-#listaColores .cajaColor:nth-child(4) {
-  border: 1px solid #2563eb;
-  background-color: #eff6ff;
-  color: #3154b4;
-}
-
-/*Color Verde*/
-#listaColores .cajaColor:nth-child(5) {
-  border: 1px solid #66ce9d;
-  background-color: #ecfdf5;
-  color: #227c52;
-}
-
-/*Color Blanco*/
-#listaColores .cajaColor:nth-child(6) {
-  border: 1px solid #a39898;
-  background-color: white;
-  color: #837979;
-}
-
+/* Estilo base de la caja de color */
 .cajaColor {
   display: flex;
   justify-content: center;
@@ -162,7 +121,87 @@ body {
   min-height: 19px;
 }
 
-/*Punto para recalcar cual es el color seleccionado*/
 .cajaColor span {
   color: #047857;
+}
+
+.cajaColor--rojo {
+  border: 1px solid #eb9ba4;
+  background-color: #fff1f2;
+  color: #9f399f;
+}
+
+.cajaColor--morado {
+  border: 1px solid #713cec;
+  background-color: #eae3f8;
+  color: #3b1692;
+}
+
+.cajaColor--amarillo {
+  border: 1px solid #eecb41;
+  background-color: #fffbeb;
+  color: #b37314;
+}
+
+.cajaColor--azul {
+  border: 1px solid #2563eb;
+  background-color: #eff6ff;
+  color: #3154b4;
+}
+
+.cajaColor--verde {
+  border: 1px solid #66ce9d;
+  background-color: #ecfdf5;
+  color: #227c52;
+}
+
+.cajaColor--blanco {
+  border: 1px solid #a39898;
+  background-color: #ffffff;
+  color: #837979;
+}
+
+/* Bordes */
+#listaBordes {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0 5px;
+  gap: 20px;
+  font-size: 14px;
+}
+
+.cajaBorde {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 15px;
+  border: 1px solid #000;
+  min-height: 33px;
+  border-radius: 4px;
+}
+
+.cajaBorde--verdura {
+  color: #2a7336;
+  background-color: #eaf5ec;
+  border: 1px solid #2a7336;
+}
+
+.cajaBorde--limpieza {
+  color: #890f94;
+  background-color: #f3e6f9;
+  border: 1px solid #940f87;
+}
+
+.cajaBorde--diario {
+  color: #b86a00;
+  background-color: #fff5e5;
+  border: 1px solid #b86a00;
+}
+
+.activo {
+  font-size: 12px;
+  background-color: #fff;
+  padding: 2px 6px;
+  border-radius: 10px;
 }

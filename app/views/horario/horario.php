@@ -41,45 +41,59 @@
                 <section id="coloresSeccion">
 
                     <div id="coloresHeader">
+
                         <span class="inter-semibold">Colores y bordes</span>
                         <input type="checkbox">
+
+
                     </div>
 
                     <div id="coloresFondo">
-                        <section id="listaColores">
 
-                            <div class="cajaColor">
+                        <section id="listaColores" class="inter-normal">
+
+                            <div class="cajaColor cajaColor--rojo">
                                 <p>Rojo</p>
                             </div>
 
-                            <div class="cajaColor">
+                            <div class="cajaColor cajaColor--morado">
                                 <p>Morado</p>
                             </div>
 
-                            <div class="cajaColor">
+                            <div class="cajaColor cajaColor--amarillo">
                                 <p>Amarillo</p>
                             </div>
 
-                            <div class="cajaColor">
+                            <div class="cajaColor cajaColor--azul">
                                 <p>Azul</p>
                             </div>
 
-                            <div class="cajaColor">
+                            <div class="cajaColor cajaColor--verde">
                                 <p>Verde</p>
-
                             </div>
 
-                            <div class="cajaColor">
+                            <div class="cajaColor cajaColor--blanco">
                                 <p>Blanco</p>
                             </div>
 
                         </section>
 
-                        <section id="listaBordes">
+                        <hr style="margin: 0 5px;">
 
+                        <section id="listaBordes" class="inter-normal">
+
+                            <div class="cajaBorde cajaBorde--verdura">
+                                <span>• Verduras</span>
+                                <span class="activo">activo</span>
+                            </div>
+                            <div class="cajaBorde cajaBorde--limpieza">
+                                <span>• Limpieza</span>
+                            </div>
+                            <div class="cajaBorde cajaBorde--diario">
+                                <span>• Diario</span>
+                            </div>
                         </section>
                     </div>
-
 
                 </section>
 

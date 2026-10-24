@@ -44,7 +44,8 @@ body {
 
 #coloresSeccion {
   background-color: #ffffff;
-  padding: 0 10px;
+  padding: 10px 10px 20px 10px;
+  border-radius: 14px;
 }
 
 #coloresHeader {
@@ -63,7 +64,7 @@ body {
   justify-content: center;
   background-color: #f7f8fa;
   border-radius: 14px;
-  padding: 5px;
+  padding: 10px;
 }
 
 #listaColores {
@@ -117,7 +118,7 @@ body {
 
 .cajaColor {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 6px;
   margin: 5px;
@@ -133,6 +134,7 @@ body {
   min-height: 19px;
 }
 
+/*Punto para recalcar cual es el color seleccionado*/
 .cajaColor span {
   color: #047857;
 }

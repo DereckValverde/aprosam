@@ -1,0 +1,138 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  zoom: 1;
+}
+
+#horarioHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 30px 15px;
+}
+
+#horarioHeader h1 {
+  color: #111827;
+  font-size: 30px;
+}
+
+#btnGuardarHorario {
+  width: 130px;
+  height: 35px;
+  padding: 8px;
+  background-color: #047857;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+}
+
+#horarioGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  margin: 0 15px;
+  border: 1px solid red; /*temporal para guía*/
+}
+
+#panelFuncionalidades {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+}
+
+#coloresSeccion {
+  background-color: #ffffff;
+  padding: 0 10px;
+}
+
+#coloresHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 3px;
+}
+
+#coloresHeader span {
+  font-size: 14px;
+}
+
+#coloresFondo {
+  display: flex;
+  justify-content: center;
+  background-color: #f7f8fa;
+  border-radius: 14px;
+  padding: 5px;
+}
+
+#listaColores {
+  display: grid;
+  grid-template-columns: repeat(3, 90px);
+  column-gap: 15px;
+  row-gap: 10px;
+}
+
+/*Color Rojo*/
+#listaColores .cajaColor:nth-child(1) {
+  border: 1px solid #eb9ba4;
+  background-color: #fff1f2;
+  color: #9f399f;
+}
+
+/*Color Morado*/
+#listaColores .cajaColor:nth-child(2) {
+  border: 1px solid #713cec;
+  background-color: #eae3f8;
+  color: #3b1692;
+}
+
+/*Color Amarillo*/
+#listaColores .cajaColor:nth-child(3) {
+  border: 1px solid #eecb41;
+  background-color: #fffbeb;
+  color: #b37314;
+}
+
+/*Color Azul*/
+#listaColores .cajaColor:nth-child(4) {
+  border: 1px solid #2563eb;
+  background-color: #eff6ff;
+  color: #3154b4;
+}
+
+/*Color Verde*/
+#listaColores .cajaColor:nth-child(5) {
+  border: 1px solid #66ce9d;
+  background-color: #ecfdf5;
+  color: #227c52;
+}
+
+/*Color Blanco*/
+#listaColores .cajaColor:nth-child(6) {
+  border: 1px solid #a39898;
+  background-color: white;
+  color: #837979;
+}
+
+.cajaColor {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px;
+  margin: 5px;
+  gap: 6px;
+  border-radius: 4px;
+}
+
+.cajaColor p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 11px;
+  min-height: 19px;
+}
+
+.cajaColor span {
+  color: #047857;
+}

@@ -1,0 +1,26 @@
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/Inter.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+.inter-light {
+  font-family: "Inter", sans-serif;
+  font-variation-settings: "wght" 300;
+}
+
+.inter-normal {
+  font-family: "Inter", sans-serif;
+  font-variation-settings: "wght" 400;
+}
+
+.inter-semibold {
+  font-family: "Inter", sans-serif;
+  font-variation-settings: "wght" 500;
+}
+
+.inter-bold {
+  font-family: "Inter", sans-serif;
+  font-variation-settings: "wght" 700;
+}

@@ -1,0 +1,92 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f7f8fa;
+}
+
+#header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 15px;
+  background-color: #ffffff;
+
+  position: relative;
+}
+
+#logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#logo img {
+  border-radius: 20px;
+  box-shadow: 0 0 8px 2px rgba(209, 208, 208, 0.3);
+  width: 32px;
+}
+
+#logo span {
+  color: #111827;
+  font-size: 15px;
+}
+
+#navbar {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#navbar ul {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 320px;
+  gap: 20px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid #e9edf4;
+  background-color: #f4f7fa;
+}
+
+#navbar li {
+  list-style: none;
+}
+
+#navbar a {
+  text-decoration: none;
+  color: #475569;
+  font-size: 12px;
+  display: inline-block;
+  padding: 2px 8px;
+  border: 1px solid transparent;
+  border-radius: 6px;
+
+  transition: 0.3s;
+}
+
+#navbar a:hover {
+  background-color: #ffffff;
+  border-color: #ffffff;
+  box-shadow: 0 0 8px 3px rgba(209, 208, 208, 0.4);
+  color: #1b1b1b !important;
+}
+
+#menu-header i {
+  font-size: 25px;
+  color: #475569;
+}
+
+/*==============================================*/
+
+/*Esta clase es para colocarle a los botones del header
+para marcar cual es el que está activo*/
+.boton-activo {
+  background-color: #ffffff;
+  border-color: #ffffff;
+  color: #1b1b1b !important;
+}

@@ -21,13 +21,41 @@ body {
 }
 
 #btnGuardarHorario {
+  display: block;
+  position: relative;
   width: 130px;
   height: 35px;
   padding: 8px;
-  background-color: #047857;
-  color: #ffffff;
-  border: none;
+  color: #047857;
+  background-color: #fff;
+  border: 1px solid #047857;
   border-radius: 4px;
+  transition: 0.3s;
+}
+
+#btnGuardarHorario span {
+  position: relative;
+  z-index: 2;
+}
+
+#btnGuardarHorario::after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background-color: #0e6b32;
+  transition: all 0.35s;
+}
+
+#btnGuardarHorario:hover {
+  cursor: pointer;
+  color: #fff;
+}
+
+#btnGuardarHorario:hover::after {
+  width: 100%;
 }
 
 #horarioGrid {

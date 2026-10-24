@@ -29,7 +29,7 @@
             <h1 class="inter-semibold">Horario</h1>
 
             <button id="btnGuardarHorario" type="button">
-                Guardar Horario
+                <span>Guardar Horario</span>
             </button>
 
         </header>

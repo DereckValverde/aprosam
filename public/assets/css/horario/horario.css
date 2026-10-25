@@ -407,20 +407,24 @@ main {
   border-color: #ccc;
 }
 
-#listaColaboradoras::-webkit-scrollbar {
+#listaColaboradoras::-webkit-scrollbar,
+#horarioVista::-webkit-scrollbar {
   width: 6px;
 }
 
-#listaColaboradoras::-webkit-scrollbar-track {
+#listaColaboradoras::-webkit-scrollbar-track,
+#horarioVista::-webkit-scrollbar-track {
   background: transparent;
 }
 
-#listaColaboradoras::-webkit-scrollbar-thumb {
+#listaColaboradoras::-webkit-scrollbar-thumb,
+#horarioVista::-webkit-scrollbar-thumb {
   background-color: #cbd5e1;
   border-radius: 10px;
 }
 
-#listaColaboradoras::-webkit-scrollbar-thumb:hover {
+#listaColaboradoras::-webkit-scrollbar-thumb:hover,
+#horarioVista::-webkit-scrollbar-thumb:hover {
   background-color: #94a3b8;
 }
 
@@ -473,22 +477,26 @@ main {
 
 #horarioVista {
   position: relative;
-  background-color: var(--bg-white);
+  background-color: #f7f8fa;
   margin-top: 15px;
   flex: 1 1 0;
   min-height: 0;
   min-width: 0;
+  padding: 5px;
   width: 100%;
   border-radius: var(--radius-lg);
   overflow: auto;
 }
 
 #nombreSemana {
+  position: sticky;
+  top: 0;
+  z-index: 10;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-row: 1;
   gap: 1px;
   background-color: #fff;
+  border-radius: 14px 14px 0 0;
 }
 
 .nombreDia {
@@ -496,8 +504,10 @@ main {
   justify-content: center;
   align-items: center;
   padding: 15px;
-  background-color: #e8eeff;
-  color: #647b8f;
+  background-color: #0284c7;
+
+  color: #ffffff;
+
   border: none;
 }
 
@@ -514,13 +524,13 @@ main {
   grid-template-columns: repeat(7, 1fr);
   grid-template-rows: repeat(5, 1fr);
   height: 100%;
-  gap: 1px;
   background-color: #eaebef;
 }
 
 .dia {
   border: none;
   background-color: var(--bg-white);
+  margin: 1px;
 }
 .diaHeader {
   font-size: 11px;

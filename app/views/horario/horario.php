@@ -170,7 +170,27 @@
                 </section>
 
                 <section id="horarioVista">
-                    ACÁ VA LA VISTA DEL HORARIO
+
+                    <div id="nombreSemana" class="inter-bold">
+                        <div class="nombreDia lunes">LUN</div>
+                        <div class="nombreDia">MAR</div>
+                        <div class="nombreDia">MIÉ</div>
+                        <div class="nombreDia">JUE</div>
+                        <div class="nombreDia">VIE</div>
+                        <div class="nombreDia">SÁB</div>
+                        <div class="nombreDia domingo">DOM</div>
+                    </div>
+
+                    <div id="cajaDias">
+
+                        <?php for ($i = 1; $i <= 31; $i++): ?>
+                            <div class="dia">
+                                <div class="diaHeader">
+                                    <?= $i ?>
+                                </div>
+                            </div>
+                        <?php endfor; ?>
+
                 </section>
 
             </div>

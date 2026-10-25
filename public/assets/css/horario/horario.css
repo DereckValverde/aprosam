@@ -483,6 +483,50 @@ main {
   overflow: auto;
 }
 
+#nombreSemana {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-row: 1;
+  gap: 1px;
+  background-color: #fff;
+}
+
+.nombreDia {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  background-color: #e8eeff;
+  color: #647b8f;
+  border: none;
+}
+
+.lunes {
+  border-radius: 14px 0 0 0;
+}
+
+.domingo {
+  border-radius: 0 14px 0 0;
+}
+
+#cajaDias {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  height: 100%;
+  gap: 1px;
+  background-color: #eaebef;
+}
+
+.dia {
+  border: none;
+  background-color: var(--bg-white);
+}
+.diaHeader {
+  font-size: 11px;
+  padding: 5px 0 0 5px;
+}
+
 @media (max-width: 900px) {
   #horarioGrid {
     grid-template-columns: minmax(220px, 1fr) minmax(0, 2fr);

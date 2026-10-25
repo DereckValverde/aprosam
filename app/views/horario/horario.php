@@ -4,18 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?= BASE_URL . 'public/assets/css/header.css' ?>"> <!-- hoja de estilos del header -->
-    <link rel="stylesheet" href="<?= BASE_URL . 'public/assets/bootstrap-icons/bootstrap-icons.min.css' ?>"> <!-- Iconos de bootstrap -->
-    <link rel="stylesheet" href="<?= BASE_URL . 'public/assets/css/main.css' ?>"> <!-- Font Inter -->
-    <link rel="stylesheet" href="<?= BASE_URL . 'public/assets/css/horario/horario.css' ?>"> <!-- hoja de estilos propia para el módulo de horario -->
-    <link rel="stylesheet" href=""> <!-- estilo para el font -->
+    <link rel="stylesheet" href="<?= BASE_URL . 'public/assets/css/header.css' ?>">
+    <link rel="stylesheet" href="<?= BASE_URL . 'public/assets/bootstrap-icons/bootstrap-icons.min.css' ?>">
+    <link rel="stylesheet" href="<?= BASE_URL . 'public/assets/css/main.css' ?>">
+    <link rel="stylesheet" href="<?= BASE_URL . 'public/assets/css/horario/horario.css' ?>">
 
     <title>Horario</title>
 </head>
 
 <body>
 
-    <!-- Header -->
     <?php
     $paginaActual = 'horario';
     require_once LAYOUT_PATH . 'header.php';
@@ -23,15 +21,13 @@
 
     <main>
 
-        <!-- Header del módulo de horario -->
         <header id="horarioHeader">
-
             <h1 class="inter-semibold">Horario</h1>
 
             <button id="btnGuardarHorario" type="button">
+                <i class="bi bi-floppy"></i>
                 <span>Guardar Horario</span>
             </button>
-
         </header>
 
         <div id="horarioGrid">
@@ -41,11 +37,8 @@
                 <section id="coloresSeccion">
 
                     <div id="coloresHeader">
-
-                        <span class="inter-semibold">Colores y bordes</span>
+                        <span class="inter-normal">Colores y bordes</span>
                         <input type="checkbox">
-
-
                     </div>
 
                     <div id="coloresFondo">
@@ -86,20 +79,86 @@
                                 <span>• Verduras</span>
                                 <span class="activo">activo</span>
                             </div>
+
                             <div class="cajaBorde cajaBorde--limpieza">
                                 <span>• Limpieza</span>
                             </div>
+
                             <div class="cajaBorde cajaBorde--diario">
                                 <span>• Diario</span>
                             </div>
+
                         </section>
+
                     </div>
 
                 </section>
 
+                <section id="colaboradorasSeccion" class="inter-normal">
 
-                <section id="colaboradorasSeccion">
-                    <p>colaboradoras</p>
+                    <div class="inter-normal" id="colaboradorasHeader">
+                        <span>────────</span>
+                        <span>Colaboradoras</span>
+                        <span>────────</span>
+                    </div>
+
+                    <div id="listaColaboradoras">
+
+                        <div class="colaboradorasFondo">
+                            <div class="cajaColaboradora">
+                                <div class="cajaContenido">
+                                    <div class="cajaNombre">
+                                        <img src="<?= BASE_URL . 'public/assets/images/logo.jpg' ?>" alt="">
+                                        <span>Dereck</span>
+                                    </div>
+                                    <div class="cajaTurnos">
+                                        <span>4 turnos</span>
+                                    </div>
+                                </div>
+                                <div class="cajaFiltro">
+                                    <i class="bi bi-funnel"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="colaboradorasFondo">
+                            <div class="cajaColaboradora">
+                                <div class="cajaContenido">
+                                    <div class="cajaNombre">
+                                        <img src="<?= BASE_URL . 'public/assets/images/logo.jpg' ?>" alt="">
+                                        <span>Nancy</span>
+                                    </div>
+                                    <div class="cajaTurnos">
+                                        <span>2 turnos</span>
+                                    </div>
+                                </div>
+                                <div class="cajaFiltro">
+                                    <i class="bi bi-funnel"></i>
+                                </div>
+                            </div>
+                        </div>
+
+                        <?php for ($i = 0; $i < 8; $i++): ?>
+                            <div class="colaboradorasFondos">
+                                <div class="cajaColaboradora">
+                                    <div class="cajaContenido">
+                                        <div class="cajaNombre">
+                                            <img src="<?= BASE_URL . 'public/assets/images/logo.jpg' ?>" alt="">
+                                            <span>Pedro</span>
+                                        </div>
+                                        <div class="cajaTurnos">
+                                            <span>5 turnos</span>
+                                        </div>
+                                    </div>
+                                    <div class="cajaFiltro">
+                                        <i class="bi bi-funnel"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        <?php endfor; ?>
+
+                    </div>
+
                 </section>
 
             </div>
@@ -113,19 +172,15 @@
                 <section id="horarioVista">
                     <p>horarioVista</p>
                 </section>
+
             </div>
 
         </div>
 
-
-
-
-
-
     </main>
 
-</body>
+    <script src="<?= BASE_URL . 'public/assets/js/main.js' ?>"></script>
 
-<script src="<?= BASE_URL . 'public/assets/js/main.js' ?>"></script>
+</body>
 
 </html>

@@ -22,7 +22,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  width: 130px;
+  width: 140px;
   height: 35px;
   padding: 0 8px;
   color: #047857;
@@ -30,11 +30,13 @@
   border: 1px solid #047857;
   border-radius: 4px;
   cursor: pointer;
+  gap: 6px;
   overflow: hidden;
   transition: color 0.3s ease;
 }
 
-#btnGuardarHorario span {
+#btnGuardarHorario span,
+#btnGuardarHorario i {
   position: relative;
   z-index: 2;
 }
@@ -62,18 +64,20 @@
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   margin: 0 15px;
-  border: 1px solid red; /* temporal para guía */
+  border: 1px solid red; /* Temporal para guía */
 }
 
 #panelFuncionalidades {
-  display: grid;
-  grid-template-rows: repeat(2, 1fr);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
 #coloresSeccion {
   background-color: #ffffff;
-  padding: 10px 10px 20px 10px;
+  padding: 10px 10px 20px;
   border-radius: 14px;
+  max-height: 400px;
 }
 
 #coloresHeader {
@@ -84,7 +88,8 @@
 }
 
 #coloresHeader span {
-  font-size: 14px;
+  font-size: 16px;
+  color: #475569;
 }
 
 #coloresFondo {
@@ -102,7 +107,6 @@
   gap: 8px;
 }
 
-/* Estilo base de la caja de color */
 .cajaColor {
   display: flex;
   justify-content: center;
@@ -111,13 +115,19 @@
   margin: 5px;
   gap: 6px;
   border-radius: 4px;
+  transition: transform 0.25s ease;
+}
+
+.cajaColor:hover {
+  transform: translateY(-2px);
+  cursor: pointer;
 }
 
 .cajaColor p {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 11px;
+  font-size: 12px;
   min-height: 19px;
 }
 
@@ -177,9 +187,15 @@
   align-items: center;
   padding: 6px 15px;
   border: 1px solid #000;
-  min-height: 33px;
+  min-height: 35px;
   border-radius: 4px;
   font-size: 13px;
+  transition: transform 0.25s ease;
+}
+
+.cajaBorde:hover {
+  transform: translateY(-2px);
+  cursor: pointer;
 }
 
 .cajaBorde--verdura {
@@ -205,4 +221,133 @@
   background-color: #fff;
   padding: 2px 6px;
   border-radius: 10px;
+}
+
+/* Sección de colaboradoras */
+#colaboradorasSeccion {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border-radius: 14px;
+  gap: 22px;
+  max-height: 400px;
+  overflow: hidden;
+  min-height: 0;
+}
+
+#colaboradorasHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+  margin: 20px;
+  flex-shrink: 0;
+}
+
+#colaboradorasHeader span {
+  font-size: 16px;
+  color: #475569;
+}
+
+#listaColaboradoras {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+  flex: 1;
+  padding: 0 0 15px;
+  border-radius: 0 0 14px 14px;
+}
+
+/* Redondeo de la barra de desplazamiento */
+#listaColaboradoras::-webkit-scrollbar {
+  width: 8px;
+}
+
+#listaColaboradoras::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 0 0 14px 0;
+}
+
+#listaColaboradoras::-webkit-scrollbar-thumb {
+  background-color: #cbd5e1;
+  border-radius: 10px;
+}
+
+#listaColaboradoras::-webkit-scrollbar-thumb:hover {
+  background-color: #94a3b8;
+}
+
+.cajaColaboradora {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 20px 0 20px;
+  cursor: grab;
+}
+
+.cajaContenido {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 15px 0 10px;
+  border: 1px solid #9acee9;
+  width: 85%;
+  border-radius: 10px;
+  min-height: 42px;
+}
+
+.cajaNombre {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.cajaNombre img {
+  width: 30px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.cajaNombre span {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.cajaTurnos {
+  font-size: 11px;
+  padding: 4px 8px;
+  background-color: #0284c7;
+  color: #ffffff;
+  border-radius: 12px;
+}
+
+.cajaFiltro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 18px;
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  cursor: pointer;
+
+  transition: 0.45s;
+}
+
+.cajaFiltro:hover {
+  background-color: #475569;
+  border: none;
+  color: #ffffff;
+}
+
+.filtro-activo {
+  background-color: #e2e8f0;
+  border: 1px solid #ccc;
 }

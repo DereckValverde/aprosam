@@ -1,7 +1,24 @@
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+:root {
+  --color-primary: #047857;
+  --color-primary-hover: #0e6b32;
+  --color-text-dark: #111827;
+  --color-text-muted: #475569;
+  --color-border: #e2e8f0;
+  --bg-white: #ffffff;
+  --bg-light: #f7f8fa;
+  --radius-sm: 4px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --transition-fast: 0.25s ease;
+  --transition-normal: 0.35s ease;
 }
 
 html,
@@ -15,6 +32,13 @@ body {
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
 }
 
 main {
@@ -30,13 +54,33 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 30px 15px;
+  margin: 20px 15px;
   flex-shrink: 0;
 }
 
 #horarioHeader h1 {
-  color: #111827;
-  font-size: 30px;
+  color: var(--color-text-dark);
+  font-size: 1.875rem;
+}
+
+#horarioGrid {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) minmax(0, 4fr);
+  gap: 15px;
+  margin: 0 15px;
+  width: calc(100% - 30px);
+  flex: 1 1 0;
+  min-height: 0;
+}
+
+#panelFuncionalidades,
+#panelHorario {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
 }
 
 #btnGuardarHorario {
@@ -47,14 +91,15 @@ main {
   width: 140px;
   height: 35px;
   padding: 0 8px;
-  color: #047857;
-  background-color: #fff;
-  border: 1px solid #047857;
-  border-radius: 4px;
+  color: var(--color-primary);
+  background-color: var(--bg-white);
+  border: 1px solid var(--color-primary);
+  border-radius: var(--radius-sm);
   cursor: pointer;
   gap: 6px;
   overflow: hidden;
-  transition: color 0.3s ease;
+  transition: color var(--transition-normal);
+  will-change: color;
 }
 
 #btnGuardarHorario span,
@@ -67,50 +112,31 @@ main {
   content: "";
   position: absolute;
   inset: 0;
-  width: 0;
+  width: 100%;
   height: 100%;
-  background-color: #0e6b32;
-  transition: width 0.35s ease;
+  background-color: var(--color-primary-hover);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--transition-normal);
+  will-change: transform;
 }
 
 #btnGuardarHorario:hover {
-  color: #fff;
+  color: var(--bg-white);
 }
 
 #btnGuardarHorario:hover::after {
-  width: 100%;
-}
-
-#horarioGrid {
-  display: grid;
-  grid-template-columns: minmax(250px, 1fr) minmax(0, 4fr);
-  gap: 15px;
-  margin: 0 15px;
-  width: calc(100% - 30px);
-
-  flex: 1 1 0;
-  min-height: 0;
-  align-items: stretch;
-}
-
-#panelFuncionalidades,
-#panelHorario {
-  min-width: 0;
-  min-height: 0;
+  transform: scaleX(1);
 }
 
 #panelFuncionalidades {
-  display: flex;
-  flex-direction: column;
   gap: 18px;
-  height: 100%;
-  overflow: hidden;
 }
 
 #coloresSeccion {
-  background-color: #ffffff;
+  background-color: var(--bg-white);
   padding: 10px 10px 20px;
-  border-radius: 14px;
+  border-radius: var(--radius-lg);
   flex: 0 0 auto;
 }
 
@@ -122,15 +148,15 @@ main {
 }
 
 #coloresHeader span {
-  font-size: 16px;
-  color: #475569;
+  font-size: 1rem;
+  color: var(--color-text-muted);
 }
 
 #coloresFondo {
   display: flex;
   flex-direction: column;
-  background-color: #f7f8fa;
-  border-radius: 14px;
+  background-color: var(--bg-light);
+  border-radius: var(--radius-lg);
   padding: 15px 10px;
   gap: 20px;
 }
@@ -146,27 +172,27 @@ main {
   justify-content: center;
   align-items: center;
   padding: 6px;
-  margin: 5px;
   gap: 6px;
-  border-radius: 4px;
-  transition: transform 0.25s ease;
+  border-radius: var(--radius-sm);
+  transition: transform var(--transition-fast);
+  cursor: pointer;
+  will-change: transform;
 }
 
 .cajaColor:hover {
   transform: translateY(-2px);
-  cursor: pointer;
 }
 
 .cajaColor p {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 12px;
+  font-size: 0.75rem;
   min-height: 19px;
 }
 
 .cajaColor span {
-  color: #047857;
+  color: var(--color-primary);
 }
 
 .cajaColor--rojo {
@@ -174,45 +200,38 @@ main {
   background-color: #fff1f2;
   color: #9f399f;
 }
-
 .cajaColor--morado {
   border: 1px solid #713cec;
   background-color: #eae3f8;
   color: #3b1692;
 }
-
 .cajaColor--amarillo {
   border: 1px solid #eecb41;
   background-color: #fffbeb;
   color: #b37314;
 }
-
 .cajaColor--azul {
   border: 1px solid #2563eb;
   background-color: #eff6ff;
   color: #3154b4;
 }
-
 .cajaColor--verde {
   border: 1px solid #66ce9d;
   background-color: #ecfdf5;
   color: #227c52;
 }
-
 .cajaColor--blanco {
   border: 1px solid #a39898;
   background-color: #ffffff;
   color: #837979;
 }
 
-/* Bordes */
-
 #listaBordes {
   display: flex;
   flex-direction: column;
   padding: 0 5px;
   gap: 17px;
-  font-size: 14px;
+  font-size: 0.875rem;
 }
 
 .cajaBorde {
@@ -222,14 +241,15 @@ main {
   padding: 6px 15px;
   min-height: 35px;
   border: 1px solid #000;
-  border-radius: 4px;
-  font-size: 13px;
-  transition: transform 0.25s ease;
+  border-radius: var(--radius-sm);
+  font-size: 0.8125rem;
+  transition: transform var(--transition-fast);
+  cursor: pointer;
+  will-change: transform;
 }
 
 .cajaBorde:hover {
   transform: translateY(-2px);
-  cursor: pointer;
 }
 
 .cajaBorde--verdura {
@@ -237,13 +257,11 @@ main {
   background-color: #eaf5ec;
   border-color: #2a7336;
 }
-
 .cajaBorde--limpieza {
   color: #890f94;
   background-color: #f3e6f9;
   border-color: #940f87;
 }
-
 .cajaBorde--diario {
   color: #b86a00;
   background-color: #fff5e5;
@@ -251,8 +269,8 @@ main {
 }
 
 .activo {
-  font-size: 12px;
-  background-color: #fff;
+  font-size: 0.75rem;
+  background-color: var(--bg-white);
   padding: 2px 6px;
   border-radius: 10px;
 }
@@ -260,10 +278,9 @@ main {
 #colaboradorasSeccion {
   display: flex;
   flex-direction: column;
-  background-color: #ffffff;
-  border-radius: 14px;
+  background-color: var(--bg-white);
+  border-radius: var(--radius-lg);
   gap: 18px;
-
   flex: 1 1 0;
   min-height: 0;
   overflow: hidden;
@@ -279,24 +296,21 @@ main {
 }
 
 #colaboradorasHeader span {
-  font-size: 16px;
-  color: #475569;
+  font-size: 1rem;
+  color: var(--color-text-muted);
 }
 
 #listaColaboradoras {
   display: flex;
   flex-direction: column;
   gap: 18px;
-
   flex: 1 1 0;
   min-height: 0;
   min-width: 0;
-
   overflow-y: auto;
   overflow-x: hidden;
-
   padding: 0 0 15px;
-  border-radius: 0 0 14px 14px;
+  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
 }
 
 .colaboradorasFondo {
@@ -313,6 +327,10 @@ main {
   cursor: grab;
 }
 
+.cajaColaboradora:active {
+  cursor: grabbing;
+}
+
 .cajaContenido {
   display: flex;
   justify-content: space-between;
@@ -323,7 +341,7 @@ main {
   width: 85%;
   min-width: 0;
   min-height: 42px;
-  border-radius: 10px;
+  border-radius: var(--radius-md);
 }
 
 .cajaNombre {
@@ -336,22 +354,27 @@ main {
 
 .cajaNombre img {
   width: 30px;
+  height: 30px;
+  object-fit: cover;
   flex-shrink: 0;
   border: 1px solid #ccc;
   border-radius: 6px;
 }
 
 .cajaNombre span {
-  font-size: 14px;
+  font-size: 0.875rem;
   line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .cajaTurnos {
   flex-shrink: 0;
-  font-size: 11px;
+  font-size: 0.6875rem;
   padding: 4px 8px;
   background-color: #0284c7;
-  color: #ffffff;
+  color: var(--bg-white);
   border-radius: 12px;
 }
 
@@ -362,34 +385,34 @@ main {
   flex: 0 0 32px;
   height: 32px;
   padding: 4px;
-  font-size: 18px;
-  color: #475569;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
+  font-size: 1.125rem;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: 0.45s;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
 .cajaFiltro:hover {
-  background-color: #475569;
-  border-color: #475569;
-  color: #ffffff;
+  background-color: var(--color-text-muted);
+  border-color: var(--color-text-muted);
+  color: var(--bg-white);
 }
 
 .filtro-activo {
-  background-color: #e2e8f0;
-  border: 1px solid #ccc;
+  background-color: var(--color-border);
+  border-color: #ccc;
 }
 
-/* Scrollbar */
-
 #listaColaboradoras::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 
 #listaColaboradoras::-webkit-scrollbar-track {
   background: transparent;
-  border-radius: 0 0 14px 0;
 }
 
 #listaColaboradoras::-webkit-scrollbar-thumb {
@@ -401,28 +424,19 @@ main {
   background-color: #94a3b8;
 }
 
-#panelHorario {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  overflow: hidden;
-}
-
-/* Encabezado del horario */
-
 #horarioTop {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 12px;
   padding: 14px;
-  background-color: #ffffff;
-  border-radius: 14px;
+  background-color: var(--bg-white);
+  border-radius: var(--radius-lg);
   flex: 0 0 auto;
 }
 
 #horarioTitulo {
-  font-size: 24px;
+  font-size: 1.5rem;
 }
 
 #dropdowns {
@@ -435,17 +449,17 @@ main {
   height: 34px;
   padding: 0 30px 0 12px;
   font-family: inherit;
-  font-size: 13px;
+  font-size: 0.8125rem;
   font-weight: 500;
   color: #374151;
-  background-color: #ffffff;
+  background-color: var(--bg-white);
   border: 1px solid #d1d5db;
   border-radius: 7px;
   cursor: pointer;
   outline: none;
   transition:
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
 }
 
 #dropdowns select:hover {
@@ -459,21 +473,15 @@ main {
 
 #horarioVista {
   position: relative;
-  background-color: #ffffff;
+  background-color: var(--bg-white);
   margin-top: 15px;
-
   flex: 1 1 0;
   min-height: 0;
   min-width: 0;
   width: 100%;
-
-  border-radius: 14px;
+  border-radius: var(--radius-lg);
   overflow: auto;
 }
-
-/* =========================
-   PANTALLAS ESTRECHAS
-========================= */
 
 @media (max-width: 900px) {
   #horarioGrid {
@@ -485,6 +493,17 @@ main {
   }
 
   #horarioTitulo {
-    font-size: 20px;
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  #horarioGrid {
+    grid-template-columns: 1fr;
+  }
+
+  body {
+    overflow: auto;
+    height: auto;
   }
 }

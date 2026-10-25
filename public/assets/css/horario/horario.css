@@ -1,8 +1,29 @@
-/* Reseteo global moderno */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+  padding-bottom: 15px;
 }
 
 #horarioHeader {
@@ -10,6 +31,7 @@
   justify-content: space-between;
   align-items: center;
   margin: 30px 15px;
+  flex-shrink: 0;
 }
 
 #horarioHeader h1 {
@@ -44,8 +66,7 @@
 #btnGuardarHorario::after {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0;
   width: 0;
   height: 100%;
   background-color: #0e6b32;
@@ -62,22 +83,35 @@
 
 #horarioGrid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: minmax(250px, 1fr) minmax(0, 4fr);
+  gap: 15px;
   margin: 0 15px;
-  border: 1px solid red; /* Temporal para guía */
+  width: calc(100% - 30px);
+
+  flex: 1 1 0;
+  min-height: 0;
+  align-items: stretch;
+}
+
+#panelFuncionalidades,
+#panelHorario {
+  min-width: 0;
+  min-height: 0;
 }
 
 #panelFuncionalidades {
   display: flex;
   flex-direction: column;
   gap: 18px;
+  height: 100%;
+  overflow: hidden;
 }
 
 #coloresSeccion {
   background-color: #ffffff;
   padding: 10px 10px 20px;
   border-radius: 14px;
-  max-height: 400px;
+  flex: 0 0 auto;
 }
 
 #coloresHeader {
@@ -103,7 +137,7 @@
 
 #listaColores {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 8px;
 }
 
@@ -172,12 +206,12 @@
 }
 
 /* Bordes */
+
 #listaBordes {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   padding: 0 5px;
-  gap: 20px;
+  gap: 17px;
   font-size: 14px;
 }
 
@@ -186,8 +220,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 6px 15px;
-  border: 1px solid #000;
   min-height: 35px;
+  border: 1px solid #000;
   border-radius: 4px;
   font-size: 13px;
   transition: transform 0.25s ease;
@@ -201,19 +235,19 @@
 .cajaBorde--verdura {
   color: #2a7336;
   background-color: #eaf5ec;
-  border: 1px solid #2a7336;
+  border-color: #2a7336;
 }
 
 .cajaBorde--limpieza {
   color: #890f94;
   background-color: #f3e6f9;
-  border: 1px solid #940f87;
+  border-color: #940f87;
 }
 
 .cajaBorde--diario {
   color: #b86a00;
   background-color: #fff5e5;
-  border: 1px solid #b86a00;
+  border-color: #b86a00;
 }
 
 .activo {
@@ -223,16 +257,16 @@
   border-radius: 10px;
 }
 
-/* Sección de colaboradoras */
 #colaboradorasSeccion {
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
   border-radius: 14px;
-  gap: 22px;
-  max-height: 400px;
-  overflow: hidden;
+  gap: 18px;
+
+  flex: 1 1 0;
   min-height: 0;
+  overflow: hidden;
 }
 
 #colaboradorasHeader {
@@ -240,7 +274,7 @@
   justify-content: center;
   align-items: center;
   gap: 22px;
-  margin: 20px;
+  margin: 20px 15px 0;
   flex-shrink: 0;
 }
 
@@ -252,16 +286,103 @@
 #listaColaboradoras {
   display: flex;
   flex-direction: column;
-  gap: 22px;
+  gap: 18px;
+
+  flex: 1 1 0;
+  min-height: 0;
+  min-width: 0;
+
   overflow-y: auto;
   overflow-x: hidden;
-  min-height: 0;
-  flex: 1;
+
   padding: 0 0 15px;
   border-radius: 0 0 14px 14px;
 }
 
-/* Redondeo de la barra de desplazamiento */
+.colaboradorasFondo {
+  flex: 0 0 auto;
+  min-width: 0;
+}
+
+.cajaColaboradora {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  margin: 0 20px;
+  cursor: grab;
+}
+
+.cajaContenido {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px;
+  border: 1px solid #9acee9;
+  width: 85%;
+  min-width: 0;
+  min-height: 42px;
+  border-radius: 10px;
+}
+
+.cajaNombre {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.cajaNombre img {
+  width: 30px;
+  flex-shrink: 0;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.cajaNombre span {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.cajaTurnos {
+  flex-shrink: 0;
+  font-size: 11px;
+  padding: 4px 8px;
+  background-color: #0284c7;
+  color: #ffffff;
+  border-radius: 12px;
+}
+
+.cajaFiltro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 0 0 32px;
+  height: 32px;
+  padding: 4px;
+  font-size: 18px;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.45s;
+}
+
+.cajaFiltro:hover {
+  background-color: #475569;
+  border-color: #475569;
+  color: #ffffff;
+}
+
+.filtro-activo {
+  background-color: #e2e8f0;
+  border: 1px solid #ccc;
+}
+
+/* Scrollbar */
+
 #listaColaboradoras::-webkit-scrollbar {
   width: 8px;
 }
@@ -280,93 +401,24 @@
   background-color: #94a3b8;
 }
 
-.cajaColaboradora {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 20px 0 20px;
-  cursor: grab;
-}
-
-.cajaContenido {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 15px 0 10px;
-  border: 1px solid #9acee9;
-  width: 85%;
-  border-radius: 10px;
-  min-height: 42px;
-}
-
-.cajaNombre {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-}
-
-.cajaNombre img {
-  width: 30px;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-}
-
-.cajaNombre span {
-  font-size: 14px;
-  line-height: 1;
-}
-
-.cajaTurnos {
-  font-size: 11px;
-  padding: 4px 8px;
-  background-color: #0284c7;
-  color: #ffffff;
-  border-radius: 12px;
-}
-
-.cajaFiltro {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 18px;
-  width: 32px;
-  height: 32px;
-  padding: 4px;
-  color: #475569;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
-  cursor: pointer;
-
-  transition: 0.45s;
-}
-
-.cajaFiltro:hover {
-  background-color: #475569;
-  border: none;
-  color: #ffffff;
-}
-
-.filtro-activo {
-  background-color: #e2e8f0;
-  border: 1px solid #ccc;
-}
-
-/*Header horario*/
-
 #panelHorario {
-  grid-column: 2/6;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
 }
+
+/* Encabezado del horario */
 
 #horarioTop {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
   padding: 14px;
-  margin: 0 0 0 10px;
   background-color: #ffffff;
-
   border-radius: 14px;
+  flex: 0 0 auto;
 }
 
 #horarioTitulo {
@@ -382,19 +434,15 @@
 #dropdowns select {
   height: 34px;
   padding: 0 30px 0 12px;
-
   font-family: inherit;
   font-size: 13px;
   font-weight: 500;
   color: #374151;
-
   background-color: #ffffff;
   border: 1px solid #d1d5db;
   border-radius: 7px;
-
   cursor: pointer;
   outline: none;
-
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease;
@@ -407,4 +455,36 @@
 #dropdowns select:focus {
   border-color: #3769ce;
   box-shadow: 0 0 0 3px rgba(55, 105, 206, 0.12);
+}
+
+#horarioVista {
+  position: relative;
+  background-color: #ffffff;
+  margin-top: 15px;
+
+  flex: 1 1 0;
+  min-height: 0;
+  min-width: 0;
+  width: 100%;
+
+  border-radius: 14px;
+  overflow: auto;
+}
+
+/* =========================
+   PANTALLAS ESTRECHAS
+========================= */
+
+@media (max-width: 900px) {
+  #horarioGrid {
+    grid-template-columns: minmax(220px, 1fr) minmax(0, 2fr);
+  }
+
+  #horarioTop {
+    flex-wrap: wrap;
+  }
+
+  #horarioTitulo {
+    font-size: 20px;
+  }
 }

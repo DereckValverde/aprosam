@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="<?= BASE_URL . 'public/assets/css/header.css' ?>">
     <link rel="stylesheet" href="<?= BASE_URL . 'public/assets/bootstrap-icons/bootstrap-icons.min.css' ?>">
     <link rel="stylesheet" href="<?= BASE_URL . 'public/assets/css/main.css' ?>">
@@ -20,7 +21,6 @@
     ?>
 
     <main>
-
         <header id="horarioHeader">
             <h1 class="inter-semibold">Horario</h1>
 
@@ -35,46 +35,36 @@
             <div id="panelFuncionalidades">
 
                 <section id="coloresSeccion">
-
                     <div id="coloresHeader">
                         <span class="inter-normal">Colores y bordes</span>
                         <input type="checkbox">
                     </div>
 
                     <div id="coloresFondo">
-
                         <section id="listaColores" class="inter-normal">
-
                             <div class="cajaColor cajaColor--rojo">
                                 <p>Rojo</p>
                             </div>
-
                             <div class="cajaColor cajaColor--morado">
                                 <p>Morado</p>
                             </div>
-
                             <div class="cajaColor cajaColor--amarillo">
                                 <p>Amarillo</p>
                             </div>
-
                             <div class="cajaColor cajaColor--azul">
                                 <p>Azul</p>
                             </div>
-
                             <div class="cajaColor cajaColor--verde">
                                 <p>Verde</p>
                             </div>
-
                             <div class="cajaColor cajaColor--blanco">
                                 <p>Blanco</p>
                             </div>
-
                         </section>
 
                         <hr style="margin: 0 5px;">
 
                         <section id="listaBordes" class="inter-normal">
-
                             <div class="cajaBorde cajaBorde--verdura">
                                 <span>• Verduras</span>
                                 <span class="activo">activo</span>
@@ -87,16 +77,13 @@
                             <div class="cajaBorde cajaBorde--diario">
                                 <span>• Diario</span>
                             </div>
-
                         </section>
-
                     </div>
-
                 </section>
 
                 <section id="colaboradorasSeccion" class="inter-normal">
 
-                    <div class="inter-normal" id="colaboradorasHeader">
+                    <div id="colaboradorasHeader">
                         <span>────────</span>
                         <span>Colaboradoras</span>
                         <span>────────</span>
@@ -111,13 +98,9 @@
                                         <img src="<?= BASE_URL . 'public/assets/images/logo.jpg' ?>" alt="">
                                         <span>Dereck</span>
                                     </div>
-                                    <div class="cajaTurnos">
-                                        <span>4 turnos</span>
-                                    </div>
+                                    <div class="cajaTurnos"><span>4 turnos</span></div>
                                 </div>
-                                <div class="cajaFiltro">
-                                    <i class="bi bi-funnel"></i>
-                                </div>
+                                <div class="cajaFiltro"><i class="bi bi-funnel"></i></div>
                             </div>
                         </div>
 
@@ -128,45 +111,34 @@
                                         <img src="<?= BASE_URL . 'public/assets/images/logo.jpg' ?>" alt="">
                                         <span>Nancy</span>
                                     </div>
-                                    <div class="cajaTurnos">
-                                        <span>2 turnos</span>
-                                    </div>
+                                    <div class="cajaTurnos"><span>2 turnos</span></div>
                                 </div>
-                                <div class="cajaFiltro">
-                                    <i class="bi bi-funnel"></i>
-                                </div>
+                                <div class="cajaFiltro"><i class="bi bi-funnel"></i></div>
                             </div>
                         </div>
 
                         <?php for ($i = 0; $i < 8; $i++): ?>
-                            <div class="colaboradorasFondos">
+                            <div class="colaboradorasFondo">
                                 <div class="cajaColaboradora">
                                     <div class="cajaContenido">
                                         <div class="cajaNombre">
                                             <img src="<?= BASE_URL . 'public/assets/images/logo.jpg' ?>" alt="">
                                             <span>Pedro</span>
                                         </div>
-                                        <div class="cajaTurnos">
-                                            <span>5 turnos</span>
-                                        </div>
+                                        <div class="cajaTurnos"><span>5 turnos</span></div>
                                     </div>
-                                    <div class="cajaFiltro">
-                                        <i class="bi bi-funnel"></i>
-                                    </div>
+                                    <div class="cajaFiltro"><i class="bi bi-funnel"></i></div>
                                 </div>
                             </div>
                         <?php endfor; ?>
 
                     </div>
-
                 </section>
-
             </div>
 
             <div id="panelHorario" class="inter-normal">
 
                 <section id="horarioTop">
-
                     <header id="horarioTitulo">
                         <p>Agosto 2022</p>
                     </header>
@@ -197,10 +169,12 @@
                     </div>
                 </section>
 
+                <section id="horarioVista">
+                    ACÁ VA LA VISTA DEL HORARIO
+                </section>
+
             </div>
-
         </div>
-
     </main>
 
     <script src="<?= BASE_URL . 'public/assets/js/main.js' ?>"></script>

@@ -1,20 +1,42 @@
 <?php
 
-$directorio_db = dirname(__DIR__) . '/database';
-$ruta_db = $directorio_db . '/database.db';
+require_once 'config.php';
 
-try {
+class Database
+{
 
-    if (!is_dir($directorio_db)) {
-        mkdir($directorio_db, 0777, true);
+    private static $instance = null;
+    private $conn;
+
+    private function __construct()
+    {
+        try {
+
+            $this->conn = new PDO("sqlite:" . DB_PATH);
+
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+
+            //Activar claves foráneas
+            $this->conn->exec('PRAGMA foreign_keys = ON;');
+        } catch (PDOException $error) {
+            die("Error de conexión" . $error->getMessage());
+        }
     }
 
-    $conexion = new PDO("sqlite:" . $ruta_db);
-    $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $conexion->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    public static function getInstance()
+    {
+        if (self::$instance === null) {
+            self::$instance = new Database();
+        }
 
-    // Activar soporte para foreign keys en SQLite
-    $conexion->exec("PRAGMA foreign_keys = ON;");
-} catch (PDOException $error) {
-    die("Error al conectar: " . $error->getMessage());
+        return self::$instance;
+    }
+
+    public function getConnection()
+    {
+        return $this->conn;
+    }
+
+    private function __clone() {}
 }

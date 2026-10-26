@@ -55,7 +55,7 @@ es enero, que enero = 0, febrero = 1... así que dentro de la función
 se contempla esto y se coloca mes - 1, para que por parametro se pueda 
 colocar el mes correspondiente como normalmente es:
 
-enero = 1, febrero = 2... agosto = 8... diciembre = 11
+enero = 1, febrero = 2... agosto = 8... diciembre = 12
 
 tener en cuenta que "return primerDia" es:
 
@@ -64,7 +64,6 @@ lunes = 1
 martes = 2
 ...
 */
-
 function determinarPrimerDia(mes, anio) {
   //Se corrije el mes para que coincida con el formato de Date();
   mes = mes - 1;
@@ -77,6 +76,17 @@ function determinarPrimerDia(mes, anio) {
   return primerDia;
 }
 
-console.log(determinarPrimerDia(11, 2026));
+/*
+Función que devuelve la cantidad de días de un mes, tomando en cuenta 
+año y mes. Esta función ya toma en consideración años bisiestos.
 
-//cargarListaColaboradoras();
+acá no se resta -1 al mes, ya que al colocar dia = 0 como parametro
+la función de js se devuelve al mes anterior y retorna el total de días.
+
+así que si se coloca (2026,2,0) sería = 0 de marzo de 2026,
+como no existe, la función se devuelve a febrero y devuelve el total de días 
+de ese mes anterior.
+*/
+function determinarCantidadDiasMes(anio, mes) {
+  return new Date(anio, mes, 0).getDate();
+}

@@ -8,3 +8,5 @@ define('APP_PATH', dirname(__DIR__) . '/');
 define('PUBLIC_PATH', dirname(__DIR__) . '/public/');
 define('VIEW_PATH', APP_PATH . 'views/');
 define('LAYOUT_PATH', VIEW_PATH . 'layouts/');
+
+define('DB_PATH', APP_PATH . 'database/database.db');

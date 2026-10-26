@@ -18,6 +18,11 @@
 
             </li>
 
+            <li>
+                <a class="inter-normal" href="<?= BASE_URL . 'colaboradoras' ?>">Inventario</a>
+
+            </li>
+
         </ul>
     </nav>
 

@@ -90,48 +90,7 @@
                     </div>
 
                     <div id="listaColaboradoras">
-
-                        <div class="colaboradorasFondo">
-                            <div class="cajaColaboradora">
-                                <div class="cajaContenido">
-                                    <div class="cajaNombre">
-                                        <img src="<?= BASE_URL . 'public/assets/images/logo.jpg' ?>" alt="">
-                                        <span>Dereck</span>
-                                    </div>
-                                    <div class="cajaTurnos"><span>4 turnos</span></div>
-                                </div>
-                                <div class="cajaFiltro"><i class="bi bi-funnel"></i></div>
-                            </div>
-                        </div>
-
-                        <div class="colaboradorasFondo">
-                            <div class="cajaColaboradora">
-                                <div class="cajaContenido">
-                                    <div class="cajaNombre">
-                                        <img src="<?= BASE_URL . 'public/assets/images/logo.jpg' ?>" alt="">
-                                        <span>Nancy</span>
-                                    </div>
-                                    <div class="cajaTurnos"><span>2 turnos</span></div>
-                                </div>
-                                <div class="cajaFiltro"><i class="bi bi-funnel"></i></div>
-                            </div>
-                        </div>
-
-                        <?php for ($i = 0; $i < 8; $i++): ?>
-                            <div class="colaboradorasFondo">
-                                <div class="cajaColaboradora">
-                                    <div class="cajaContenido">
-                                        <div class="cajaNombre">
-                                            <img src="<?= BASE_URL . 'public/assets/images/logo.jpg' ?>" alt="">
-                                            <span>Pedro</span>
-                                        </div>
-                                        <div class="cajaTurnos"><span>5 turnos</span></div>
-                                    </div>
-                                    <div class="cajaFiltro"><i class="bi bi-funnel"></i></div>
-                                </div>
-                            </div>
-                        <?php endfor; ?>
-
+                        <!-- Lista de colaboradoras inyectadas desde JS -->
                     </div>
                 </section>
             </div>
@@ -198,6 +157,10 @@
     </main>
 
     <script src="<?= BASE_URL . 'public/assets/js/main.js' ?>"></script>
+    <script>
+        const BASE_URL = "<?= BASE_URL ?>";
+    </script>
+    <script src="<?= BASE_URL . 'public/assets/js/horario/horario.js' ?>"></script>
 
 </body>
 

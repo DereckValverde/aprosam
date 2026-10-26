@@ -19,7 +19,12 @@ class HorarioController
         header('Content-Type: application/json');
         $colaboradoras = $this->horarioModel->getColaboradoras();
 
-        echo json_encode($colaboradoras);
+        if ($colaboradoras) {
+            echo json_encode([
+                'success' => true,
+                'data' => $colaboradoras
+            ]);
+        }
     }
 
 

@@ -478,7 +478,7 @@ main {
   border-radius: 14px;
 }
 
-#horarioVista span {
+#horarioVista > span {
   color: #bbbbbb;
   font-size: 22px;
 }
@@ -561,31 +561,12 @@ main {
   border: none;
   border-top: 1px solid #e5e7eb;
   visibility: hidden;
+  transform: translateY(-2px);
 }
 
 .divisorTurnos.divisorVisible {
   visibility: visible;
-}
-
-#horarioVista.horarioVacio {
-  display: flex;
-  flex: 1 1 0;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  min-width: 0;
-  min-height: 0;
-  margin-top: 15px;
-  padding: 5px;
-  overflow: auto;
-  background-color: #ffffff;
-  border-radius: 14px;
-}
-
-#horarioVista.horarioVacio::after {
-  content: "HORARIO";
-  color: #8f8e8ef5;
-  font-size: 22px;
+  pointer-events: none;
 }
 
 .espacioDia {
@@ -628,9 +609,12 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: stretch;
-  gap: 6px;
-  padding-top: 6px;
+  gap: 4px;
   font-size: 12px;
+}
+
+.dropCaja * {
+  pointer-events: none;
 }
 
 .dropCaja.cajaActiva {
@@ -642,6 +626,47 @@ main {
   flex: 0 0 auto;
   text-align: center;
   line-height: 1.2;
+  color: #374151;
+  font-size: 13px;
+}
+
+.turno-contenedor {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  min-height: 0;
+  padding: 2px 4px;
+}
+
+.turno-contenedor i {
+  position: absolute;
+  display: none; /* Oculto por defecto */
+  flex-shrink: 0;
+  font-size: 0.85rem;
+  margin-left: 3px;
+}
+
+/* Solo se muestra si hay al menos una colaboradora dentro */
+.turno-contenedor:has(.nombreColaboradora) i {
+  display: inline-block;
+}
+
+.turno-contenedor .bi-sun {
+  color: #d97706;
+}
+
+.turno-contenedor .bi-moon {
+  color: #4f46e5;
+}
+
+.nombresTurno {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 6px;
 }
 
 @media (max-width: 900px) {

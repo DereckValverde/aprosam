@@ -16,6 +16,8 @@ body {
   background-color: #ffffff;
 
   position: relative;
+
+  user-select: none;
 }
 
 #logo {

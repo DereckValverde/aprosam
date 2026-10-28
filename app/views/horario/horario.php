@@ -14,7 +14,6 @@
 </head>
 
 <body>
-
     <?php
     $paginaActual = 'horario';
     require_once LAYOUT_PATH . 'header.php';
@@ -31,9 +30,7 @@
         </header>
 
         <div id="horarioGrid">
-
             <div id="panelFuncionalidades">
-
                 <section id="coloresSeccion">
                     <div id="coloresHeader">
                         <span class="inter-normal">Colores y bordes</span>
@@ -82,7 +79,6 @@
                 </section>
 
                 <section id="colaboradorasSeccion" class="inter-normal">
-
                     <div id="colaboradorasHeader">
                         <span>────────</span>
                         <span>Colaboradoras</span>
@@ -96,7 +92,6 @@
             </div>
 
             <div id="panelHorario" class="inter-normal">
-
                 <section id="horarioTop">
                     <header id="horarioTitulo">
                         <p>Agosto 2022</p>
@@ -104,7 +99,7 @@
 
                     <div id="dropdowns">
                         <select id="mes" name="mes">
-                            <option value="" selected disabled style="font-weight: bold; background-color: #bbbbbb; color: #FFF;">Mes</option>
+                            <option value="" selected disabled style="font-weight: bold; background-color: #bbbbbb; color: #ffffff;">Mes</option>
                             <option value="1">Enero</option>
                             <option value="2">Febrero</option>
                             <option value="3">Marzo</option>
@@ -120,7 +115,7 @@
                         </select>
 
                         <select id="anio" name="anio">
-                            <option value="" selected disabled style="font-weight: bold; background-color: #bbbbbb; color: #FFF;">Año</option>
+                            <option value="" selected disabled style="font-weight: bold; background-color: #bbbbbb; color: #ffffff;">Año</option>
                             <option value="2026">2026</option>
                             <option value="2027">2027</option>
                             <option value="2028">2028</option>
@@ -130,10 +125,7 @@
                     </div>
                 </section>
 
-                <section id="horarioVista" class="horarioVacio">
-
-                </section>
-
+                <section id="horarioVista" class="horarioVacio"></section>
             </div>
         </div>
     </main>
@@ -143,7 +135,6 @@
         const BASE_URL = "<?= BASE_URL ?>";
     </script>
     <script src="<?= BASE_URL . 'public/assets/js/horario/horario.js' ?>"></script>
-
 </body>
 
 </html>

@@ -1,15 +1,85 @@
-/* 
-Esta funcion el endpoint encargado de traer todas 
-las colaboradoras existentes y luego colocarlas en el UI del
-módulo de horario 
+/* Función encargada de actualizar el horario,
+   tomando en cuenta el mes y el año seleccionados. */
+function actualizarHorario(mes, anio) {
+  const horarioVista = document.getElementById("horarioVista");
+
+  // Quitar la clase que indica que el horario está vacío
+  horarioVista.classList.remove("horarioVacio");
+
+  // Determinar en qué día empieza el mes
+  const dia = determinarPrimerDia(mes, anio);
+
+  // Determinar la cantidad total de días del mes
+  const totalDias = determinarCantidadDiasMes(mes, anio);
+
+  //Colocar header de los días
+  horarioVista.innerHTML = `
+    <div id="nombreSemana" class="inter-bold">
+        <div class="nombreDia lunes">LUN</div>
+        <div class="nombreDia">MAR</div>
+        <div class="nombreDia">MIÉ</div>
+        <div class="nombreDia">JUE</div>
+        <div class="nombreDia">VIE</div>
+        <div class="nombreDia">SÁB</div>
+        <div class="nombreDia domingo">DOM</div>
+    </div>
+
+    <div id="cajaDias"></div>
+  `;
+
+  let espacios = dia - 1;
+
+  //cambiar espacios = 6 si el día es domingo (domingo es = 0)
+  if (espacios === -1) {
+    espacios = 6;
+  }
+
+  //div donde van a ir los campos vacíos y los días
+  const cajaDias = document.getElementById("cajaDias");
+
+  //for para generar los campos vacíos antes del primer día de la semana
+  for (let i = 0; i < espacios; i++) {
+    const div = document.createElement("div");
+
+    div.classList.add("dia");
+    div.classList.add("espacioDia");
+
+    div.innerHTML = `
+      <div class="diaHeader"></div>
+    `;
+
+    cajaDias.appendChild(div);
+  }
+
+  // for para generar los días de la semana
+  for (let j = 1; j <= totalDias; j++) {
+    const divDia = document.createElement("div");
+
+    divDia.classList.add("dia");
+
+    divDia.innerHTML = `
+      <div class="diaHeader">${j}</div>
+    `;
+
+    cajaDias.appendChild(divDia);
+  }
+}
+
+/*
+  Función encargada de traer todas las colaboradoras
+  existentes y colocarlas en el UI del módulo de horario.
 */
 async function cargarListaColaboradoras() {
-  // Div donde se muestra la lista de colaboradoras en el UI del módulo de horario
   const listaColaboradoras = document.getElementById("listaColaboradoras");
 
   try {
-    //Se llama a la api para obtener las colaboradoras
+    // Consultar la API para obtener las colaboradoras
     const response = await fetch(BASE_URL + "colaboradoras");
+
+    if (!response.ok) {
+      throw new Error(`Error HTTP: ${response.status}`);
+    }
+
     const colaboradoras = await response.json();
 
     listaColaboradoras.innerHTML = "";
@@ -17,76 +87,85 @@ async function cargarListaColaboradoras() {
     if (colaboradoras.success) {
       colaboradoras.data.forEach((colaboradora) => {
         listaColaboradoras.innerHTML += `
-            <div class = "colaboradorasFondo">
-
-                <div class = "cajaColaboradora">
-
-                    <div class= "cajaContenido">
-
-                        <div class = "cajaNombre">
-
-                        <img src = "${BASE_URL + "public/assets/images/logo.jpg"}">
-                        <span>${colaboradora.nombre}</pan>
-
-                        </div>
-
-                        <div class = "cajaTurnos"><span>0 Turnos</span></div>
-
-                    </div>
-                    <div class="cajaFiltro"><i class="bi bi-funnel"></i></div>
+          <div class="colaboradorasFondo">
+            <div class="cajaColaboradora">
+              <div class="cajaContenido">
+                <div class="cajaNombre">
+                  <img
+                    src="${BASE_URL}public/assets/images/logo.jpg"
+                    alt="Imagen de colaboradora"
+                  >
+                  <span>${colaboradora.nombre}</span>
                 </div>
+
+                <div class="cajaTurnos">
+                  <span>0 Turnos</span>
+                </div>
+              </div>
+
+              <div class="cajaFiltro">
+                <i class="bi bi-funnel"></i>
+              </div>
             </div>
+          </div>
         `;
       });
     }
   } catch (error) {
-    console.log(error);
+    console.error("Error al cargar las colaboradoras:", error);
   }
 }
 
 /*
-Funcion encargada de determinar el primer día inicial de cada mes
-tomando en cuenta como variables el día, mes y año, donde:
+  Determina el día de la semana en que comienza el mes.
 
-dia siempre va a ser 1 para determinar EL PRIMER día del mes.
+  Parámetros:
+  mes: 1 = enero, 2 = febrero, ..., 12 = diciembre.
+  anio: año seleccionado.
 
-mes será igual a (mes - 1) ya que en Date(YYYY,MM,DD) el primer mes
-es enero, que enero = 0, febrero = 1... así que dentro de la función
-se contempla esto y se coloca mes - 1, para que por parametro se pueda 
-colocar el mes correspondiente como normalmente es:
-
-enero = 1, febrero = 2... agosto = 8... diciembre = 12
-
-tener en cuenta que "return primerDia" es:
-
-domingo = 0
-lunes = 1
-martes = 2
-...
+  Retorno:
+  domingo = 0, lunes = 1, ..., sábado = 6.
 */
 function determinarPrimerDia(mes, anio) {
-  //Se corrije el mes para que coincida con el formato de Date();
-  mes = mes - 1;
+  const fecha = new Date(anio, mes - 1, 1);
 
-  //Formato YYYY/MM/DD
-  const fecha = new Date(anio, mes, 1);
-
-  const primerDia = fecha.getDay();
-
-  return primerDia;
+  return fecha.getDay();
 }
 
 /*
-Función que devuelve la cantidad de días de un mes, tomando en cuenta 
-año y mes. Esta función ya toma en consideración años bisiestos.
+  Determina la cantidad de días del mes seleccionado.
+  También contempla los años bisiestos.
 
-acá no se resta -1 al mes, ya que al colocar dia = 0 como parametro
-la función de js se devuelve al mes anterior y retorna el total de días.
-
-así que si se coloca (2026,2,0) sería = 0 de marzo de 2026,
-como no existe, la función se devuelve a febrero y devuelve el total de días 
-de ese mes anterior.
+  Parámetros:
+  mes: 1 = enero, ..., 12 = diciembre.
+  anio: año seleccionado.
 */
-function determinarCantidadDiasMes(anio, mes) {
+function determinarCantidadDiasMes(mes, anio) {
   return new Date(anio, mes, 0).getDate();
 }
+
+// Obtener los selectores de mes y año
+const mes = document.getElementById("mes");
+const anio = document.getElementById("anio");
+
+/*
+  Actualiza el horario solamente cuando ambos selectores
+  tienen un valor seleccionado.
+*/
+function verificarSeleccionHorario() {
+  if (mes.value === "" || anio.value === "") {
+    return;
+  }
+
+  const mesSeleccionado = Number(mes.value);
+  const anioSeleccionado = Number(anio.value);
+
+  actualizarHorario(mesSeleccionado, anioSeleccionado);
+}
+
+// Escuchar cambios en el mes y el año
+mes.addEventListener("change", verificarSeleccionHorario);
+anio.addEventListener("change", verificarSeleccionHorario);
+
+// Cargar la lista de colaboradoras al iniciar
+cargarListaColaboradoras();

@@ -59,6 +59,14 @@ function actualizarHorario(mes, anio) {
 
     divDia.innerHTML = `
       <div class="diaHeader">${j}</div>
+
+      <div class="turnoManana dropCaja">
+
+      </div>
+
+      <div class="turnoTarde dropCaja">
+
+      </div>
     `;
 
     cajaDias.appendChild(divDia);
@@ -199,10 +207,47 @@ function iniciarDragAndDrop() {
   });
 }
 
-function finalizarDragAndDrop() {}
+function detectarDrop() {
+  const horarioVista = document.getElementById("horarioVista");
+
+  // Detectar cuando se arrastra un elemento sobre una caja
+  horarioVista.addEventListener("dragover", (event) => {
+    const caja = event.target.closest(".dropCaja");
+    if (!caja) return;
+
+    event.preventDefault();
+  });
+
+  // Detectar cuando el cursor entra en una caja
+  horarioVista.addEventListener("dragenter", (event) => {
+    const caja = event.target.closest(".dropCaja");
+    if (!caja) return;
+
+    caja.classList.add("cajaActiva");
+  });
+
+  // Detectar cuando el cursor sale de una caja
+  horarioVista.addEventListener("dragleave", (event) => {
+    const caja = event.target.closest(".dropCaja");
+    if (!caja) return;
+
+    caja.classList.remove("cajaActiva");
+  });
+
+  // Detectar cuando se suelta la colaboradora
+  horarioVista.addEventListener("drop", (event) => {
+    const caja = event.target.closest(".dropCaja");
+    if (!caja) return;
+
+    event.preventDefault();
+    caja.classList.remove("cajaActiva");
+
+    console.log("Colaboradora soltada en la caja");
+  });
+}
 
 // Cargar la lista de colaboradoras al iniciar
 cargarListaColaboradoras();
 
 iniciarDragAndDrop();
-finalizarDragAndDrop();
+detectarDrop();

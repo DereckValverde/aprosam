@@ -628,7 +628,7 @@ main {
   flex-direction: column;
   justify-content: center;
   align-items: stretch;
-  gap: 2px;
+  gap: 6px;
   padding-top: 6px;
   font-size: 12px;
 }

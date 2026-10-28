@@ -59,6 +59,14 @@ function actualizarHorario(mes, anio) {
 
     divDia.innerHTML = `
       <div class="diaHeader">${j}</div>
+
+      <div class="turnoManana dropCaja"></div>
+
+      <hr class="divisorTurnos">
+
+      <div class="turnoTarde dropCaja">
+
+      </div>
     `;
 
     cajaDias.appendChild(divDia);
@@ -89,7 +97,7 @@ async function cargarListaColaboradoras() {
         listaColaboradoras.innerHTML += `
           <div class="colaboradorasFondo">
             <div class="cajaColaboradora">
-              <div draggable="true" class="cajaContenido" data-id="${colaboradora.idColaboradora}">
+              <div draggable="true" class="cajaContenido" data-nombre="${colaboradora.nombre}">
                 <div class="cajaNombre">
                   <img
                     src="${BASE_URL}public/assets/images/logo.jpg"
@@ -153,9 +161,11 @@ const anio = document.getElementById("anio");
   tienen un valor seleccionado.
 */
 function verificarSeleccionHorario() {
-  if (mes.value === "" || anio.value === "") {
-    return;
-  }
+  //Comentado por ahora para pruebas
+  //hace que no valide y cargue por defecto 1 y 2026
+  // if (mes.value === "" || anio.value === "") {
+  //   return;
+  // }
 
   const mesSeleccionado = Number(mes.value);
   const anioSeleccionado = Number(anio.value);
@@ -176,8 +186,11 @@ function iniciarDragAndDrop() {
 
     if (!caja) return;
 
-    const id = caja.dataset.id;
+    const id = caja.dataset.nombre;
     const nombre = caja.querySelector(".cajaNombre span").textContent;
+
+    // Guardar el id para recuperarlo cuando se suelte la colaboradora
+    event.dataTransfer.setData("text/plain", id);
 
     console.log(`Se hizo drag a ${nombre}`);
     console.log(id);
@@ -199,10 +212,88 @@ function iniciarDragAndDrop() {
   });
 }
 
-function finalizarDragAndDrop() {}
+function detectarDrop() {
+  const horarioVista = document.getElementById("horarioVista");
+
+  // Detectar cuando se arrastra un elemento sobre una caja
+  horarioVista.addEventListener("dragover", (event) => {
+    const caja = event.target.closest(".dropCaja");
+    if (!caja) return;
+
+    event.preventDefault();
+  });
+
+  // Detectar cuando el cursor entra en una caja
+  horarioVista.addEventListener("dragenter", (event) => {
+    const caja = event.target.closest(".dropCaja");
+    if (!caja) return;
+
+    caja.classList.add("cajaActiva");
+  });
+
+  // Detectar cuando el cursor sale realmente de una caja
+  horarioVista.addEventListener("dragleave", (event) => {
+    const caja = event.target.closest(".dropCaja");
+    if (!caja) return;
+
+    if (event.relatedTarget && caja.contains(event.relatedTarget)) {
+      return;
+    }
+
+    caja.classList.remove("cajaActiva");
+  });
+
+  // Detectar cuando se suelta la colaboradora
+  horarioVista.addEventListener("drop", (event) => {
+    const caja = event.target.closest(".dropCaja");
+    if (!caja) return;
+
+    event.preventDefault();
+    caja.classList.remove("cajaActiva");
+
+    // Recuperar el ID de la colaboradora arrastrada
+    const nombreColaboradora = event.dataTransfer.getData("text/plain");
+
+    /* Lógica para asignar colaboradora a la caja */
+    mostrar(caja, nombreColaboradora);
+  });
+}
+
+function mostrar(caja, nombre) {
+  const dia = caja.closest(".dia");
+  const divisor = dia.querySelector(".divisorTurnos");
+
+  // Limitar a 2 colaboradoras por turno
+  const cantidad = caja.querySelectorAll(".nombreColaboradora").length;
+
+  if (cantidad >= 2) {
+    console.log("Máximo de colaboradoras alcanzado.");
+    return;
+  }
+
+  // Mostrar el divisor cuando se asigna una colaboradora
+  divisor.classList.add("divisorVisible");
+
+  if (cantidad > 0) {
+    const elementoY = document.createElement("div");
+    elementoY.classList.add("nombreColaboradora");
+    elementoY.textContent = "y";
+    caja.appendChild(elementoY);
+  }
+
+  const elemento = document.createElement("div");
+  elemento.textContent = nombre;
+  elemento.classList.add("nombreColaboradora");
+
+  caja.appendChild(elemento);
+}
 
 // Cargar la lista de colaboradoras al iniciar
 cargarListaColaboradoras();
 
+//Llamada de funciones encargadas del dragAndDrop del módulo horario
 iniciarDragAndDrop();
-finalizarDragAndDrop();
+detectarDrop();
+
+//llamada TEMPORAL para que el horario cargue de una vez
+verificarSeleccionHorario();

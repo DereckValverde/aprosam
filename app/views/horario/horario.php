@@ -90,48 +90,7 @@
                     </div>
 
                     <div id="listaColaboradoras">
-
-                        <div class="colaboradorasFondo">
-                            <div class="cajaColaboradora">
-                                <div class="cajaContenido">
-                                    <div class="cajaNombre">
-                                        <img src="<?= BASE_URL . 'public/assets/images/logo.jpg' ?>" alt="">
-                                        <span>Dereck</span>
-                                    </div>
-                                    <div class="cajaTurnos"><span>4 turnos</span></div>
-                                </div>
-                                <div class="cajaFiltro"><i class="bi bi-funnel"></i></div>
-                            </div>
-                        </div>
-
-                        <div class="colaboradorasFondo">
-                            <div class="cajaColaboradora">
-                                <div class="cajaContenido">
-                                    <div class="cajaNombre">
-                                        <img src="<?= BASE_URL . 'public/assets/images/logo.jpg' ?>" alt="">
-                                        <span>Nancy</span>
-                                    </div>
-                                    <div class="cajaTurnos"><span>2 turnos</span></div>
-                                </div>
-                                <div class="cajaFiltro"><i class="bi bi-funnel"></i></div>
-                            </div>
-                        </div>
-
-                        <?php for ($i = 0; $i < 8; $i++): ?>
-                            <div class="colaboradorasFondo">
-                                <div class="cajaColaboradora">
-                                    <div class="cajaContenido">
-                                        <div class="cajaNombre">
-                                            <img src="<?= BASE_URL . 'public/assets/images/logo.jpg' ?>" alt="">
-                                            <span>Pedro</span>
-                                        </div>
-                                        <div class="cajaTurnos"><span>5 turnos</span></div>
-                                    </div>
-                                    <div class="cajaFiltro"><i class="bi bi-funnel"></i></div>
-                                </div>
-                            </div>
-                        <?php endfor; ?>
-
+                        <!-- Lista de colaboradoras inyectadas desde JS -->
                     </div>
                 </section>
             </div>
@@ -145,6 +104,7 @@
 
                     <div id="dropdowns">
                         <select id="mes" name="mes">
+                            <option value="" selected disabled style="font-weight: bold; background-color: #bbbbbb; color: #FFF;">Mes</option>
                             <option value="1">Enero</option>
                             <option value="2">Febrero</option>
                             <option value="3">Marzo</option>
@@ -160,7 +120,8 @@
                         </select>
 
                         <select id="anio" name="anio">
-                            <option value="2026" selected>2026</option>
+                            <option value="" selected disabled style="font-weight: bold; background-color: #bbbbbb; color: #FFF;">Año</option>
+                            <option value="2026">2026</option>
                             <option value="2027">2027</option>
                             <option value="2028">2028</option>
                             <option value="2029">2029</option>
@@ -169,27 +130,7 @@
                     </div>
                 </section>
 
-                <section id="horarioVista">
-
-                    <div id="nombreSemana" class="inter-bold">
-                        <div class="nombreDia lunes">LUN</div>
-                        <div class="nombreDia">MAR</div>
-                        <div class="nombreDia">MIÉ</div>
-                        <div class="nombreDia">JUE</div>
-                        <div class="nombreDia">VIE</div>
-                        <div class="nombreDia">SÁB</div>
-                        <div class="nombreDia domingo">DOM</div>
-                    </div>
-
-                    <div id="cajaDias">
-
-                        <?php for ($i = 1; $i <= 31; $i++): ?>
-                            <div class="dia">
-                                <div class="diaHeader">
-                                    <?= $i ?>
-                                </div>
-                            </div>
-                        <?php endfor; ?>
+                <section id="horarioVista" class="horarioVacio">
 
                 </section>
 
@@ -198,6 +139,10 @@
     </main>
 
     <script src="<?= BASE_URL . 'public/assets/js/main.js' ?>"></script>
+    <script>
+        const BASE_URL = "<?= BASE_URL ?>";
+    </script>
+    <script src="<?= BASE_URL . 'public/assets/js/horario/horario.js' ?>"></script>
 
 </body>
 

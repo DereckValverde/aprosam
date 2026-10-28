@@ -13,3 +13,10 @@ function view(string $viewPath)
         die("La vista '{$viewPath}' no existe.");
     }
 }
+
+function model($model)
+{
+    require_once __DIR__ . '/../models/' . $model . '.php';
+
+    return new $model();
+}

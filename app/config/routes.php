@@ -16,6 +16,9 @@ $router->get('inventario', ['InventarioController', 'index']);
 $router->get('medicamentos', ['MedicamentosController', 'index']);
 
 
+//Ruta de prueba para obtener colaboradoras
+$router->get('colaboradoras', ['HorarioController', 'apiColaboradoras']);
+
 //Rutas de errores
 $router->get('error/404', ['ErrorController', 'error404']);
 

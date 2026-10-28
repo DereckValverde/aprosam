@@ -284,6 +284,7 @@ main {
   flex: 1 1 0;
   min-height: 0;
   overflow: hidden;
+  user-select: none;
 }
 
 #colaboradorasHeader {
@@ -311,11 +312,13 @@ main {
   overflow-x: hidden;
   padding: 0 0 15px;
   border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  user-select: none;
 }
 
 .colaboradorasFondo {
   flex: 0 0 auto;
   min-width: 0;
+  user-select: none;
 }
 
 .cajaColaboradora {
@@ -324,11 +327,7 @@ main {
   align-items: center;
   gap: 8px;
   margin: 0 20px;
-  cursor: grab;
-}
-
-.cajaColaboradora:active {
-  cursor: grabbing;
+  user-select: none;
 }
 
 .cajaContenido {
@@ -342,6 +341,7 @@ main {
   min-width: 0;
   min-height: 42px;
   border-radius: var(--radius-md);
+  cursor: grab;
 }
 
 .cajaNombre {

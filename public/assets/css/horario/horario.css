@@ -6,21 +6,6 @@
   box-sizing: border-box;
 }
 
-:root {
-  --color-primary: #047857;
-  --color-primary-hover: #0e6b32;
-  --color-text-dark: #111827;
-  --color-text-muted: #475569;
-  --color-border: #e2e8f0;
-  --bg-white: #ffffff;
-  --bg-light: #f7f8fa;
-  --radius-sm: 4px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
-  --transition-fast: 0.25s ease;
-  --transition-normal: 0.35s ease;
-}
-
 html,
 body {
   width: 100%;
@@ -28,9 +13,9 @@ body {
 }
 
 body {
-  height: 100vh;
   display: flex;
   flex-direction: column;
+  height: 100vh;
   overflow: hidden;
   font-family:
     system-ui,
@@ -43,63 +28,63 @@ body {
 
 main {
   display: flex;
-  flex-direction: column;
   flex: 1 1 auto;
+  flex-direction: column;
   min-height: 0;
-  overflow: hidden;
   padding-bottom: 15px;
+  overflow: hidden;
 }
 
 #horarioHeader {
   display: flex;
+  flex-shrink: 0;
   justify-content: space-between;
   align-items: center;
   margin: 20px 15px;
-  flex-shrink: 0;
+  user-select: none;
 }
 
 #horarioHeader h1 {
-  color: var(--color-text-dark);
+  color: #111827;
   font-size: 1.875rem;
 }
 
 #horarioGrid {
   display: grid;
   grid-template-columns: minmax(260px, 1fr) minmax(0, 4fr);
-  gap: 15px;
-  margin: 0 15px;
-  width: calc(100% - 30px);
   flex: 1 1 0;
+  gap: 15px;
+  width: calc(100% - 30px);
   min-height: 0;
+  margin: 0 15px;
 }
 
 #panelFuncionalidades,
 #panelHorario {
-  min-width: 0;
-  min-height: 0;
   display: flex;
   flex-direction: column;
   height: 100%;
+  min-width: 0;
+  min-height: 0;
   overflow: hidden;
 }
 
 #btnGuardarHorario {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
   position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
   width: 140px;
   height: 35px;
   padding: 0 8px;
-  color: var(--color-primary);
-  background-color: var(--bg-white);
-  border: 1px solid var(--color-primary);
-  border-radius: var(--radius-sm);
-  cursor: pointer;
-  gap: 6px;
   overflow: hidden;
-  transition: color var(--transition-normal);
-  will-change: color;
+  color: #047857;
+  background-color: #ffffff;
+  border: 1px solid #047857;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: color 0.35s ease;
 }
 
 #btnGuardarHorario span,
@@ -109,20 +94,19 @@ main {
 }
 
 #btnGuardarHorario::after {
-  content: "";
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--color-primary-hover);
+  background-color: #0e6b32;
+  content: "";
   transform: scaleX(0);
   transform-origin: left;
-  transition: transform var(--transition-normal);
-  will-change: transform;
+  transition: transform 0.35s ease;
 }
 
 #btnGuardarHorario:hover {
-  color: var(--bg-white);
+  color: #ffffff;
 }
 
 #btnGuardarHorario:hover::after {
@@ -134,10 +118,11 @@ main {
 }
 
 #coloresSeccion {
-  background-color: var(--bg-white);
-  padding: 10px 10px 20px;
-  border-radius: var(--radius-lg);
   flex: 0 0 auto;
+  padding: 10px 10px 20px;
+  background-color: #ffffff;
+  border-radius: 14px;
+  user-select: none;
 }
 
 #coloresHeader {
@@ -148,17 +133,17 @@ main {
 }
 
 #coloresHeader span {
+  color: #475569;
   font-size: 1rem;
-  color: var(--color-text-muted);
 }
 
 #coloresFondo {
   display: flex;
   flex-direction: column;
-  background-color: var(--bg-light);
-  border-radius: var(--radius-lg);
-  padding: 15px 10px;
   gap: 20px;
+  padding: 15px 10px;
+  background-color: #f7f8fa;
+  border-radius: 14px;
 }
 
 #listaColores {
@@ -171,12 +156,11 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 6px;
   gap: 6px;
-  border-radius: var(--radius-sm);
-  transition: transform var(--transition-fast);
+  padding: 6px;
+  border-radius: 4px;
   cursor: pointer;
-  will-change: transform;
+  transition: transform 0.25s ease;
 }
 
 .cajaColor:hover {
@@ -187,50 +171,55 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 0.75rem;
   min-height: 19px;
+  font-size: 0.75rem;
 }
 
 .cajaColor span {
-  color: var(--color-primary);
+  color: #047857;
 }
 
 .cajaColor--rojo {
-  border: 1px solid #eb9ba4;
-  background-color: #fff1f2;
   color: #9f399f;
+  background-color: #fff1f2;
+  border: 1px solid #eb9ba4;
 }
+
 .cajaColor--morado {
-  border: 1px solid #713cec;
-  background-color: #eae3f8;
   color: #3b1692;
+  background-color: #eae3f8;
+  border: 1px solid #713cec;
 }
+
 .cajaColor--amarillo {
-  border: 1px solid #eecb41;
-  background-color: #fffbeb;
   color: #b37314;
+  background-color: #fffbeb;
+  border: 1px solid #eecb41;
 }
+
 .cajaColor--azul {
-  border: 1px solid #2563eb;
-  background-color: #eff6ff;
   color: #3154b4;
+  background-color: #eff6ff;
+  border: 1px solid #2563eb;
 }
+
 .cajaColor--verde {
-  border: 1px solid #66ce9d;
-  background-color: #ecfdf5;
   color: #227c52;
+  background-color: #ecfdf5;
+  border: 1px solid #66ce9d;
 }
+
 .cajaColor--blanco {
-  border: 1px solid #a39898;
-  background-color: #ffffff;
   color: #837979;
+  background-color: #ffffff;
+  border: 1px solid #a39898;
 }
 
 #listaBordes {
   display: flex;
   flex-direction: column;
-  padding: 0 5px;
   gap: 17px;
+  padding: 0 5px;
   font-size: 0.875rem;
 }
 
@@ -238,14 +227,13 @@ main {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 6px 15px;
   min-height: 35px;
-  border: 1px solid #000;
-  border-radius: var(--radius-sm);
+  padding: 6px 15px;
+  border: 1px solid #000000;
+  border-radius: 4px;
   font-size: 0.8125rem;
-  transition: transform var(--transition-fast);
   cursor: pointer;
-  will-change: transform;
+  transition: transform 0.25s ease;
 }
 
 .cajaBorde:hover {
@@ -257,11 +245,13 @@ main {
   background-color: #eaf5ec;
   border-color: #2a7336;
 }
+
 .cajaBorde--limpieza {
   color: #890f94;
   background-color: #f3e6f9;
   border-color: #940f87;
 }
+
 .cajaBorde--diario {
   color: #b86a00;
   background-color: #fff5e5;
@@ -269,21 +259,21 @@ main {
 }
 
 .activo {
-  font-size: 0.75rem;
-  background-color: var(--bg-white);
   padding: 2px 6px;
+  background-color: #ffffff;
   border-radius: 10px;
+  font-size: 0.75rem;
 }
 
 #colaboradorasSeccion {
   display: flex;
-  flex-direction: column;
-  background-color: var(--bg-white);
-  border-radius: var(--radius-lg);
-  gap: 18px;
   flex: 1 1 0;
+  flex-direction: column;
+  gap: 18px;
   min-height: 0;
   overflow: hidden;
+  background-color: #ffffff;
+  border-radius: 14px;
   user-select: none;
 }
 
@@ -291,27 +281,27 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-shrink: 0;
   gap: 22px;
   margin: 20px 15px 0;
-  flex-shrink: 0;
 }
 
 #colaboradorasHeader span {
+  color: #475569;
   font-size: 1rem;
-  color: var(--color-text-muted);
 }
 
 #listaColaboradoras {
   display: flex;
+  flex: 1 1 0;
   flex-direction: column;
   gap: 18px;
-  flex: 1 1 0;
-  min-height: 0;
   min-width: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
+  min-height: 0;
   padding: 0 0 15px;
-  border-radius: 0 0 var(--radius-lg) var(--radius-lg);
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-radius: 0 0 14px 14px;
   user-select: none;
 }
 
@@ -335,12 +325,12 @@ main {
   justify-content: space-between;
   align-items: center;
   gap: 8px;
-  padding: 0 10px;
-  border: 1px solid #9acee9;
   width: 85%;
   min-width: 0;
   min-height: 42px;
-  border-radius: var(--radius-md);
+  padding: 0 10px;
+  border: 1px solid #9acee9;
+  border-radius: 10px;
   cursor: grab;
 }
 
@@ -353,58 +343,58 @@ main {
 }
 
 .cajaNombre img {
+  flex-shrink: 0;
   width: 30px;
   height: 30px;
   object-fit: cover;
-  flex-shrink: 0;
-  border: 1px solid #ccc;
+  border: 1px solid #cccccc;
   border-radius: 6px;
 }
 
 .cajaNombre span {
+  overflow: hidden;
   font-size: 0.875rem;
   line-height: 1;
   white-space: nowrap;
-  overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .cajaTurnos {
   flex-shrink: 0;
-  font-size: 0.6875rem;
   padding: 4px 8px;
+  color: #ffffff;
   background-color: #0284c7;
-  color: var(--bg-white);
   border-radius: 12px;
+  font-size: 0.6875rem;
 }
 
 .cajaFiltro {
   display: flex;
+  flex: 0 0 32px;
   justify-content: center;
   align-items: center;
-  flex: 0 0 32px;
   height: 32px;
   padding: 4px;
+  color: #475569;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
   font-size: 1.125rem;
-  color: var(--color-text-muted);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
   cursor: pointer;
   transition:
-    background-color var(--transition-fast),
-    color var(--transition-fast),
-    border-color var(--transition-fast);
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
 }
 
 .cajaFiltro:hover {
-  background-color: var(--color-text-muted);
-  border-color: var(--color-text-muted);
-  color: var(--bg-white);
+  color: #ffffff;
+  background-color: #475569;
+  border-color: #475569;
 }
 
 .filtro-activo {
-  background-color: var(--color-border);
-  border-color: #ccc;
+  background-color: #e2e8f0;
+  border-color: #cccccc;
 }
 
 #listaColaboradoras::-webkit-scrollbar,
@@ -430,13 +420,14 @@ main {
 
 #horarioTop {
   display: flex;
+  flex: 0 0 auto;
   justify-content: space-between;
   align-items: center;
   gap: 12px;
   padding: 14px;
-  background-color: var(--bg-white);
-  border-radius: var(--radius-lg);
-  flex: 0 0 auto;
+  background-color: #ffffff;
+  border-radius: 14px;
+  user-select: none;
 }
 
 #horarioTitulo {
@@ -445,25 +436,25 @@ main {
 
 #dropdowns {
   display: flex;
-  gap: 10px;
   align-items: center;
+  gap: 10px;
 }
 
 #dropdowns select {
   height: 34px;
   padding: 0 30px 0 12px;
+  color: #374151;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 7px;
   font-family: inherit;
   font-size: 0.8125rem;
   font-weight: 500;
-  color: #374151;
-  background-color: var(--bg-white);
-  border: 1px solid #d1d5db;
-  border-radius: 7px;
   cursor: pointer;
   outline: none;
   transition:
-    border-color var(--transition-fast),
-    box-shadow var(--transition-fast);
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 #dropdowns select:hover {
@@ -477,19 +468,19 @@ main {
 
 #horarioVista {
   position: relative;
-  background-color: #eaeaec;
-  margin-top: 15px;
   flex: 1 1 0;
-  min-height: 0;
-  min-width: 0;
   width: 100%;
-  border-radius: var(--radius-lg);
+  min-width: 0;
+  min-height: 0;
+  margin-top: 15px;
   overflow: auto;
+  background-color: #eaeaec;
+  border-radius: 14px;
 }
 
 #horarioVista span {
+  color: #bbbbbb;
   font-size: 22px;
-  color: #bbb;
 }
 
 #nombreSemana {
@@ -499,7 +490,7 @@ main {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: 1px;
-  background-color: #fff;
+  background-color: #ffffff;
   border-radius: 14px 14px 0 0;
   user-select: none;
 }
@@ -509,10 +500,8 @@ main {
   justify-content: center;
   align-items: center;
   padding: 15px;
-  background-color: #0284c7;
-
   color: #ffffff;
-
+  background-color: #0284c7;
   border: none;
 }
 
@@ -531,43 +520,66 @@ main {
 }
 
 .dia {
-  display: flex;
-  flex-direction: column;
-  border: none;
-  background-color: var(--bg-white);
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) 5px minmax(0, 1fr);
+  min-width: 0;
+  min-height: 0;
   margin: 1px;
-}
-.diaHeader {
+  background-color: #ffffff;
+  border: none;
   user-select: none;
-  font-size: 11px;
-  padding: 5px 0 0 5px;
+}
 
-  flex: 0 0 auto;
+.diaHeader {
+  grid-row: 1;
+  padding: 5px 0 0 5px;
+  font-size: 11px;
+  user-select: none;
+}
+
+.turnoManana,
+.turnoTarde {
+  min-width: 0;
+  min-height: 0;
+  overflow: auto;
 }
 
 .turnoManana {
-  /* border: 1px solid red; */
-  flex: 1 1 0;
+  grid-row: 2;
 }
 
 .turnoTarde {
-  /* border: 1px solid blue; */
-  flex: 1 1 0;
+  grid-row: 4;
+}
+
+.divisorTurnos {
+  grid-row: 3;
+  align-self: center;
+  width: calc(100% - 16px);
+  height: 0;
+  margin: 0 8px;
+  border: none;
+  border-top: 1px solid #e5e7eb;
+  visibility: hidden;
+}
+
+.divisorTurnos.divisorVisible {
+  visibility: visible;
 }
 
 #horarioVista.horarioVacio {
   display: flex;
+  flex: 1 1 0;
   justify-content: center;
   align-items: center;
-  background-color: #fff;
-  margin-top: 15px;
-  flex: 1 1 0;
-  min-height: 0;
-  min-width: 0;
-  padding: 5px;
   width: 100%;
-  border-radius: var(--radius-lg);
+  min-width: 0;
+  min-height: 0;
+  margin-top: 15px;
+  padding: 5px;
   overflow: auto;
+  background-color: #ffffff;
+  border-radius: 14px;
 }
 
 #horarioVista.horarioVacio::after {
@@ -577,23 +589,20 @@ main {
 }
 
 .espacioDia {
+  background-color: #f7f8fa;
   pointer-events: none;
   user-select: none;
-  background-color: #f7f8fa;
 }
 
 .achicar {
   position: absolute;
   top: -1000px;
   left: -1000px;
-
   width: 200px;
   padding: 10px 14px;
-
   background-color: #ffffff;
   border: 1px solid #9acee9;
   border-radius: 10px;
-
   transform: scale(0.9);
   transform-origin: top left;
   pointer-events: none;
@@ -614,9 +623,25 @@ main {
   font-size: 11px;
 }
 
+.dropCaja {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: stretch;
+  gap: 2px;
+  padding-top: 6px;
+  font-size: 14px;
+}
+
 .dropCaja.cajaActiva {
   background-color: #ecfdf5;
-  border: 1px solid #6ee7b7;
+  box-shadow: inset 0 0 0 1px #6ee7b7;
+}
+
+.nombreColaboradora {
+  flex: 0 0 auto;
+  text-align: center;
+  line-height: 1.2;
 }
 
 @media (max-width: 900px) {
@@ -639,7 +664,7 @@ main {
   }
 
   body {
-    overflow: auto;
     height: auto;
+    overflow: auto;
   }
 }

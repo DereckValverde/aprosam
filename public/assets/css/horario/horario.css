@@ -531,6 +531,8 @@ main {
 }
 
 .dia {
+  display: flex;
+  flex-direction: column;
   border: none;
   background-color: var(--bg-white);
   margin: 1px;
@@ -539,6 +541,18 @@ main {
   user-select: none;
   font-size: 11px;
   padding: 5px 0 0 5px;
+
+  flex: 0 0 auto;
+}
+
+.turnoManana {
+  /* border: 1px solid red; */
+  flex: 1 1 0;
+}
+
+.turnoTarde {
+  /* border: 1px solid blue; */
+  flex: 1 1 0;
 }
 
 #horarioVista.horarioVacio {
@@ -598,6 +612,11 @@ main {
 
 .achicar .cajaTurnos {
   font-size: 11px;
+}
+
+.dropCaja.cajaActiva {
+  background-color: #ecfdf5;
+  border: 1px solid #6ee7b7;
 }
 
 @media (max-width: 900px) {

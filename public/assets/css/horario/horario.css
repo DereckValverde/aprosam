@@ -626,11 +626,11 @@ main {
 .dropCaja {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: stretch;
   gap: 2px;
   padding-top: 6px;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .dropCaja.cajaActiva {

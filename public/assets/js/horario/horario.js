@@ -89,7 +89,7 @@ async function cargarListaColaboradoras() {
         listaColaboradoras.innerHTML += `
           <div class="colaboradorasFondo">
             <div class="cajaColaboradora">
-              <div class="cajaContenido">
+              <div draggable="true" class="cajaContenido" data-id="${colaboradora.idColaboradora}">
                 <div class="cajaNombre">
                   <img
                     src="${BASE_URL}public/assets/images/logo.jpg"
@@ -167,5 +167,42 @@ function verificarSeleccionHorario() {
 mes.addEventListener("change", verificarSeleccionHorario);
 anio.addEventListener("change", verificarSeleccionHorario);
 
+//ejecutar evento encargado de escuchar el dragAndDrop
+function iniciarDragAndDrop() {
+  const listaColaboradoras = document.getElementById("listaColaboradoras");
+
+  listaColaboradoras.addEventListener("dragstart", (event) => {
+    const caja = event.target.closest(".cajaContenido");
+
+    if (!caja) return;
+
+    const id = caja.dataset.id;
+    const nombre = caja.querySelector(".cajaNombre span").textContent;
+
+    console.log(`Se hizo drag a ${nombre}`);
+    console.log(id);
+
+    const fantasma = caja.cloneNode(true);
+
+    fantasma.classList.add("achicar");
+
+    document.body.appendChild(fantasma);
+
+    event.dataTransfer.setDragImage(
+      fantasma,
+      fantasma.offsetWidth / 2,
+      fantasma.offsetHeight / 2,
+    );
+
+    // Eliminar la copia después de iniciar el arrastre
+    requestAnimationFrame(() => fantasma.remove());
+  });
+}
+
+function finalizarDragAndDrop() {}
+
 // Cargar la lista de colaboradoras al iniciar
 cargarListaColaboradoras();
+
+iniciarDragAndDrop();
+finalizarDragAndDrop();

@@ -568,6 +568,38 @@ main {
   background-color: #f7f8fa;
 }
 
+.achicar {
+  position: absolute;
+  top: -1000px;
+  left: -1000px;
+
+  width: 200px;
+  padding: 10px 14px;
+
+  background-color: #ffffff;
+  border: 1px solid #9acee9;
+  border-radius: 10px;
+
+  transform: scale(0.9);
+  transform-origin: top left;
+  pointer-events: none;
+}
+
+.achicar .cajaNombre img {
+  width: 28px;
+  height: 28px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.achicar .cajaNombre span {
+  font-size: 12px;
+}
+
+.achicar .cajaTurnos {
+  font-size: 11px;
+}
+
 @media (max-width: 900px) {
   #horarioGrid {
     grid-template-columns: minmax(220px, 1fr) minmax(0, 2fr);

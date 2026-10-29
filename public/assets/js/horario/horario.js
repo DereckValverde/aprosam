@@ -1,3 +1,19 @@
+function actualizarContadorTurnos(nombre, cambio) {
+  const cajas = document.querySelectorAll(
+    `#listaColaboradoras .cajaContenido[data-nombre="${nombre}"]`,
+  );
+
+  cajas.forEach((caja) => {
+    const spanTurnos = caja.querySelector(".cajaTurnos span");
+    if (!spanTurnos) return;
+
+    const actual = parseInt(spanTurnos.textContent, 10) || 0;
+    const nuevoTotal = Math.max(0, actual + cambio);
+
+    spanTurnos.textContent = `${nuevoTotal} ${nuevoTotal === 1 ? "Turno" : "Turnos"}`;
+  });
+}
+
 function actualizarHorario(mes, anio) {
   const horarioVista = document.getElementById("horarioVista");
 
@@ -237,6 +253,8 @@ function mostrar(caja, nombre) {
   elemento.title = "Clic derecho para eliminar";
 
   contenedorNombres.appendChild(elemento);
+
+  actualizarContadorTurnos(nombre, 1);
 }
 
 document.addEventListener("contextmenu", (event) => {
@@ -245,11 +263,13 @@ document.addEventListener("contextmenu", (event) => {
   const elementoNombre = event.target.closest(".nombreColaboradora");
   if (!elementoNombre) return;
 
+  const nombre = elementoNombre.textContent.trim();
   const contenedor = elementoNombre.closest(".nombresTurno");
   const dia = elementoNombre.closest(".dia");
   const divisor = dia.querySelector(".divisorTurnos");
 
   elementoNombre.remove();
+  actualizarContadorTurnos(nombre, -1);
 
   const separador = contenedor.querySelector(".separadorY");
   if (separador) {
@@ -267,11 +287,18 @@ document.getElementById("horarioVista").addEventListener("click", (event) => {
   if (!btnEliminar) return;
 
   const chip = btnEliminar.closest(".chipColaboradora");
+  const nombreElemento = chip.querySelector(".nombreColaboradora");
+  const nombre = nombreElemento ? nombreElemento.textContent.trim() : null;
+
   const contenedor = chip.closest(".nombresTurno");
   const dia = chip.closest(".dia");
   const divisor = dia.querySelector(".divisorTurnos");
 
   chip.remove();
+
+  if (nombre) {
+    actualizarContadorTurnos(nombre, -1);
+  }
 
   const separador = contenedor.querySelector(".separadorY");
   if (separador) {

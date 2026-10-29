@@ -1,3 +1,19 @@
+function actualizarContadorTurnos(nombre, cambio) {
+  const cajas = document.querySelectorAll(
+    `#listaColaboradoras .cajaContenido[data-nombre="${nombre}"]`,
+  );
+
+  cajas.forEach((caja) => {
+    const spanTurnos = caja.querySelector(".cajaTurnos span");
+    if (!spanTurnos) return;
+
+    const actual = parseInt(spanTurnos.textContent, 10) || 0;
+    const nuevoTotal = Math.max(0, actual + cambio);
+
+    spanTurnos.textContent = `${nuevoTotal} ${nuevoTotal === 1 ? "Turno" : "Turnos"}`;
+  });
+}
+
 function actualizarHorario(mes, anio) {
   const horarioVista = document.getElementById("horarioVista");
 
@@ -214,19 +230,19 @@ function mostrar(caja, nombre) {
   const divisor = dia.querySelector(".divisorTurnos");
   const contenedorNombres = caja.querySelector(".nombresTurno");
 
-  const cantidad = contenedorNombres.querySelectorAll(
+  const colaboradoras = contenedorNombres.querySelectorAll(
     ".nombreColaboradora",
-  ).length;
+  );
 
-  if (cantidad >= 2) {
+  if (colaboradoras.length >= 2) {
     return;
   }
 
   divisor.classList.add("divisorVisible");
 
-  if (cantidad > 0) {
+  if (colaboradoras.length === 1) {
     const elementoY = document.createElement("span");
-    elementoY.classList.add("nombreColaboradora");
+    elementoY.classList.add("separadorY");
     elementoY.textContent = " y ";
     contenedorNombres.appendChild(elementoY);
   }
@@ -234,9 +250,66 @@ function mostrar(caja, nombre) {
   const elemento = document.createElement("span");
   elemento.textContent = nombre;
   elemento.classList.add("nombreColaboradora");
+  elemento.title = "Clic derecho para eliminar";
 
   contenedorNombres.appendChild(elemento);
+
+  actualizarContadorTurnos(nombre, 1);
 }
+
+document.addEventListener("contextmenu", (event) => {
+  event.preventDefault();
+
+  const elementoNombre = event.target.closest(".nombreColaboradora");
+  if (!elementoNombre) return;
+
+  const nombre = elementoNombre.textContent.trim();
+  const contenedor = elementoNombre.closest(".nombresTurno");
+  const dia = elementoNombre.closest(".dia");
+  const divisor = dia.querySelector(".divisorTurnos");
+
+  elementoNombre.remove();
+  actualizarContadorTurnos(nombre, -1);
+
+  const separador = contenedor.querySelector(".separadorY");
+  if (separador) {
+    separador.remove();
+  }
+
+  const totalEnDia = dia.querySelectorAll(".nombreColaboradora").length;
+  if (totalEnDia === 0) {
+    divisor.classList.remove("divisorVisible");
+  }
+});
+
+document.getElementById("horarioVista").addEventListener("click", (event) => {
+  const btnEliminar = event.target.closest(".btnEliminarColaboradora");
+  if (!btnEliminar) return;
+
+  const chip = btnEliminar.closest(".chipColaboradora");
+  const nombreElemento = chip.querySelector(".nombreColaboradora");
+  const nombre = nombreElemento ? nombreElemento.textContent.trim() : null;
+
+  const contenedor = chip.closest(".nombresTurno");
+  const dia = chip.closest(".dia");
+  const divisor = dia.querySelector(".divisorTurnos");
+
+  chip.remove();
+
+  if (nombre) {
+    actualizarContadorTurnos(nombre, -1);
+  }
+
+  const separador = contenedor.querySelector(".separadorY");
+  if (separador) {
+    separador.remove();
+  }
+
+  const totalEnDia = dia.querySelectorAll(".chipColaboradora").length;
+  if (totalEnDia === 0) {
+    divisor.classList.remove("divisorVisible");
+  }
+});
 
 cargarListaColaboradoras();
 

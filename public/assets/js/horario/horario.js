@@ -214,19 +214,19 @@ function mostrar(caja, nombre) {
   const divisor = dia.querySelector(".divisorTurnos");
   const contenedorNombres = caja.querySelector(".nombresTurno");
 
-  const cantidad = contenedorNombres.querySelectorAll(
+  const colaboradoras = contenedorNombres.querySelectorAll(
     ".nombreColaboradora",
-  ).length;
+  );
 
-  if (cantidad >= 2) {
+  if (colaboradoras.length >= 2) {
     return;
   }
 
   divisor.classList.add("divisorVisible");
 
-  if (cantidad > 0) {
+  if (colaboradoras.length === 1) {
     const elementoY = document.createElement("span");
-    elementoY.classList.add("nombreColaboradora");
+    elementoY.classList.add("separadorY");
     elementoY.textContent = " y ";
     contenedorNombres.appendChild(elementoY);
   }
@@ -234,9 +234,55 @@ function mostrar(caja, nombre) {
   const elemento = document.createElement("span");
   elemento.textContent = nombre;
   elemento.classList.add("nombreColaboradora");
+  elemento.title = "Clic derecho para eliminar";
 
   contenedorNombres.appendChild(elemento);
 }
+
+document.addEventListener("contextmenu", (event) => {
+  event.preventDefault();
+
+  const elementoNombre = event.target.closest(".nombreColaboradora");
+  if (!elementoNombre) return;
+
+  const contenedor = elementoNombre.closest(".nombresTurno");
+  const dia = elementoNombre.closest(".dia");
+  const divisor = dia.querySelector(".divisorTurnos");
+
+  elementoNombre.remove();
+
+  const separador = contenedor.querySelector(".separadorY");
+  if (separador) {
+    separador.remove();
+  }
+
+  const totalEnDia = dia.querySelectorAll(".nombreColaboradora").length;
+  if (totalEnDia === 0) {
+    divisor.classList.remove("divisorVisible");
+  }
+});
+
+document.getElementById("horarioVista").addEventListener("click", (event) => {
+  const btnEliminar = event.target.closest(".btnEliminarColaboradora");
+  if (!btnEliminar) return;
+
+  const chip = btnEliminar.closest(".chipColaboradora");
+  const contenedor = chip.closest(".nombresTurno");
+  const dia = chip.closest(".dia");
+  const divisor = dia.querySelector(".divisorTurnos");
+
+  chip.remove();
+
+  const separador = contenedor.querySelector(".separadorY");
+  if (separador) {
+    separador.remove();
+  }
+
+  const totalEnDia = dia.querySelectorAll(".chipColaboradora").length;
+  if (totalEnDia === 0) {
+    divisor.classList.remove("divisorVisible");
+  }
+});
 
 cargarListaColaboradoras();
 

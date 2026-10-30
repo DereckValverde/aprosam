@@ -58,12 +58,17 @@ function actualizarHorario(mes, anio) {
   }
 
   for (let j = 1; j <= totalDias; j++) {
-    const divDia = document.createElement("div");
+    cajaDias.appendChild(crearDia(j));
+  }
+}
 
-    divDia.classList.add("dia");
+function crearDia(numero) {
+  const divDia = document.createElement("div");
 
-    divDia.innerHTML = `
-      <div class="diaHeader">${j}</div>
+  divDia.classList.add("dia");
+
+  divDia.innerHTML = `
+      <div class="diaHeader">${numero}</div>
 
       <div class="turnoManana dropCaja">
         <div class="turno-contenedor">
@@ -82,8 +87,7 @@ function actualizarHorario(mes, anio) {
       </div>
     `;
 
-    cajaDias.appendChild(divDia);
-  }
+  return divDia;
 }
 
 async function cargarListaColaboradoras() {

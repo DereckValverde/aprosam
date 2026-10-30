@@ -393,8 +393,9 @@ main {
 }
 
 .filtro-activo {
-  background-color: #e2e8f0;
-  border-color: #cccccc;
+  color: #ffffff;
+  background-color: #475569;
+  border-color: #475569;
 }
 
 #listaColaboradoras::-webkit-scrollbar,
@@ -682,6 +683,10 @@ main {
   color: #6b7280;
   pointer-events: none;
   line-height: 1;
+}
+
+.prueba {
+  background-color: red;
 }
 
 @media (max-width: 900px) {

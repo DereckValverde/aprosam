@@ -126,6 +126,8 @@ async function cargarListaColaboradoras() {
           </div>
         `;
       });
+
+      activarFiltros();
     }
   } catch (error) {
     console.error("Error al cargar las colaboradoras:", error);
@@ -255,6 +257,35 @@ function mostrar(caja, nombre) {
   contenedorNombres.appendChild(elemento);
 
   actualizarContadorTurnos(nombre, 1);
+}
+
+function activarFiltros() {
+  const cajaFiltro = document.querySelectorAll(".cajaFiltro");
+
+  cajaFiltro.forEach((caja) => {
+    caja.addEventListener("click", () => {
+      const nombreColaboradora =
+        caja.parentElement.firstElementChild.dataset.nombre;
+
+      //colorea el filtro
+      caja.classList.toggle("filtro-activo");
+
+      //ejecuta el filtro
+      ejecutarFiltro(nombreColaboradora);
+    });
+  });
+}
+
+function ejecutarFiltro(nombre) {
+  const nombreColaboradora = document.querySelectorAll(".nombreColaboradora");
+
+  nombreColaboradora.forEach((colaboradora) => {
+    if (colaboradora.textContent === nombre) {
+      const dia = colaboradora.closest(".dia");
+
+      dia.classList.toggle("prueba");
+    }
+  });
 }
 
 document.addEventListener("contextmenu", (event) => {

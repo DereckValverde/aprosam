@@ -484,6 +484,19 @@ main {
   font-size: 22px;
 }
 
+#horarioVista.horarioVacio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+}
+
+#horarioVista.horarioVacio::after {
+  content: "HORARIO";
+  color: #8f8e8ef5;
+  font-size: 22px;
+}
+
 #nombreSemana {
   position: sticky;
   top: 0;

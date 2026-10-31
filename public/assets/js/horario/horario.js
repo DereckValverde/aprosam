@@ -17,32 +17,19 @@ function actualizarContadorTurnos(nombre, cambio) {
 function actualizarHorario(mes, anio) {
   const horarioVista = document.getElementById("horarioVista");
 
+  //Limpiar vista vacía inicial
   horarioVista.classList.remove("horarioVacio");
 
-  const dia = determinarPrimerDia(mes, anio);
+  //Espacios iniciales: lunes = 0, domingo = 6
+
+  console.log(determinarPrimerDia(mes, anio));
+
+  const espacios = (determinarPrimerDia(mes, anio) + 6) % 7;
   const totalDias = determinarCantidadDiasMes(mes, anio);
 
-  horarioVista.innerHTML = `
-    <div id="nombreSemana" class="inter-bold">
-        <div class="nombreDia lunes">LUN</div>
-        <div class="nombreDia">MAR</div>
-        <div class="nombreDia">MIÉ</div>
-        <div class="nombreDia">JUE</div>
-        <div class="nombreDia">VIE</div>
-        <div class="nombreDia">SÁB</div>
-        <div class="nombreDia domingo">DOM</div>
-    </div>
-
-    <div id="cajaDias"></div>
-  `;
-
-  let espacios = dia - 1;
-
-  if (espacios === -1) {
-    espacios = 6;
-  }
-
-  const cajaDias = document.getElementById("cajaDias");
+  //crear cajaDias
+  const cajaDias = document.createElement("div");
+  cajaDias.id = "cajaDias";
 
   for (let i = 0; i < espacios; i++) {
     cajaDias.appendChild(crearEspacioDia());
@@ -51,6 +38,43 @@ function actualizarHorario(mes, anio) {
   for (let j = 1; j <= totalDias; j++) {
     cajaDias.appendChild(crearDia(j));
   }
+
+  horarioVista.replaceChildren(crearEncabezadoHorario(), cajaDias);
+}
+
+function crearEncabezadoHorario() {
+  const DIAS_SEMANA = ["LUN", "MAR", "MIÉ", "JUE", "VIE", "SÁB", "DOM"];
+
+  const encabezado = document.createElement("div");
+
+  encabezado.id = "nombreSemana";
+  encabezado.className = "inter-bold";
+
+  DIAS_SEMANA.forEach((nombre, indice) => {
+    const dia = document.createElement("div");
+    dia.className = "nombreDia";
+
+    if (indice === 0) dia.classList.add("lunes");
+    if (indice === DIAS_SEMANA.length - 1) dia.classList.add("domingo");
+
+    dia.textContent = nombre;
+    encabezado.appendChild(dia);
+  });
+
+  return encabezado;
+}
+
+function crearEspacioDia() {
+  const divEspacio = document.createElement("div");
+
+  divEspacio.classList.add("dia");
+  divEspacio.classList.add("espacioDia");
+
+  divEspacio.innerHTML = `
+      <div class="diaHeader"></div>
+    `;
+
+  return divEspacio;
 }
 
 function crearDia(numero) {
@@ -79,19 +103,6 @@ function crearDia(numero) {
     `;
 
   return divDia;
-}
-
-function crearEspacioDia() {
-  const divEspacio = document.createElement("div");
-
-  divEspacio.classList.add("dia");
-  divEspacio.classList.add("espacioDia");
-
-  divEspacio.innerHTML = `
-      <div class="diaHeader"></div>
-    `;
-
-  return divEspacio;
 }
 
 async function cargarListaColaboradoras() {
@@ -156,6 +167,8 @@ const mes = document.getElementById("mes");
 const anio = document.getElementById("anio");
 
 function verificarSeleccionHorario() {
+  if (mes.value === "" || anio.value === "") return;
+
   const mesSeleccionado = Number(mes.value);
   const anioSeleccionado = Number(anio.value);
 

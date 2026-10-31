@@ -1,6 +1,10 @@
 //colaboradoras máximas por turno
 const MAX_POR_TURNO = 2;
 
+//Dropdowns del horario
+const selectMes = document.getElementById("mes");
+const selectAnio = document.getElementById("anio");
+
 function actualizarContadorTurnos(nombre, cambio) {
   const cajas = document.querySelectorAll(
     `#listaColaboradoras .cajaContenido[data-nombre="${nombre}"]`,
@@ -230,15 +234,9 @@ function limpiarFiltros() {
   });
 }
 
-const mes = document.getElementById("mes");
-const anio = document.getElementById("anio");
-
 function verificarSeleccionHorario() {
-  if (mes.value === "" || anio.value === "") {
-    /*Se le coloca una fecha y año para pruebas, ESTO ES TEMPORAL */
-    mes.value = 1;
-    anio.value = 2026;
-    //return;
+  if (selectMes.value === "" || selectAnio.value === "") {
+    return;
   }
 
   const mesSeleccionado = Number(mes.value);
@@ -246,9 +244,6 @@ function verificarSeleccionHorario() {
 
   actualizarHorario(mesSeleccionado, anioSeleccionado);
 }
-
-mes.addEventListener("change", verificarSeleccionHorario);
-anio.addEventListener("change", verificarSeleccionHorario);
 
 function iniciarDragAndDrop() {
   const listaColaboradoras = document.getElementById("listaColaboradoras");
@@ -390,10 +385,19 @@ function quitarColaboradora(elementoNombre) {
   }
 }
 
-cargarListaColaboradoras();
+function registrarEventos() {
+  selectMes.addEventListener("change", verificarSeleccionHorario);
+  selectAnio.addEventListener("change", verificarSeleccionHorario);
 
-iniciarDragAndDrop();
-detectarDrop();
+  iniciarDragAndDrop();
+  detectarDrop();
+  iniciarFiltros();
+}
 
-verificarSeleccionHorario();
-iniciarFiltros();
+function init() {
+  registrarEventos();
+  cargarListaColaboradoras();
+  verificarSeleccionHorario();
+}
+
+init();

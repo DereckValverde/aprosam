@@ -115,22 +115,43 @@ async function cargarListaColaboradoras() {
       throw new Error(`Error HTTP: ${response.status}`);
     }
 
-    const colaboradoras = await response.json();
+    const datos = await response.json();
 
-    listaColaboradoras.innerHTML = "";
+    if (!datos.success) {
+      console.log("datos recibidos");
+      listaColaboradoras.replaceChildren();
+      return;
+    }
 
-    if (colaboradoras.success) {
-      colaboradoras.data.forEach((colaboradora) => {
-        listaColaboradoras.innerHTML += `
+    const fragmento = document.createDocumentFragment();
+
+    datos.data.forEach((colaboradora) => {
+      fragmento.appendChild(crearColaboradora(colaboradora));
+    });
+
+    listaColaboradoras.replaceChildren(fragmento);
+
+    activarFiltros();
+  } catch (error) {
+    console.error("Error al cargar las colaboradoras:", error);
+  }
+}
+
+function crearColaboradora(colaboradora) {
+  const contenedor = document.createElement("div");
+
+  contenedor.className = "colaboradorasFondo";
+
+  contenedor.innerHTML += `
           <div class="colaboradorasFondo">
             <div class="cajaColaboradora">
-              <div draggable="true" class="cajaContenido" data-nombre="${colaboradora.nombre}">
+              <div draggable="true" class="cajaContenido">
                 <div class="cajaNombre">
                   <img
                     src="${BASE_URL}public/assets/images/logo.jpg"
                     alt="Imagen de colaboradora"
                   >
-                  <span>${colaboradora.nombre}</span>
+                  <span></span>
                 </div>
 
                 <div class="cajaTurnos">
@@ -144,13 +165,15 @@ async function cargarListaColaboradoras() {
             </div>
           </div>
         `;
-      });
 
-      activarFiltros();
-    }
-  } catch (error) {
-    console.error("Error al cargar las colaboradoras:", error);
-  }
+  const cajaContenido = contenedor.querySelector(".cajaContenido");
+
+  cajaContenido.dataset.nombre = colaboradora.nombre;
+
+  cajaContenido.querySelector(".cajaContenido span").textContent =
+    colaboradora.nombre;
+
+  return contenedor;
 }
 
 function determinarPrimerDia(mes, anio) {
@@ -167,7 +190,12 @@ const mes = document.getElementById("mes");
 const anio = document.getElementById("anio");
 
 function verificarSeleccionHorario() {
-  if (mes.value === "" || anio.value === "") return;
+  if (mes.value === "" || anio.value === "") {
+    /*Se le coloca una fecha y año para pruebas, ESTO ES TEMPORAL */
+    mes.value = 1;
+    anio.value = 2026;
+    //return;
+  }
 
   const mesSeleccionado = Number(mes.value);
   const anioSeleccionado = Number(anio.value);

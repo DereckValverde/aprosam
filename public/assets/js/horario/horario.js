@@ -1,3 +1,6 @@
+//colaboradoras máximas por turno
+const MAX_POR_TURNO = 2;
+
 function actualizarContadorTurnos(nombre, cambio) {
   const cajas = document.querySelectorAll(
     `#listaColaboradoras .cajaContenido[data-nombre="${nombre}"]`,
@@ -326,27 +329,36 @@ function mostrar(caja, nombre) {
     ".nombreColaboradora",
   );
 
-  if (colaboradoras.length >= 2) {
+  if (colaboradoras.length >= MAX_POR_TURNO) {
     return;
   }
 
   divisor.classList.add("divisorVisible");
 
   if (colaboradoras.length === 1) {
-    const elementoY = document.createElement("span");
-    elementoY.classList.add("separadorY");
-    elementoY.textContent = " y ";
-    contenedorNombres.appendChild(elementoY);
+    contenedorNombres.appendChild(crearSeparadorY());
   }
 
-  const elemento = document.createElement("span");
-  elemento.textContent = nombre;
-  elemento.classList.add("nombreColaboradora");
-  elemento.title = "Clic derecho para eliminar";
-
-  contenedorNombres.appendChild(elemento);
+  contenedorNombres.appendChild(crearNombreColaboradora(nombre));
 
   actualizarContadorTurnos(nombre, 1);
+}
+
+function crearSeparadorY() {
+  const elementoY = document.createElement("span");
+  elementoY.classList.add("separadorY");
+  elementoY.textContent = " y ";
+
+  return elementoY;
+}
+
+function crearNombreColaboradora(nombre) {
+  const elemento = document.createElement("span");
+  elemento.classList.add("nombreColaboradora");
+  elemento.textContent = nombre;
+  elemento.title = "Clic derecho para eliminar";
+
+  return elemento;
 }
 
 document.addEventListener("contextmenu", (event) => {

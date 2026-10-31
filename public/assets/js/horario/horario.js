@@ -22,8 +22,6 @@ function actualizarHorario(mes, anio) {
 
   //Espacios iniciales: lunes = 0, domingo = 6
 
-  console.log(determinarPrimerDia(mes, anio));
-
   const espacios = (determinarPrimerDia(mes, anio) + 6) % 7;
   const totalDias = determinarCantidadDiasMes(mes, anio);
 
@@ -118,7 +116,6 @@ async function cargarListaColaboradoras() {
     const datos = await response.json();
 
     if (!datos.success) {
-      console.log("datos recibidos");
       listaColaboradoras.replaceChildren();
       return;
     }
@@ -130,8 +127,6 @@ async function cargarListaColaboradoras() {
     });
 
     listaColaboradoras.replaceChildren(fragmento);
-
-    activarFiltros();
   } catch (error) {
     console.error("Error al cargar las colaboradoras:", error);
   }
@@ -184,6 +179,52 @@ function determinarPrimerDia(mes, anio) {
 
 function determinarCantidadDiasMes(mes, anio) {
   return new Date(anio, mes, 0).getDate();
+}
+
+function iniciarFiltros() {
+  const listaColaboradoras = document.getElementById("listaColaboradoras");
+
+  listaColaboradoras.addEventListener("click", (event) => {
+    const cajaFiltro = event.target.closest(".cajaFiltro");
+
+    if (!cajaFiltro) return;
+
+    const estabaFiltroActivo = cajaFiltro.classList.contains("filtro-activo");
+
+    const cajaContenido =
+      cajaFiltro.parentElement.querySelector(".cajaContenido");
+
+    const nombre = cajaContenido.dataset.nombre;
+
+    //limpiar otros filtros por si están activos
+    limpiarFiltros();
+
+    if (estabaFiltroActivo) return;
+
+    cajaFiltro.classList.add("filtro-activo");
+
+    ejecutarFiltro(nombre);
+  });
+}
+
+function ejecutarFiltro(nombre) {
+  document.querySelectorAll(".nombreColaboradora").forEach((colaboradora) => {
+    if (colaboradora.textContent !== nombre) return;
+
+    colaboradora.closest(".dia").classList.add("prueba"); // hay que resaltar más lindo, por ahora solo es gb: red;
+  });
+}
+
+function limpiarFiltros() {
+  // Apagar todos los iconos
+  document.querySelectorAll(".cajaFiltro.filtro-activo").forEach((filtro) => {
+    filtro.classList.remove("filtro-activo");
+  });
+
+  //quitar resaltado de todos los días
+  document.querySelectorAll(".dia.prueba").forEach((dia) => {
+    dia.classList.remove("prueba");
+  });
 }
 
 const mes = document.getElementById("mes");
@@ -308,35 +349,6 @@ function mostrar(caja, nombre) {
   actualizarContadorTurnos(nombre, 1);
 }
 
-function activarFiltros() {
-  const cajaFiltro = document.querySelectorAll(".cajaFiltro");
-
-  cajaFiltro.forEach((caja) => {
-    caja.addEventListener("click", () => {
-      const nombreColaboradora =
-        caja.parentElement.firstElementChild.dataset.nombre;
-
-      //colorea el filtro
-      caja.classList.toggle("filtro-activo");
-
-      //ejecuta el filtro
-      ejecutarFiltro(nombreColaboradora);
-    });
-  });
-}
-
-function ejecutarFiltro(nombre) {
-  const nombreColaboradora = document.querySelectorAll(".nombreColaboradora");
-
-  nombreColaboradora.forEach((colaboradora) => {
-    if (colaboradora.textContent === nombre) {
-      const dia = colaboradora.closest(".dia");
-
-      dia.classList.toggle("prueba");
-    }
-  });
-}
-
 document.addEventListener("contextmenu", (event) => {
   event.preventDefault();
 
@@ -397,3 +409,4 @@ iniciarDragAndDrop();
 detectarDrop();
 
 verificarSeleccionHorario();
+iniciarFiltros();

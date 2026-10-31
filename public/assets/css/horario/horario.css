@@ -393,8 +393,9 @@ main {
 }
 
 .filtro-activo {
-  background-color: #e2e8f0;
-  border-color: #cccccc;
+  color: #ffffff;
+  background-color: #475569;
+  border-color: #475569;
 }
 
 #listaColaboradoras::-webkit-scrollbar,
@@ -480,6 +481,19 @@ main {
 
 #horarioVista > span {
   color: #bbbbbb;
+  font-size: 22px;
+}
+
+#horarioVista.horarioVacio {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffffff;
+}
+
+#horarioVista.horarioVacio::after {
+  content: "HORARIO";
+  color: #8f8e8ef5;
   font-size: 22px;
 }
 
@@ -682,6 +696,10 @@ main {
   color: #6b7280;
   pointer-events: none;
   line-height: 1;
+}
+
+.prueba {
+  background-color: red;
 }
 
 @media (max-width: 900px) {

@@ -45,16 +45,7 @@ function actualizarHorario(mes, anio) {
   const cajaDias = document.getElementById("cajaDias");
 
   for (let i = 0; i < espacios; i++) {
-    const div = document.createElement("div");
-
-    div.classList.add("dia");
-    div.classList.add("espacioDia");
-
-    div.innerHTML = `
-      <div class="diaHeader"></div>
-    `;
-
-    cajaDias.appendChild(div);
+    cajaDias.appendChild(crearEspacioDia());
   }
 
   for (let j = 1; j <= totalDias; j++) {
@@ -88,6 +79,19 @@ function crearDia(numero) {
     `;
 
   return divDia;
+}
+
+function crearEspacioDia() {
+  const divEspacio = document.createElement("div");
+
+  divEspacio.classList.add("dia");
+  divEspacio.classList.add("espacioDia");
+
+  divEspacio.innerHTML = `
+      <div class="diaHeader"></div>
+    `;
+
+  return divEspacio;
 }
 
 async function cargarListaColaboradoras() {

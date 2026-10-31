@@ -316,11 +316,11 @@ function detectarDrop() {
 
     const nombreColaboradora = event.dataTransfer.getData("text/plain");
 
-    mostrar(caja, nombreColaboradora);
+    agregarColaboradora(caja, nombreColaboradora);
   });
 }
 
-function mostrar(caja, nombre) {
+function agregarColaboradora(caja, nombreColaboradora) {
   const dia = caja.closest(".dia");
   const divisor = dia.querySelector(".divisorTurnos");
   const contenedorNombres = caja.querySelector(".nombresTurno");
@@ -339,9 +339,9 @@ function mostrar(caja, nombre) {
     contenedorNombres.appendChild(crearSeparadorY());
   }
 
-  contenedorNombres.appendChild(crearNombreColaboradora(nombre));
+  contenedorNombres.appendChild(crearNombreColaboradora(nombreColaboradora));
 
-  actualizarContadorTurnos(nombre, 1);
+  actualizarContadorTurnos(nombreColaboradora, 1);
 }
 
 function crearSeparadorY() {

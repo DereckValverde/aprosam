@@ -355,6 +355,10 @@ document.addEventListener("contextmenu", (event) => {
   const elementoNombre = event.target.closest(".nombreColaboradora");
   if (!elementoNombre) return;
 
+  quitarColaboradora(elementoNombre);
+});
+
+function quitarColaboradora(elementoNombre) {
   const nombre = elementoNombre.textContent.trim();
   const contenedor = elementoNombre.closest(".nombresTurno");
   const dia = elementoNombre.closest(".dia");
@@ -372,36 +376,7 @@ document.addEventListener("contextmenu", (event) => {
   if (totalEnDia === 0) {
     divisor.classList.remove("divisorVisible");
   }
-});
-
-document.getElementById("horarioVista").addEventListener("click", (event) => {
-  const btnEliminar = event.target.closest(".btnEliminarColaboradora");
-  if (!btnEliminar) return;
-
-  const chip = btnEliminar.closest(".chipColaboradora");
-  const nombreElemento = chip.querySelector(".nombreColaboradora");
-  const nombre = nombreElemento ? nombreElemento.textContent.trim() : null;
-
-  const contenedor = chip.closest(".nombresTurno");
-  const dia = chip.closest(".dia");
-  const divisor = dia.querySelector(".divisorTurnos");
-
-  chip.remove();
-
-  if (nombre) {
-    actualizarContadorTurnos(nombre, -1);
-  }
-
-  const separador = contenedor.querySelector(".separadorY");
-  if (separador) {
-    separador.remove();
-  }
-
-  const totalEnDia = dia.querySelectorAll(".chipColaboradora").length;
-  if (totalEnDia === 0) {
-    divisor.classList.remove("divisorVisible");
-  }
-});
+}
 
 cargarListaColaboradoras();
 

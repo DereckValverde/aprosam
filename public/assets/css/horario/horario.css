@@ -705,27 +705,46 @@ main {
 }
 
 /*ALERTAS DE SWEETALERT2*/
-.alerta-error.swal2-popup {
-  background: #fef2f2 !important;
-  border: 1px solid #fca5a5 !important;
-  border-radius: 10px !important;
-  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.12) !important;
-}
-
-.alerta-error .swal2-title {
-  color: #991b1b !important;
+.swal2-container .alerta-error.swal2-popup {
+  box-sizing: border-box;
+  width: auto;
+  max-width: min(380px, calc(100vw - 32px));
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-left: 3px solid #dc2626;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.14);
+  padding: 10px 14px;
   font-family: "Inter", sans-serif;
-  font-size: 13px;
-  font-weight: 500;
+  color: #111827;
 }
 
-.alerta-error .swal2-icon {
+.swal2-container .alerta-error.swal2-popup .swal2-icon {
+  font-size: 0.75em;
+  margin: 0 0.625rem 0 0;
   border-color: #dc2626;
   color: #dc2626;
 }
 
-.alerta-error .swal2-timer-progress-bar {
-  background: #dc2626 !important;
+.swal2-container .alerta-error.swal2-popup .swal2-title {
+  margin: 0;
+  padding: 0;
+  color: #111827;
+  font-family: "Inter", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.35;
+  text-align: left;
+}
+
+.swal2-container .alerta-error.swal2-popup .swal2-timer-progress-bar-container {
+  height: 2px;
+  background: #fee2e2;
+}
+
+.swal2-container .alerta-error.swal2-popup .swal2-timer-progress-bar {
+  height: 2px;
+  background: #dc2626;
 }
 /***********************/
 

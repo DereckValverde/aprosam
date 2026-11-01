@@ -425,15 +425,12 @@ function refrescarFiltroActivo() {
 function mostrarAlertaColaboradoraRepetida() {
   Swal.fire({
     toast: true,
-    position: "bottom-end",
+    position: "bottom",
     icon: "error",
     title: "Esa colaboradora ya está en ese turno",
     showConfirmButton: false,
     timer: 3000,
     timerProgressBar: true,
-
-    showClass: { popup: "" },
-    hideClass: { popup: "" },
 
     customClass: {
       popup: "alerta-error",

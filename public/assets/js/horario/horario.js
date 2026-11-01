@@ -165,6 +165,19 @@ function agregarColaboradora(caja, nombreColaboradora) {
     ".nombreColaboradora",
   );
 
+  //validar si ese nombre ya está en ese turno
+  const yaEstaEnElTurno = [...colaboradoras].some(
+    (colaboradora) => colaboradora.textContent.trim() === nombreColaboradora,
+  );
+
+  // si ya está, enviar alerta y no permitir añadir
+  if (yaEstaEnElTurno) {
+    //alerta
+    mostrarAlertaColaboradoraRepetida();
+
+    return;
+  }
+
   if (colaboradoras.length >= MAX_POR_TURNO) {
     return;
   }
@@ -407,6 +420,25 @@ function refrescarFiltroActivo() {
   const nombre = caja.querySelector(".cajaContenido").dataset.nombre;
 
   aplicarFiltro(nombre);
+}
+
+function mostrarAlertaColaboradoraRepetida() {
+  Swal.fire({
+    toast: true,
+    position: "bottom-end",
+    icon: "error",
+    title: "Esa colaboradora ya está en ese turno",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+
+    showClass: { popup: "" },
+    hideClass: { popup: "" },
+
+    customClass: {
+      popup: "alerta-error",
+    },
+  });
 }
 
 /* =========================================================

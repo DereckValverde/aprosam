@@ -132,6 +132,8 @@
         </div>
     </main>
 
+
+    <script src="<?= BASE_URL ?>public/assets/js/sweetalert2.all.min.js"></script>
     <script src="<?= BASE_URL . 'public/assets/js/main.js' ?>"></script>
     <script>
         const BASE_URL = "<?= BASE_URL ?>";

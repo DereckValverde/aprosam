@@ -704,6 +704,31 @@ main {
   border-radius: 6px;
 }
 
+/*ALERTAS DE SWEETALERT2*/
+.alerta-error.swal2-popup {
+  background: #fef2f2 !important;
+  border: 1px solid #fca5a5 !important;
+  border-radius: 10px !important;
+  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.12) !important;
+}
+
+.alerta-error .swal2-title {
+  color: #991b1b !important;
+  font-family: "Inter", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.alerta-error .swal2-icon {
+  border-color: #dc2626;
+  color: #dc2626;
+}
+
+.alerta-error .swal2-timer-progress-bar {
+  background: #dc2626 !important;
+}
+/***********************/
+
 @media (max-width: 900px) {
   #horarioGrid {
     grid-template-columns: minmax(220px, 1fr) minmax(0, 2fr);

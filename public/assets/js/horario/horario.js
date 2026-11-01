@@ -125,7 +125,7 @@ function iniciarFiltros() {
 
     cajaFiltro.classList.add("filtro-activo");
 
-    ejecutarFiltro(nombre);
+    aplicarFiltro(nombre);
   });
 }
 
@@ -178,6 +178,8 @@ function agregarColaboradora(caja, nombreColaboradora) {
   contenedorNombres.appendChild(crearNombreColaboradora(nombreColaboradora));
 
   actualizarContadorTurnos(nombreColaboradora, 1);
+
+  refrescarFiltroActivo();
 }
 
 function quitarColaboradora(elementoNombre) {
@@ -198,6 +200,8 @@ function quitarColaboradora(elementoNombre) {
   if (totalEnDia === 0) {
     divisor.classList.remove("divisorVisible");
   }
+
+  refrescarFiltroActivo();
 }
 
 /* =========================================================
@@ -226,6 +230,8 @@ function actualizarHorario(mes, anio) {
   }
 
   horarioVista.replaceChildren(crearEncabezadoHorario(), cajaDias);
+
+  limpiarFiltros();
 }
 
 function crearEncabezadoHorario() {
@@ -358,7 +364,15 @@ function actualizarContadorTurnos(nombre, cambio) {
   });
 }
 
-function ejecutarFiltro(nombre) {
+function aplicarFiltro(nombre) {
+  const horarioVista = document.getElementById("horarioVista");
+
+  horarioVista.classList.add("filtroActivo");
+
+  document.querySelectorAll(".dia.prueba").forEach((dia) => {
+    dia.classList.remove("prueba");
+  });
+
   document.querySelectorAll(".nombreColaboradora").forEach((colaboradora) => {
     if (colaboradora.textContent !== nombre) return;
 
@@ -368,6 +382,11 @@ function ejecutarFiltro(nombre) {
 }
 
 function limpiarFiltros() {
+  //quitar filtroActivo
+  const horarioVista = document.getElementById("horarioVista");
+
+  horarioVista.classList.remove("filtroActivo");
+
   // Apagar todos los iconos
   document.querySelectorAll(".cajaFiltro.filtro-activo").forEach((filtro) => {
     filtro.classList.remove("filtro-activo");
@@ -377,6 +396,17 @@ function limpiarFiltros() {
   document.querySelectorAll(".dia.prueba").forEach((dia) => {
     dia.classList.remove("prueba");
   });
+}
+
+function refrescarFiltroActivo() {
+  const filtroActivo = document.querySelector(".cajaFiltro.filtro-activo");
+
+  if (!filtroActivo) return;
+
+  const caja = filtroActivo.closest(".cajaColaboradora");
+  const nombre = caja.querySelector(".cajaContenido").dataset.nombre;
+
+  aplicarFiltro(nombre);
 }
 
 /* =========================================================

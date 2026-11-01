@@ -698,8 +698,10 @@ main {
   line-height: 1;
 }
 
-.prueba {
-  background-color: red;
+#horarioVista.filtroActivo .dia.prueba {
+  background-color: #f2f6ff;
+  box-shadow: inset 0 0 0 2px #3769ce;
+  border-radius: 6px;
 }
 
 @media (max-width: 900px) {

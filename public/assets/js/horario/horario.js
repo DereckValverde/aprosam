@@ -5,6 +5,11 @@ const MAX_POR_TURNO = 2;
 const DIAS_SEMANA = ["LUN", "MAR", "MIÉ", "JUE", "VIE", "SÁB", "DOM"];
 
 /* =========================================================
+   Estado
+   ========================================================= */
+var bordeSeleccionado = null;
+
+/* =========================================================
    Referencias al DOM
    ========================================================= */
 const selectMes = document.getElementById("mes");
@@ -29,6 +34,7 @@ function registrarEventos() {
   iniciarDragAndDrop();
   detectarDrop();
   iniciarFiltros();
+  detectarBordeSeleccionado();
 
   // Listener global: desactiva el menú de clic derecho y maneja el borrado
   document.addEventListener("contextmenu", alClicDerecho);
@@ -59,6 +65,8 @@ function iniciarDragAndDrop() {
     );
 
     requestAnimationFrame(() => fantasma.remove());
+
+    limpiarIndicadorActivoBordes();
   });
 }
 
@@ -151,6 +159,26 @@ function alClicDerecho(event) {
   if (!elementoNombre) return;
 
   quitarColaboradora(elementoNombre);
+}
+
+function detectarBordeSeleccionado() {
+  const listaBordes = document.getElementById("listaBordes");
+
+  listaBordes.addEventListener("click", (event) => {
+    const cajaBorde = event.target.closest(".cajaBorde");
+
+    if (!cajaBorde) return;
+
+    //eliminar otros filtros por si estaban activos
+    limpiarIndicadorActivoBordes();
+
+    //Colocar indicador de que está activo
+    cajaBorde.appendChild(crearCajaActivo());
+
+    //indicador de borde seleccionado
+    const span = cajaBorde.querySelector(".textoBorde");
+    bordeSeleccionado = span.textContent;
+  });
 }
 
 /* =========================================================
@@ -352,6 +380,15 @@ function crearSeparadorY() {
   return elementoY;
 }
 
+function crearCajaActivo() {
+  const cajaActivo = document.createElement("span");
+
+  cajaActivo.textContent = "activo";
+  cajaActivo.classList.add("activo");
+
+  return cajaActivo;
+}
+
 function crearNombreColaboradora(nombre) {
   const elemento = document.createElement("span");
   elemento.classList.add("nombreColaboradora");
@@ -408,6 +445,13 @@ function limpiarFiltros() {
   // Quitar resaltado de todos los días
   document.querySelectorAll(".dia.prueba").forEach((dia) => {
     dia.classList.remove("prueba");
+  });
+}
+
+function limpiarIndicadorActivoBordes() {
+  document.querySelectorAll(".activo").forEach((caja) => {
+    caja.remove();
+    bordeSeleccionado = null;
   });
 }
 

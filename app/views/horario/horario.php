@@ -63,16 +63,15 @@
 
                         <section id="listaBordes" class="inter-normal">
                             <div class="cajaBorde cajaBorde--verdura">
-                                <span>• Verduras</span>
-                                <span class="activo">activo</span>
+                                <span class="textoBorde">Verduras</span>
                             </div>
 
                             <div class="cajaBorde cajaBorde--limpieza">
-                                <span>• Limpieza</span>
+                                <span class="textoBorde">Limpieza</span>
                             </div>
 
                             <div class="cajaBorde cajaBorde--diario">
-                                <span>• Diario</span>
+                                <span class="textoBorde">Diario</span>
                             </div>
                         </section>
                     </div>

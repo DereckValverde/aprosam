@@ -34,7 +34,10 @@ function registrarEventos() {
   iniciarDragAndDrop();
   detectarDrop();
   iniciarFiltros();
+
   detectarBordeSeleccionado();
+  detectarDiaSeleccionado();
+  eliminarBorde();
 
   // Listener global: desactiva el menú de clic derecho y maneja el borrado
   document.addEventListener("contextmenu", alClicDerecho);
@@ -181,6 +184,30 @@ function detectarBordeSeleccionado() {
   });
 }
 
+function detectarDiaSeleccionado() {
+  const horarioVista = document.getElementById("horarioVista");
+
+  horarioVista.addEventListener("click", (event) => {
+    const dia = event.target.closest(".dia");
+
+    pintarBordeDia(dia);
+  });
+}
+
+function eliminarBorde() {
+  const horarioVista = document.getElementById("horarioVista");
+
+  horarioVista.addEventListener("contextmenu", (event) => {
+    const dia = event.target.closest(".dia");
+
+    if (!dia) return;
+
+    event.preventDefault();
+
+    dia.classList.remove("borde-verduras", "borde-limpieza", "borde-diario");
+  });
+}
+
 /* =========================================================
    Acciones
    ========================================================= */
@@ -245,6 +272,27 @@ function quitarColaboradora(elementoNombre) {
   refrescarFiltroActivo();
 }
 
+function pintarBordeDia(dia) {
+  if (!dia || !bordeSeleccionado) return;
+
+  // Eliminar bordes anteriores
+  dia.classList.remove("borde-verduras", "borde-limpieza", "borde-diario");
+
+  // Aplicar el nuevo borde
+  switch (bordeSeleccionado) {
+    case "Verduras":
+      dia.classList.add("borde-verduras");
+      break;
+
+    case "Limpieza":
+      dia.classList.add("borde-limpieza");
+      break;
+
+    case "Diario":
+      dia.classList.add("borde-diario");
+      break;
+  }
+}
 /* =========================================================
    Render
    ========================================================= */

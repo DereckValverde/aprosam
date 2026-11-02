@@ -748,6 +748,58 @@ main {
 }
 /***********************/
 
+/*BORDES*/
+
+.borde-verduras,
+.borde-limpieza,
+.borde-diario {
+  position: relative;
+}
+
+.borde-verduras {
+  border: 1.5px dashed #2a7336;
+}
+
+.borde-limpieza {
+  border: 1px dashed #890f94;
+}
+
+.borde-diario {
+  border: 1px dashed #b86a00;
+}
+
+/* Etiquetas */
+.borde-verduras::before,
+.borde-limpieza::before,
+.borde-diario::before {
+  position: absolute;
+  top: 4px;
+  right: 3px;
+  padding: 2px 7px;
+  border-radius: 8px;
+  font-size: 9px;
+  font-weight: bold;
+  letter-spacing: 1px;
+  color: #ffffff;
+}
+
+.borde-verduras::before {
+  content: "VERDURAS";
+  background: #2a7336;
+}
+
+.borde-limpieza::before {
+  content: "LIMPIEZA";
+  background: #890f94;
+}
+
+.borde-diario::before {
+  content: "DIARIO";
+  background: #b86a00;
+}
+
+/***********************/
+
 @media (max-width: 900px) {
   #horarioGrid {
     grid-template-columns: minmax(220px, 1fr) minmax(0, 2fr);

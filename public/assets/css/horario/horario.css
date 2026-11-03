@@ -813,6 +813,32 @@ main {
   opacity: 1;
 }
 
+.cajaColor {
+  position: relative;
+}
+
+.cajaColor.color-seleccionado {
+  border: 1px solid #047857;
+}
+
+.cajaColor.color-seleccionado::after {
+  content: "✓";
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 19px;
+  height: 19px;
+  color: #ffffff;
+  background-color: #047857;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  font-size: 11px;
+  font-weight: bold;
+}
+
 @media (max-width: 900px) {
   #horarioGrid {
     grid-template-columns: minmax(220px, 1fr) minmax(0, 2fr);

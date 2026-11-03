@@ -8,6 +8,7 @@ const DIAS_SEMANA = ["LUN", "MAR", "MIÉ", "JUE", "VIE", "SÁB", "DOM"];
    Estado
    ========================================================= */
 var bordeSeleccionado = null;
+var colorSeleccionado = null;
 
 /* =========================================================
    Referencias al DOM
@@ -40,6 +41,7 @@ function registrarEventos() {
   eliminarBorde();
 
   detectarCheckBoxColores();
+  detectarColorSeleccionado();
 
   // Listener global: desactiva el menú de clic derecho y maneja el borrado
   document.addEventListener("contextmenu", alClicDerecho);
@@ -168,6 +170,33 @@ function alClicDerecho(event) {
   quitarColaboradora(elementoNombre);
 }
 
+function detectarColorSeleccionado() {
+  const listaColores = document.getElementById("listaColores");
+
+  listaColores.addEventListener("click", (event) => {
+    const cajaColor = event.target.closest(".cajaColor");
+
+    if (!cajaColor) return;
+
+    // Quitar la selección visual de los demás colores
+    document.querySelectorAll(".cajaColor").forEach((caja) => {
+      caja.classList.remove("color-seleccionado");
+    });
+
+    // Marcar visualmente el color seleccionado
+    cajaColor.classList.add("color-seleccionado");
+
+    // Obtener el nombre del color
+    const nombreColor = cajaColor.querySelector("p").textContent.trim();
+
+    colorSeleccionado = nombreColor;
+
+    // Desactivar cualquier borde seleccionado
+    limpiarIndicadorActivoBordes();
+    bordeSeleccionado = null;
+  });
+}
+
 function detectarBordeSeleccionado() {
   const listaBordes = document.getElementById("listaBordes");
 
@@ -176,13 +205,21 @@ function detectarBordeSeleccionado() {
 
     if (!cajaBorde) return;
 
-    //eliminar otros filtros por si estaban activos
+    // Eliminar otros indicadores de bordes
     limpiarIndicadorActivoBordes();
 
-    //Colocar indicador de que está activo
+    // Quitar la selección visual de los colores
+    document.querySelectorAll(".cajaColor").forEach((caja) => {
+      caja.classList.remove("color-seleccionado");
+    });
+
+    // Desactivar el color seleccionado
+    colorSeleccionado = null;
+
+    // Colocar indicador de que el borde está activo
     cajaBorde.appendChild(crearCajaActivo());
 
-    //indicador de borde seleccionado
+    // Guardar el borde seleccionado
     const span = cajaBorde.querySelector(".textoBorde");
     bordeSeleccionado = span.textContent;
   });
@@ -191,10 +228,21 @@ function detectarBordeSeleccionado() {
 function detectarDiaSeleccionado() {
   const horarioVista = document.getElementById("horarioVista");
 
+  //Evento para pintar el borde
   horarioVista.addEventListener("click", (event) => {
-    const dia = event.target.closest(".dia");
+    if (bordeSeleccionado != null && colorSeleccionado == null) {
+      const dia = event.target.closest(".dia");
 
-    pintarBordeDia(dia);
+      pintarBordeDia(dia);
+    }
+  });
+
+  horarioVista.addEventListener("click", (event) => {
+    if (bordeSeleccionado == null && colorSeleccionado != null) {
+      const dia = event.target.closest(".dia");
+
+      pintarFondoDia(dia);
+    }
   });
 }
 
@@ -219,6 +267,32 @@ function detectarCheckBoxColores() {
       activarColoresSeccion();
     }
   });
+}
+
+function pintarFondoDia(dia) {
+  switch (colorSeleccionado) {
+    case "Rojo":
+      dia.style.backgroundColor = "#fff1f2";
+      break;
+    case "Morado":
+      dia.style.backgroundColor = "#eae3f8";
+      break;
+    case "Amarillo":
+      dia.style.backgroundColor = "#fffbeb";
+      break;
+    case "Azul":
+      dia.style.backgroundColor = "#eff6ff";
+      break;
+    case "Verde":
+      dia.style.backgroundColor = "#ecfdf5";
+      break;
+    case "Blanco":
+      dia.style.backgroundColor = "#ffffff";
+      break;
+
+    default:
+      break;
+  }
 }
 
 /* =========================================================
@@ -305,6 +379,19 @@ function pintarBordeDia(dia) {
       dia.classList.add("borde-diario");
       break;
   }
+}
+
+function reiniciarColoresYBordes() {
+  colorSeleccionado = null;
+  bordeSeleccionado = null;
+
+  // Quitar indicadores de selección de colores
+  document.querySelectorAll(".cajaColor").forEach((caja) => {
+    caja.classList.remove("color-seleccionado");
+  });
+
+  // Quitar indicadores de selección de bordes
+  limpiarIndicadorActivoBordes();
 }
 /* =========================================================
    Render
@@ -487,7 +574,6 @@ function aplicarFiltro(nombre) {
   document.querySelectorAll(".nombreColaboradora").forEach((colaboradora) => {
     if (colaboradora.textContent !== nombre) return;
 
-    // Hay que resaltar más lindo, por ahora solo es bg: red
     colaboradora.closest(".dia").classList.add("prueba");
   });
 }
@@ -558,11 +644,12 @@ function activarColoresSeccion() {
 
   if (estabaDeshabilidato) {
     coloresSeccion.classList.remove("divDeshabilitado");
+    reiniciarColoresYBordes();
+    limpiarIndicadorActivoBordes();
   } else {
     coloresSeccion.classList.add("divDeshabilitado");
+    reiniciarColoresYBordes();
   }
-
-  console.log(estabaDeshabilidato);
 }
 
 /* =========================================================

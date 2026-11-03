@@ -39,6 +39,8 @@ function registrarEventos() {
   detectarDiaSeleccionado();
   eliminarBorde();
 
+  detectarCheckBoxColores();
+
   // Listener global: desactiva el menú de clic derecho y maneja el borrado
   document.addEventListener("contextmenu", alClicDerecho);
 }
@@ -151,6 +153,8 @@ function verificarSeleccionHorario() {
   const mesSeleccionado = Number(selectMes.value);
   const anioSeleccionado = Number(selectAnio.value);
 
+  colocarTituloHorario(mesSeleccionado, anioSeleccionado);
+
   actualizarHorario(mesSeleccionado, anioSeleccionado);
 }
 
@@ -205,6 +209,15 @@ function eliminarBorde() {
     event.preventDefault();
 
     dia.classList.remove("borde-verduras", "borde-limpieza", "borde-diario");
+  });
+}
+function detectarCheckBoxColores() {
+  const checkBoxColores = document.getElementById("checkBoxColores");
+
+  checkBoxColores.addEventListener("click", () => {
+    if (checkBoxColores) {
+      activarColoresSeccion();
+    }
   });
 }
 
@@ -528,6 +541,28 @@ function mostrarAlertaColaboradoraRepetida() {
       popup: "alerta-error",
     },
   });
+}
+
+function colocarTituloHorario(indexMes, anioSeleccionado) {
+  const mes = document.getElementById("mes")[indexMes].textContent;
+
+  document.querySelector(".nombreHorario").textContent =
+    `${mes} ${anioSeleccionado}`;
+}
+
+function activarColoresSeccion() {
+  const coloresSeccion = document.getElementById("coloresSeccion");
+
+  const estabaDeshabilidato =
+    coloresSeccion.classList.contains("divDeshabilitado");
+
+  if (estabaDeshabilidato) {
+    coloresSeccion.classList.remove("divDeshabilitado");
+  } else {
+    coloresSeccion.classList.add("divDeshabilitado");
+  }
+
+  console.log(estabaDeshabilidato);
 }
 
 /* =========================================================

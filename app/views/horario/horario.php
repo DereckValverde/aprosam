@@ -31,10 +31,10 @@
 
         <div id="horarioGrid">
             <div id="panelFuncionalidades">
-                <section id="coloresSeccion">
+                <section id="coloresSeccion" class="divDeshabilitado">
                     <div id="coloresHeader">
                         <span class="inter-normal">Colores y bordes</span>
-                        <input type="checkbox">
+                        <input id="checkBoxColores" type="checkbox">
                     </div>
 
                     <div id="coloresFondo">
@@ -93,7 +93,7 @@
             <div id="panelHorario" class="inter-normal">
                 <section id="horarioTop">
                     <header id="horarioTitulo">
-                        <p>Agosto 2022</p>
+                        <p class="nombreHorario"></p>
                     </header>
 
                     <div id="dropdowns">

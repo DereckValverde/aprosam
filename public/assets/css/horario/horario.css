@@ -122,7 +122,6 @@ main {
   padding: 10px 10px 20px;
   background-color: #ffffff;
   border-radius: 14px;
-  user-select: none;
 }
 
 #coloresHeader {
@@ -432,7 +431,7 @@ main {
 }
 
 #horarioTitulo {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
 }
 
 #dropdowns {
@@ -799,6 +798,19 @@ main {
 }
 
 /***********************/
+
+/* Deshabilitar solo el texto */
+.divDeshabilitado .inter-normal {
+  opacity: 0.5;
+  user-select: none;
+  pointer-events: none;
+}
+
+/* Habilitar explícitamente el input por si acaso */
+.divDeshabilitado input[type="checkbox"] {
+  pointer-events: auto;
+  opacity: 1;
+}
 
 @media (max-width: 900px) {
   #horarioGrid {

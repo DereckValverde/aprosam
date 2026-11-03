@@ -15,6 +15,7 @@ var colorSeleccionado = null;
    ========================================================= */
 const selectMes = document.getElementById("mes");
 const selectAnio = document.getElementById("anio");
+const btnGuardarHorario = document.getElementById("btnGuardarHorario");
 
 /* =========================================================
    Punto de entrada
@@ -31,6 +32,7 @@ function init() {
 function registrarEventos() {
   selectMes.addEventListener("change", verificarSeleccionHorario);
   selectAnio.addEventListener("change", verificarSeleccionHorario);
+  btnGuardarHorario.addEventListener("click", imprimirHorario);
 
   iniciarDragAndDrop();
   detectarDrop();
@@ -160,6 +162,27 @@ function verificarSeleccionHorario() {
   actualizarHorario(mesSeleccionado, anioSeleccionado);
 }
 
+async function imprimirHorario() {
+  const confirmado = await mostrarMensajeGuardarHorario();
+
+  if (confirmado) {
+    const horarioVista = document.getElementById("horarioVista");
+
+    if (horarioVista.classList.contains("horarioVacio")) return;
+
+    const { hoja, zona } = crearContenedorImpresion(horarioVista);
+
+    try {
+      await html2pdf().set(opcionesPdf()).from(hoja).save();
+    } catch (error) {
+      console.error("No se pudo generar el PDF del horario:", error);
+      mostrarAlertaPdfFallido();
+    } finally {
+      zona.remove();
+    }
+  }
+}
+
 function alClicDerecho(event) {
   event.preventDefault();
 
@@ -256,7 +279,7 @@ function eliminarBorde() {
 
     event.preventDefault();
 
-    dia.classList.remove("borde-verduras", "borde-limpieza", "borde-diario");
+    dia.classList.remove("borde-verduras", "borde-pava", "borde-diario");
   });
 }
 function detectarCheckBoxColores() {
@@ -270,6 +293,8 @@ function detectarCheckBoxColores() {
 }
 
 function pintarFondoDia(dia) {
+  if (!dia) return;
+
   switch (colorSeleccionado) {
     case "Rojo":
       dia.style.backgroundColor = "#fff1f2";
@@ -293,6 +318,145 @@ function pintarFondoDia(dia) {
     default:
       break;
   }
+}
+
+/* =========================================================
+   Impresión
+   ========================================================= */
+const ANCHO_HOJA_IMPRESION = 800;
+const ALTO_HOJA_IMPRESION = 540;
+
+function opcionesPdf() {
+  return {
+    margin: [12, 12, 12, 12],
+    filename: nombreArchivoHorario(),
+    // Cambiado a PNG para evitar los bordes borrosos de la compresión JPEG
+    image: { type: "png" },
+    html2canvas: {
+      scale: 4, // Escala reducida a 4 (suficiente para PNG sin sobrecargar la memoria)
+      width: ANCHO_HOJA_IMPRESION,
+      height: ALTO_HOJA_IMPRESION,
+      useCORS: true,
+      backgroundColor: "#ffffff",
+      logging: false,
+      letterRendering: true, // Mejora el trazado de las fuentes
+    },
+    jsPDF: { unit: "mm", format: "a4", orientation: "landscape" },
+  };
+}
+
+function nombreArchivoHorario() {
+  const titulo = document.querySelector(".nombreHorario").textContent.trim();
+  return `Horario ${titulo}.pdf`.replace(/\s+/g, " ");
+}
+
+function crearContenedorImpresion(horarioVista) {
+  const zona = document.createElement("div");
+  zona.style.position = "absolute";
+  zona.style.top = "0";
+  zona.style.left = "0";
+  zona.style.width = "0";
+  zona.style.height = "0";
+  zona.style.overflow = "hidden";
+
+  const hoja = document.createElement("div");
+  hoja.style.position = "relative";
+  hoja.style.width = `${ANCHO_HOJA_IMPRESION}px`;
+  hoja.style.height = `${ALTO_HOJA_IMPRESION}px`;
+  hoja.style.overflow = "hidden";
+  hoja.style.backgroundColor = "#ffffff";
+
+  const contenido = document.createElement("div");
+  contenido.style.width = `${horarioVista.clientWidth}px`;
+  contenido.style.backgroundColor = "#ffffff";
+  contenido.style.fontFamily = getComputedStyle(horarioVista).fontFamily;
+
+  // Optimizaciones de nitidez para el texto antes de capturar
+  contenido.style.textRendering = "optimizeLegibility";
+  contenido.style.webkitFontSmoothing = "antialiased";
+  contenido.style.MozOsxFontSmoothing = "grayscale";
+
+  const titulo = document.getElementById("horarioTitulo").cloneNode(true);
+  titulo.removeAttribute("id");
+  titulo.style.margin = "0";
+  titulo.style.paddingBottom = "40px";
+  titulo.style.fontSize = "1.9rem";
+
+  titulo.style.width = "100%";
+  titulo.style.textAlign = "center";
+  titulo.style.display = "flex";
+  titulo.style.justifyContent = "center";
+  titulo.style.alignItems = "center";
+
+  const nombreTitulo = titulo.querySelector(".nombreHorario");
+  if (nombreTitulo) nombreTitulo.style.margin = "0";
+
+  const vista = horarioVista.cloneNode(true);
+  vista.removeAttribute("id");
+  vista.classList.remove("filtroActivo");
+  vista.style.height = "auto";
+  vista.style.marginTop = "0";
+  vista.style.overflow = "visible";
+  vista.style.flex = "0 0 auto";
+  vista.style.background = "#eaeaec";
+  vista.style.borderRadius = "14px";
+
+  vista.querySelectorAll(".dia.prueba").forEach((dia) => {
+    dia.classList.remove("prueba");
+  });
+
+  const semana = vista.querySelector("#nombreSemana");
+  if (semana) semana.style.position = "static";
+
+  contenido.append(titulo, vista);
+  hoja.appendChild(contenido);
+  zona.appendChild(hoja);
+  document.body.appendChild(zona);
+
+  const ancho = contenido.offsetWidth;
+  const alto = contenido.offsetHeight;
+  const escala = Math.min(
+    ANCHO_HOJA_IMPRESION / ancho,
+    ALTO_HOJA_IMPRESION / alto,
+  );
+
+  contenido.style.position = "absolute";
+  contenido.style.transformOrigin = "top left";
+  contenido.style.transform = `scale(${escala})`;
+  contenido.style.left = `${(ANCHO_HOJA_IMPRESION - ancho * escala) / 2}px`;
+  contenido.style.top = `${(ALTO_HOJA_IMPRESION - alto * escala) / 2}px`;
+
+  return { hoja, zona };
+}
+
+function mostrarAlertaPdfFallido() {
+  Swal.fire({
+    toast: true,
+    position: "bottom",
+    icon: "error",
+    title: "No se pudo generar el PDF",
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: true,
+    customClass: {
+      popup: "alerta-error",
+    },
+  });
+}
+
+async function mostrarMensajeGuardarHorario() {
+  const result = await Swal.fire({
+    title: "¿Guardar horario?",
+    text: "Se generará y descargará un archivo PDF.",
+    icon: "question",
+    showCancelButton: true,
+    confirmButtonColor: "#047857",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sí, guardar PDF",
+    cancelButtonText: "Cancelar",
+  });
+
+  return result.isConfirmed;
 }
 
 /* =========================================================
@@ -363,7 +527,7 @@ function pintarBordeDia(dia) {
   if (!dia || !bordeSeleccionado) return;
 
   // Eliminar bordes anteriores
-  dia.classList.remove("borde-verduras", "borde-limpieza", "borde-diario");
+  dia.classList.remove("borde-verduras", "borde-pava", "borde-diario");
 
   // Aplicar el nuevo borde
   switch (bordeSeleccionado) {
@@ -371,8 +535,8 @@ function pintarBordeDia(dia) {
       dia.classList.add("borde-verduras");
       break;
 
-    case "Limpieza":
-      dia.classList.add("borde-limpieza");
+    case "Pava":
+      dia.classList.add("borde-pava");
       break;
 
     case "Diario":
@@ -398,24 +562,30 @@ function reiniciarColoresYBordes() {
    ========================================================= */
 function actualizarHorario(mes, anio) {
   const horarioVista = document.getElementById("horarioVista");
-
-  // Limpiar vista vacía inicial
   horarioVista.classList.remove("horarioVacio");
 
-  // Espacios iniciales: lunes = 0, domingo = 6
   const espacios = (determinarPrimerDia(mes, anio) + 6) % 7;
   const totalDias = determinarCantidadDiasMes(mes, anio);
 
-  // Crear cajaDias
   const cajaDias = document.createElement("div");
   cajaDias.id = "cajaDias";
 
+  // Crear espacios vacíos iniciales
   for (let i = 0; i < espacios; i++) {
     cajaDias.appendChild(crearEspacioDia());
   }
 
+  // Crear los días del mes
   for (let j = 1; j <= totalDias; j++) {
     cajaDias.appendChild(crearDia(j));
+  }
+
+  // Crear espacios vacíos finales para rellenar
+  const totalCeldas = espacios + totalDias;
+  const espaciosFinales = totalCeldas % 7 === 0 ? 0 : 7 - (totalCeldas % 7);
+
+  for (let k = 0; k < espaciosFinales; k++) {
+    cajaDias.appendChild(crearEspacioDia());
   }
 
   horarioVista.replaceChildren(crearEncabezadoHorario(), cajaDias);

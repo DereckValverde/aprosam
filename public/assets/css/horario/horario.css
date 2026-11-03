@@ -246,7 +246,7 @@ main {
   border-color: #2a7336;
 }
 
-.cajaBorde--limpieza {
+.cajaBorde--pava {
   color: #890f94;
   background-color: #f3e6f9;
   border-color: #940f87;
@@ -573,7 +573,7 @@ main {
   height: 0;
   margin: 0 8px;
   border: none;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid #8e8e8f;
   visibility: hidden;
   transform: translateY(-2px);
 }
@@ -584,7 +584,7 @@ main {
 }
 
 .espacioDia {
-  background-color: #f7f8fa;
+  background-color: #f3f4f6;
   pointer-events: none;
   user-select: none;
 }
@@ -751,7 +751,7 @@ main {
 /*BORDES*/
 
 .borde-verduras,
-.borde-limpieza,
+.borde-pava,
 .borde-diario {
   position: relative;
 }
@@ -760,7 +760,7 @@ main {
   border: 1.5px dashed #2a7336;
 }
 
-.borde-limpieza {
+.borde-pava {
   border: 1px dashed #890f94;
 }
 
@@ -770,7 +770,7 @@ main {
 
 /* Etiquetas */
 .borde-verduras::before,
-.borde-limpieza::before,
+.borde-pava::before,
 .borde-diario::before {
   position: absolute;
   top: 4px;
@@ -788,8 +788,8 @@ main {
   background: #2a7336;
 }
 
-.borde-limpieza::before {
-  content: "LIMPIEZA";
+.borde-pava::before {
+  content: "PAVA";
   background: #890f94;
 }
 

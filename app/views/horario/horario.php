@@ -24,8 +24,8 @@
             <h1 class="inter-semibold">Horario</h1>
 
             <button id="btnGuardarHorario" type="button">
-                <i class="bi bi-floppy"></i>
-                <span>Guardar Horario</span>
+                <i class="bi bi-printer"></i>
+                <span>Imprimir Horario</span>
             </button>
         </header>
 
@@ -66,8 +66,8 @@
                                 <span class="textoBorde">Verduras</span>
                             </div>
 
-                            <div class="cajaBorde cajaBorde--limpieza">
-                                <span class="textoBorde">Limpieza</span>
+                            <div class="cajaBorde cajaBorde--pava">
+                                <span class="textoBorde">Pava</span>
                             </div>
 
                             <div class="cajaBorde cajaBorde--diario">
@@ -133,6 +133,7 @@
 
 
     <script src="<?= BASE_URL ?>public/assets/js/sweetalert2.all.min.js"></script>
+    <script src="<?= BASE_URL ?>public/assets/js/html2pdf.bundle.min.js"></script>
     <script src="<?= BASE_URL . 'public/assets/js/main.js' ?>"></script>
     <script>
         const BASE_URL = "<?= BASE_URL ?>";

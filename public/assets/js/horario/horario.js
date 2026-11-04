@@ -325,15 +325,21 @@ function pintarFondoDia(dia) {
    ========================================================= */
 const ANCHO_HOJA_IMPRESION = 800;
 const ALTO_HOJA_IMPRESION = 540;
+// Ancho de referencia del calendario en escritorio, medido del PDF correcto
+// generado en el equipo del usuario. Se usa siempre para imprimir, sin
+// importar el tamaño de la ventana o de la pantalla.
+const ANCHO_CONTENIDO_IMPRESION = 1494;
 
 function opcionesPdf() {
   return {
     margin: [12, 12, 12, 12],
     filename: nombreArchivoHorario(),
-    // Cambiado a PNG para evitar los bordes borrosos de la compresión JPEG
+    // PNG sin pérdida para que los bordes y el texto salgan nítidos
     image: { type: "png" },
     html2canvas: {
-      scale: 4, // Escala reducida a 4 (suficiente para PNG sin sobrecargar la memoria)
+      // 800 px de hoja x 8 = 6400 px de ancho. Al imprimir en A4 horizontal
+      // equivale a ~600 DPI, el máximo aprovechable en impresoras normales.
+      scale: 8,
       width: ANCHO_HOJA_IMPRESION,
       height: ALTO_HOJA_IMPRESION,
       useCORS: true,
@@ -341,7 +347,14 @@ function opcionesPdf() {
       logging: false,
       letterRendering: true, // Mejora el trazado de las fuentes
     },
-    jsPDF: { unit: "mm", format: "a4", orientation: "landscape" },
+    // compress: true comprime la imagen sin pérdida (Flate), así el PDF
+    // mantiene la nitidez pero no crece a decenas de MB.
+    jsPDF: {
+      unit: "mm",
+      format: "a4",
+      orientation: "landscape",
+      compress: true,
+    },
   };
 }
 
@@ -367,7 +380,7 @@ function crearContenedorImpresion(horarioVista) {
   hoja.style.backgroundColor = "#ffffff";
 
   const contenido = document.createElement("div");
-  contenido.style.width = `${horarioVista.clientWidth}px`;
+  contenido.style.width = `${ANCHO_CONTENIDO_IMPRESION}px`;
   contenido.style.backgroundColor = "#ffffff";
   contenido.style.fontFamily = getComputedStyle(horarioVista).fontFamily;
 

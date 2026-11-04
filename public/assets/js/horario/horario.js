@@ -292,32 +292,23 @@ function detectarCheckBoxColores() {
   });
 }
 
+const COLORES_DIA = {
+  Rojo: "--color-dia-rojo",
+  Morado: "--color-dia-morado",
+  Amarillo: "--color-dia-amarillo",
+  Azul: "--color-dia-azul",
+  Verde: "--color-dia-verde",
+  Blanco: "--color-dia-blanco",
+};
+
 function pintarFondoDia(dia) {
   if (!dia) return;
 
-  switch (colorSeleccionado) {
-    case "Rojo":
-      dia.style.backgroundColor = "#fff1f2";
-      break;
-    case "Morado":
-      dia.style.backgroundColor = "#eae3f8";
-      break;
-    case "Amarillo":
-      dia.style.backgroundColor = "#fffbeb";
-      break;
-    case "Azul":
-      dia.style.backgroundColor = "#eff6ff";
-      break;
-    case "Verde":
-      dia.style.backgroundColor = "#ecfdf5";
-      break;
-    case "Blanco":
-      dia.style.backgroundColor = "#ffffff";
-      break;
-
-    default:
-      break;
-  }
+  const variable = COLORES_DIA[colorSeleccionado];
+  if (!variable) return;
+  dia.style.backgroundColor = getComputedStyle(document.documentElement)
+    .getPropertyValue(variable)
+    .trim();
 }
 
 /* =========================================================
@@ -325,30 +316,22 @@ function pintarFondoDia(dia) {
    ========================================================= */
 const ANCHO_HOJA_IMPRESION = 800;
 const ALTO_HOJA_IMPRESION = 540;
-// Ancho de referencia del calendario en escritorio, medido del PDF correcto
-// generado en el equipo del usuario. Se usa siempre para imprimir, sin
-// importar el tamaño de la ventana o de la pantalla.
 const ANCHO_CONTENIDO_IMPRESION = 1494;
 
 function opcionesPdf() {
   return {
     margin: [12, 12, 12, 12],
     filename: nombreArchivoHorario(),
-    // PNG sin pérdida para que los bordes y el texto salgan nítidos
-    image: { type: "png" },
+    image: { type: "jpeg", quality: 1.0 },
     html2canvas: {
-      // 800 px de hoja x 8 = 6400 px de ancho. Al imprimir en A4 horizontal
-      // equivale a ~600 DPI, el máximo aprovechable en impresoras normales.
-      scale: 8,
+      scale: 4,
       width: ANCHO_HOJA_IMPRESION,
       height: ALTO_HOJA_IMPRESION,
       useCORS: true,
       backgroundColor: "#ffffff",
       logging: false,
-      letterRendering: true, // Mejora el trazado de las fuentes
+      letterRendering: true,
     },
-    // compress: true comprime la imagen sin pérdida (Flate), así el PDF
-    // mantiene la nitidez pero no crece a decenas de MB.
     jsPDF: {
       unit: "mm",
       format: "a4",
@@ -383,8 +366,6 @@ function crearContenedorImpresion(horarioVista) {
   contenido.style.width = `${ANCHO_CONTENIDO_IMPRESION}px`;
   contenido.style.backgroundColor = "#ffffff";
   contenido.style.fontFamily = getComputedStyle(horarioVista).fontFamily;
-
-  // Optimizaciones de nitidez para el texto antes de capturar
   contenido.style.textRendering = "optimizeLegibility";
   contenido.style.webkitFontSmoothing = "antialiased";
   contenido.style.MozOsxFontSmoothing = "grayscale";

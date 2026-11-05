@@ -132,6 +132,24 @@
     </main>
 
 
+    <!-- Modal para sustituir colaboradora -->
+    <div class="modalSustituirColaboradora">
+
+        <h1 class="tituloModal">Nombre</h1>
+
+        <span>Sustituir por:</span>
+
+        <select id="modalListaColaboradoras">
+            <!-- Lista cargada desde JS -->
+        </select>
+
+        <div>
+            <button type="button" class="btnEliminarSustituta" style="display: none;">Quitar</button>
+            <button type="button" class="btnAceptar">Aceptar</button>
+            <button type="button" class="btnCancelar">Cancelar</button>
+        </div>
+
+    </div>
     <script src="<?= BASE_URL ?>public/assets/js/sweetalert2.all.min.js"></script>
     <script src="<?= BASE_URL ?>public/assets/js/html2pdf.bundle.min.js"></script>
     <script src="<?= BASE_URL . 'public/assets/js/main.js' ?>"></script>

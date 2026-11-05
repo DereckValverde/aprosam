@@ -9,6 +9,8 @@ const DIAS_SEMANA = ["LUN", "MAR", "MIÉ", "JUE", "VIE", "SÁB", "DOM"];
    ========================================================= */
 var bordeSeleccionado = null;
 var colorSeleccionado = null;
+var itemColaboradoraParaSustituir = null;
+var listaColaboradorasCache = [];
 
 /* =========================================================
    Referencias al DOM
@@ -45,7 +47,9 @@ function registrarEventos() {
   detectarCheckBoxColores();
   detectarColorSeleccionado();
 
-  // Listener global: desactiva el menú de clic derecho y maneja el borrado
+  dobleClicIzquierdoColaboradora();
+  iniciarEventosModalSustituirColaboradora();
+
   document.addEventListener("contextmenu", alClicDerecho);
 }
 
@@ -146,6 +150,173 @@ function iniciarFiltros() {
   });
 }
 
+function abrirModalParaSustituirColaboradora(itemColaboradora, x, y) {
+  itemColaboradoraParaSustituir = itemColaboradora;
+
+  const elementoTitular = itemColaboradora.querySelector(".nombreColaboradora");
+  if (!elementoTitular) return;
+
+  const nombreTitular =
+    elementoTitular.dataset.nombre || elementoTitular.textContent.trim();
+  const elementoSustituta = itemColaboradora.querySelector(".nombreSustituta");
+  const sustitutaActual = elementoSustituta
+    ? (
+        elementoSustituta.dataset.nombre || elementoSustituta.textContent
+      ).replace(/[()]/g, "").trim()
+    : "";
+
+  const modal = document.querySelector(".modalSustituirColaboradora");
+  modal.querySelector(".tituloModal").textContent = nombreTitular;
+
+  poblarSelectSustitutas(itemColaboradora, nombreTitular, sustitutaActual);
+
+  const btnEliminarSustituta = modal.querySelector(".btnEliminarSustituta");
+  if (btnEliminarSustituta) {
+    btnEliminarSustituta.style.display = sustitutaActual ? "inline-block" : "none";
+  }
+
+  // Posicionar modal
+  modal.style.display = "flex";
+  const modalAncho = 300;
+  const modalAlto = 170;
+  let posX = x + 30;
+  let posY = y - 20;
+
+  if (posX + modalAncho > window.innerWidth) {
+    posX = Math.max(10, x - modalAncho - 10);
+  }
+  if (posY + modalAlto > window.innerHeight) {
+    posY = Math.max(10, window.innerHeight - modalAlto - 10);
+  }
+
+  modal.style.left = `${posX}px`;
+  modal.style.top = `${posY}px`;
+}
+
+function poblarSelectSustitutas(itemColaboradora, nombreTitular, sustitutaActual) {
+  const select = document.getElementById("modalListaColaboradoras");
+  select.replaceChildren();
+
+  if (!listaColaboradorasCache || listaColaboradorasCache.length === 0) {
+    const cajas = document.querySelectorAll(
+      "#listaColaboradoras .cajaContenido",
+    );
+    listaColaboradorasCache = Array.from(cajas).map((caja) => ({
+      nombre: caja.dataset.nombre,
+    }));
+  }
+
+  const turno = itemColaboradora.closest(".nombresTurno");
+  const otrosNombresEnTurno = turno
+    ? [
+        ...turno.querySelectorAll(".nombreColaboradora, .nombreSustituta"),
+      ]
+        .filter((el) => !itemColaboradora.contains(el))
+        .map((el) =>
+          (el.dataset.nombre || el.textContent).replace(/[()]/g, "").trim(),
+        )
+    : [];
+
+  const fragmento = document.createDocumentFragment();
+
+  listaColaboradorasCache.forEach((colaboradora) => {
+    if (colaboradora.nombre === nombreTitular) return;
+    if (otrosNombresEnTurno.includes(colaboradora.nombre)) return;
+
+    const option = document.createElement("option");
+    option.value = colaboradora.nombre;
+    option.textContent = colaboradora.nombre;
+
+    if (colaboradora.nombre === sustitutaActual) {
+      option.selected = true;
+    }
+
+    fragmento.appendChild(option);
+  });
+
+  select.appendChild(fragmento);
+}
+
+function iniciarEventosModalSustituirColaboradora() {
+  const modal = document.querySelector(".modalSustituirColaboradora");
+  if (!modal) return;
+
+  modal.addEventListener("click", (event) => {
+    // Botón Aceptar
+    if (event.target.closest(".btnAceptar")) {
+      const select = document.getElementById("modalListaColaboradoras");
+      const nombreSeleccionado = select.value;
+
+      if (!nombreSeleccionado || !itemColaboradoraParaSustituir) {
+        cerrarModalSustitucion();
+        return;
+      }
+
+      asignarSustituta(itemColaboradoraParaSustituir, nombreSeleccionado);
+      cerrarModalSustitucion();
+    }
+
+    // Botón Cancelar
+    if (event.target.closest(".btnCancelar")) {
+      cerrarModalSustitucion();
+    }
+
+    // Botón Quitar sustituta
+    if (event.target.closest(".btnEliminarSustituta")) {
+      if (itemColaboradoraParaSustituir) {
+        const sustituta =
+          itemColaboradoraParaSustituir.querySelector(".nombreSustituta");
+        if (sustituta) {
+          quitarSustituta(sustituta);
+        }
+      }
+      cerrarModalSustitucion();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && modal.style.display === "flex") {
+      cerrarModalSustitucion();
+    }
+  });
+
+  document.addEventListener("mousedown", (event) => {
+    if (
+      modal.style.display === "flex" &&
+      !modal.contains(event.target) &&
+      !event.target.closest(".nombreColaboradora") &&
+      !event.target.closest(".nombreSustituta")
+    ) {
+      cerrarModalSustitucion();
+    }
+  });
+}
+
+function cerrarModalSustitucion() {
+  const modal = document.querySelector(".modalSustituirColaboradora");
+  if (modal) {
+    modal.style.display = "none";
+  }
+  itemColaboradoraParaSustituir = null;
+}
+
+function asignarSustituta(itemColaboradora, nombreSustituta) {
+  let spanSustituta = itemColaboradora.querySelector(".nombreSustituta");
+
+  if (!spanSustituta) {
+    spanSustituta = document.createElement("span");
+    spanSustituta.classList.add("nombreSustituta");
+    itemColaboradora.appendChild(spanSustituta);
+  }
+
+  spanSustituta.dataset.nombre = nombreSustituta;
+  spanSustituta.textContent = `(${nombreSustituta})`;
+  spanSustituta.title =
+    "Clic derecho para eliminar sustitución | Doble clic para cambiar";
+
+  refrescarFiltroActivo();
+}
+
 /* =========================================================
    Handlers
    ========================================================= */
@@ -184,13 +355,38 @@ async function imprimirHorario() {
 }
 
 function alClicDerecho(event) {
-  event.preventDefault();
+  const elementoSustituta = event.target.closest(".nombreSustituta");
+  if (elementoSustituta) {
+    event.preventDefault();
+    event.stopPropagation();
+    quitarSustituta(elementoSustituta);
+    return;
+  }
 
   const elementoNombre = event.target.closest(".nombreColaboradora");
+  if (elementoNombre) {
+    event.preventDefault();
+    event.stopPropagation();
+    quitarColaboradora(elementoNombre);
+    return;
+  }
+}
 
-  if (!elementoNombre) return;
+function dobleClicIzquierdoColaboradora() {
+  const horarioVista = document.getElementById("horarioVista");
 
-  quitarColaboradora(elementoNombre);
+  horarioVista.addEventListener("dblclick", (event) => {
+    const item =
+      event.target.closest(".itemColaboradora") ||
+      event.target.closest(".nombreColaboradora")?.parentElement;
+
+    if (!item) return;
+
+    const x = event.clientX;
+    const y = event.clientY;
+
+    abrirModalParaSustituirColaboradora(item, x, y);
+  });
 }
 
 function detectarColorSeleccionado() {
@@ -461,30 +657,30 @@ function agregarColaboradora(caja, nombreColaboradora) {
   const divisor = dia.querySelector(".divisorTurnos");
   const contenedorNombres = caja.querySelector(".nombresTurno");
 
-  const colaboradoras = contenedorNombres.querySelectorAll(
-    ".nombreColaboradora",
+  const items = contenedorNombres.querySelectorAll(".itemColaboradora");
+
+  // Validar si ese nombre ya está en ese turno (como titular o como sustituta)
+  const nombresEnTurno = [
+    ...contenedorNombres.querySelectorAll(
+      ".nombreColaboradora, .nombreSustituta",
+    ),
+  ].map((el) =>
+    (el.dataset.nombre || el.textContent).replace(/[()]/g, "").trim(),
   );
 
-  //validar si ese nombre ya está en ese turno
-  const yaEstaEnElTurno = [...colaboradoras].some(
-    (colaboradora) => colaboradora.textContent.trim() === nombreColaboradora,
-  );
-
-  // si ya está, enviar alerta y no permitir añadir
-  if (yaEstaEnElTurno) {
-    //alerta
+  // Si ya está, enviar alerta y no permitir añadir
+  if (nombresEnTurno.includes(nombreColaboradora)) {
     mostrarAlertaColaboradoraRepetida();
-
     return;
   }
 
-  if (colaboradoras.length >= MAX_POR_TURNO) {
+  if (items.length >= MAX_POR_TURNO) {
     return;
   }
 
   divisor.classList.add("divisorVisible");
 
-  if (colaboradoras.length === 1) {
+  if (items.length === 1) {
     contenedorNombres.appendChild(crearSeparadorY());
   }
 
@@ -495,23 +691,36 @@ function agregarColaboradora(caja, nombreColaboradora) {
   refrescarFiltroActivo();
 }
 
-function quitarColaboradora(elementoNombre) {
-  const nombre = elementoNombre.textContent.trim();
-  const contenedor = elementoNombre.closest(".nombresTurno");
-  const dia = elementoNombre.closest(".dia");
-  const divisor = dia.querySelector(".divisorTurnos");
+function quitarSustituta(elementoSustituta) {
+  elementoSustituta.remove();
+  cerrarModalSustitucion();
+  refrescarFiltroActivo();
+}
 
-  elementoNombre.remove();
+function quitarColaboradora(elementoNombre) {
+  const item = elementoNombre.closest(".itemColaboradora") || elementoNombre;
+  const titular = item.querySelector(".nombreColaboradora") || elementoNombre;
+  const nombre = titular.dataset.nombre || titular.textContent.trim();
+  const contenedor = item.closest(".nombresTurno");
+  const dia = item.closest(".dia");
+  const divisor = dia ? dia.querySelector(".divisorTurnos") : null;
+
+  item.remove();
+  cerrarModalSustitucion();
   actualizarContadorTurnos(nombre, -1);
 
-  const separador = contenedor.querySelector(".separadorY");
-  if (separador) {
-    separador.remove();
+  if (contenedor) {
+    const itemsRestantes = contenedor.querySelectorAll(".itemColaboradora");
+    if (itemsRestantes.length <= 1) {
+      contenedor.querySelectorAll(".separadorY").forEach((sep) => sep.remove());
+    }
   }
 
-  const totalEnDia = dia.querySelectorAll(".nombreColaboradora").length;
-  if (totalEnDia === 0) {
-    divisor.classList.remove("divisorVisible");
+  if (dia && divisor) {
+    const totalEnDia = dia.querySelectorAll(".nombreColaboradora").length;
+    if (totalEnDia === 0) {
+      divisor.classList.remove("divisorVisible");
+    }
   }
 
   refrescarFiltroActivo();
@@ -702,12 +911,17 @@ function crearCajaActivo() {
 }
 
 function crearNombreColaboradora(nombre) {
+  const item = document.createElement("div");
+  item.classList.add("itemColaboradora");
+
   const elemento = document.createElement("span");
   elemento.classList.add("nombreColaboradora");
+  elemento.dataset.nombre = nombre;
   elemento.textContent = nombre;
-  elemento.title = "Clic derecho para eliminar";
+  elemento.title = "Clic derecho para eliminar | Doble clic para sustituir";
 
-  return elemento;
+  item.appendChild(elemento);
+  return item;
 }
 
 function actualizarContadorTurnos(nombre, cambio) {
@@ -735,11 +949,19 @@ function aplicarFiltro(nombre) {
     dia.classList.remove("prueba");
   });
 
-  document.querySelectorAll(".nombreColaboradora").forEach((colaboradora) => {
-    if (colaboradora.textContent !== nombre) return;
+  document
+    .querySelectorAll(".nombreColaboradora, .nombreSustituta")
+    .forEach((elemento) => {
+      const nombreElemento = (
+        elemento.dataset.nombre || elemento.textContent
+      )
+        .replace(/[()]/g, "")
+        .trim();
 
-    colaboradora.closest(".dia").classList.add("prueba");
-  });
+      if (nombreElemento !== nombre) return;
+
+      elemento.closest(".dia")?.classList.add("prueba");
+    });
 }
 
 function limpiarFiltros() {
@@ -846,8 +1068,11 @@ async function cargarListaColaboradoras() {
 
     if (!datos.success) {
       listaColaboradoras.replaceChildren();
+      listaColaboradorasCache = [];
       return;
     }
+
+    listaColaboradorasCache = datos.data;
 
     const fragmento = document.createDocumentFragment();
 

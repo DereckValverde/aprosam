@@ -5,6 +5,10 @@
   font-style: normal;
 }
 
+body {
+  font-family: "Inter", sans-serif;
+}
+
 .inter-light {
   font-family: "Inter", sans-serif;
   font-variation-settings: "wght" 300;

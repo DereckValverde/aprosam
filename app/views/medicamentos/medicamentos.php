@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
@@ -18,11 +18,12 @@
     require_once LAYOUT_PATH . 'header.php';
     ?>
 
-    <h1>Página de Medicamentos</h1>
+    <main style="padding: 20px 15px;">
+        <h1 class="inter-semibold">Página de Medicamentos</h1>
+    </main>
 
 </body>
 
 <script src="<?= BASE_URL . 'public/assets/js/main.js' ?>"></script>
-
 
 </html>

@@ -19,6 +19,7 @@
   margin: 20px 15px;
   padding: 14px;
   border-radius: 14px;
+  user-select: none;
 }
 
 .filtros-categorias {
@@ -58,4 +59,98 @@
 .btn-generar-diario:hover {
   background-color: #0d5f48;
   cursor: pointer;
+}
+
+/*Estilos del header de la lista de productos*/
+.header-lista-produtos {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px;
+  margin: 20px 15px;
+  background-color: #ffffff;
+  border-radius: 14px 14px 0 0;
+  user-select: none;
+}
+
+.header-lista-produtos > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.titulo-lista p {
+  font-size: 18px;
+}
+
+.titulo-lista span {
+  font-size: 12px;
+  padding: 6px 8px;
+  border-radius: 12px;
+  background-color: #f3f4f6;
+}
+
+.lista-funcionalidades button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  background-color: transparent;
+  border: 1px solid #2c4d79;
+  color: #2c4d79;
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 13px;
+
+  transition: ease 0.3s;
+}
+
+.lista-funcionalidades button:hover {
+  background-color: #153764;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+/*Estilo barra de busqueda*/
+.barra-busqueda-inventario {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 260px;
+  padding: 0 12px;
+  background-color: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* Estilo del icono de búsqueda */
+.barra-busqueda-inventario i {
+  color: #94a3b8;
+  font-size: 14px;
+}
+
+.barra-busqueda-inventario input {
+  width: 100%;
+  padding: 8px 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 14px;
+  color: #111827;
+}
+
+/* Color del texto del placeholder */
+.barra-busqueda-inventario input::placeholder {
+  color: #94a3b8;
+}
+
+/* Efecto focus: ilumina toda la caja al hacer clic */
+.barra-busqueda-inventario:focus-within {
+  border-color: #2c4d79;
+  box-shadow: 0 0 0 3px rgba(44, 77, 121, 0.15);
 }

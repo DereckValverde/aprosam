@@ -68,6 +68,26 @@
             </button>
         </section>
 
+        <section class="header-lista-produtos">
+
+            <div class="titulo-lista">
+                <p class="inter-semibold">Lista Productos</p>
+                <span class="inter-semibold">128 registros</span>
+            </div>
+
+            <div class="lista-funcionalidades">
+                <button class="inter-semibold">
+                    <i class="bi bi-plus-lg"></i>
+                    <span>Agregar producto</span>
+                </button>
+
+                <div class="barra-busqueda-inventario">
+                    <i class="bi bi-search"></i>
+                    <input type="text" name="" id="" placeholder="Buscar producto o proveedor">
+                </div>
+            </div>
+        </section>
+
     </main>
 
 </body>

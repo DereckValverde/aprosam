@@ -94,3 +94,15 @@ INSERT INTO Colaboradoras (nombre) VALUES
 ('Sandra'),
 ('Xinia'),
 ('Yocsine');
+
+
+-- Insertse de las categoriás
+
+INSERT INTO Categorias (nombre_categoria) VALUES
+('abarrotes'),
+('carnes'),
+('verduras'),
+('articulosPersonales'),
+('jabones')
+
+SELECT * FROM Categorias;

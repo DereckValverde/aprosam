@@ -20,8 +20,10 @@
 
         </ul>
     </nav>
+    <a href="<?= BASE_URL . 'configuraciones' ?>">
+        <div id="menu-header">
+            <i class="bi bi-list"></i>
+        </div>
 
-    <div id="menu-header">
-        <i class="bi bi-list"></i>
-    </div>
+    </a>
 </header>

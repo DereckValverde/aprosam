@@ -11,6 +11,7 @@ $router->get('horario', ['HorarioController', 'index']);
 
 //Rutas para el módulo de Inventario
 $router->get('inventario', ['InventarioController', 'index']);
+$router->get('categorias', ['InventarioController', 'apiObtenerCategorias']);
 
 //Rutas para el módulo de Medicamento
 $router->get('medicamentos', ['MedicamentosController', 'index']);

@@ -111,3 +111,58 @@ para marcar cual es el que está activo*/
   border-color: #ffffff;
   color: #1b1b1b !important;
 }
+
+/*==============================================*/
+
+/* Header en pantallas angostas: la navegación deja de
+ser absoluta para que no se monte sobre el logo ni el menú */
+@media (max-width: 560px) {
+  #header {
+    gap: 8px;
+    padding: 0 10px;
+  }
+
+  #logo {
+    flex-shrink: 0;
+  }
+
+  #logo span {
+    font-size: 13px;
+  }
+
+  #navbar {
+    position: static;
+    display: flex;
+    flex: 1 1 auto;
+    justify-content: center;
+    min-width: 0;
+    transform: none;
+  }
+
+  #navbar ul {
+    width: auto;
+    max-width: 100%;
+    gap: 4px;
+    padding: 3px 5px;
+  }
+
+  #navbar a {
+    padding: 2px 6px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  #menu-header {
+    flex-shrink: 0;
+  }
+
+  #menu-header i {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 380px) {
+  #logo span {
+    display: none;
+  }
+}

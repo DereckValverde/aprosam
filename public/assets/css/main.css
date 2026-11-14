@@ -100,3 +100,19 @@ main {
   border-color: #3769ce;
   box-shadow: 0 0 0 3px rgba(55, 105, 206, 0.12);
 }
+
+/* En pantallas angostas la página puede desplazarse en vertical.
+El horario conserva su propio scroll interno para el calendario. */
+@media (max-width: 640px) {
+  body {
+    height: auto;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  main {
+    flex: 0 0 auto;
+    overflow: visible;
+  }
+}

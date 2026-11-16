@@ -956,10 +956,33 @@
 @media (max-width: 640px) {
   #horarioGrid {
     grid-template-columns: 1fr;
+    flex: 0 0 auto;
+    gap: 15px;
   }
 
-  body {
+  #panelFuncionalidades,
+  #panelHorario {
     height: auto;
-    overflow: auto;
+    overflow: visible;
+  }
+
+  #colaboradorasSeccion {
+    flex: 0 0 auto;
+    max-height: 40vh;
+  }
+
+  #listaColaboradoras {
+    flex: 1 1 auto;
+  }
+
+  #horarioVista {
+    flex: 0 0 auto;
+    height: 60vh;
+    min-height: 320px;
+  }
+
+  #cajaDias,
+  #nombreSemana {
+    min-width: 700px;
   }
 }

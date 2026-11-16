@@ -16,7 +16,9 @@
     require_once LAYOUT_PATH . 'header.php';
     ?>
 
-    <h1>Página Configuraciones</h1>
+    <main style="padding: 20px 15px;">
+        <h1>Página Configuraciones</h1>
+    </main>
 
 </body>
 

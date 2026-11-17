@@ -85,15 +85,15 @@ FOREIGN KEY (idDistribuidora) REFERENCES Distribuidora(idDistribuidora) ON DELET
 
 
 -- Inserts de las colaboradoras:
-INSERT INTO Colaboradoras (nombre) VALUES 
-('Heilyn'),
-('Karla'),
-('Katherine'),
-('Norma'),
-('Romaneth'),
-('Sandra'),
-('Xinia'),
-('Yocsine');
+INSERT INTO Colaboradoras (nombre, apellido1, apellido2) VALUES 
+('Heilyn', 'López', 'Oporta'),
+('Karla', 'Madrigal', 'Gómez'),
+('Katherine', 'Quesada', ''),
+('Norman', 'Hidalgo', 'Mora'),
+('Romaneth', 'Céspedes', 'Navarro'),
+('Sandra', 'Mora', 'Méndez'),
+('Xinia', 'Blanco', 'Vargas'),
+('Yocsine', 'Céspedes', 'Navarro');
 
 
 -- Insertse de las categoriás
@@ -103,6 +103,8 @@ INSERT INTO Categorias (nombre_categoria) VALUES
 ('carnes'),
 ('verduras'),
 ('articulosPersonales'),
-('jabones')
+('jabones');
 
 SELECT * FROM Categorias;
+
+PRAGMA encoding;

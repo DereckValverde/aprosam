@@ -45,68 +45,7 @@
 
                     <div class="lista-colaboradoras">
 
-                        <!-- Colaboradora -->
-                        <div class="colaboradora">
-
-                            <div class="colaboradora-info">
-                                <div class="avatar-colaboradora">
-                                    K
-                                </div>
-
-                                <div class="datos-colaboradora">
-                                    <span class="nombre-colaboradora">
-                                        Karla
-                                    </span>
-
-                                    <span class="apellido-colaboradora">
-                                        Madrigal Gómez
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div class="acciones-colaboradora">
-                                <button class="btn-editar" title="Editar colaboradora">
-                                    <i class="bi bi-pencil"></i>
-                                </button>
-
-                                <button class="btn-eliminar" title="Eliminar colaboradora">
-                                    <i class="bi bi-trash3"></i>
-                                </button>
-                            </div>
-
-                        </div>
-
-                        <!-- Puedes agregar más colaboradoras aquí -->
-
-                        <div class="colaboradora">
-
-                            <div class="colaboradora-info">
-                                <div class="avatar-colaboradora">
-                                    M
-                                </div>
-
-                                <div class="datos-colaboradora">
-                                    <span class="nombre-colaboradora">
-                                        María
-                                    </span>
-
-                                    <span class="apellido-colaboradora">
-                                        Vega Solís
-                                    </span>
-                                </div>
-                            </div>
-
-                            <div class="acciones-colaboradora">
-                                <button class="btn-editar" title="Editar colaboradora">
-                                    <i class="bi bi-pencil"></i>
-                                </button>
-
-                                <button class="btn-eliminar" title="Eliminar colaboradora">
-                                    <i class="bi bi-trash3"></i>
-                                </button>
-                            </div>
-
-                        </div>
+                        <!-- Lista de colaboradoras inyectadas desde JS -->
 
                     </div>
 
@@ -160,6 +99,9 @@
 
 </body>
 
+<script>
+    const BASE_URL = "<?= BASE_URL ?>";
+</script>
 <script src="<?= BASE_URL . 'public/assets/js/configuraciones/configuraciones-horario.js' ?>"></script>
 
 </html>

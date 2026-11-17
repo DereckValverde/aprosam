@@ -20,10 +20,11 @@
 
         </ul>
     </nav>
-    <a href="<?= BASE_URL . 'configuraciones' ?>">
+    <a class="config-link <?= $paginaActual === 'configuraciones' ? 'activo' : '' ?>" href="<?= BASE_URL . 'configuraciones' ?>" aria-label="Configuraciones" title="Configuraciones">
         <div id="menu-header">
-            <i class="bi bi-list"></i>
+            <i class="bi bi-gear"></i>
         </div>
 
     </a>
 </header>
+<script src="<?= BASE_URL . 'public/assets/js/header.js' ?>"></script>

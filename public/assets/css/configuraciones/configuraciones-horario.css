@@ -28,6 +28,7 @@
   border: 1px solid #e9eeeb;
   border-radius: 14px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.025);
+  user-select: none;
 }
 
 /* ENCABEZADO */
@@ -85,7 +86,7 @@
   margin-top: 24px;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: #cdd9d1 transparent;
+  scrollbar-color: rgb(175, 172, 172) transparent;
   scrollbar-gutter: stable;
 }
 
@@ -98,7 +99,7 @@
 }
 
 .lista-colaboradoras::-webkit-scrollbar-thumb {
-  background-color: #d3ded6;
+  background-color: #17dd4b;
   background-clip: padding-box;
   border: 2px solid transparent;
   border-radius: 999px;

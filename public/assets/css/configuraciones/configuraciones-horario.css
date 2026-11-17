@@ -19,8 +19,12 @@
 /* TARJETA DE COLABORADORAS */
 
 .contenedor-colaboradoras {
+  display: flex;
+  flex-direction: column;
   background-color: #ffffff;
   padding: 24px;
+  max-height: 500px;
+  overflow: hidden;
   border: 1px solid #e9eeeb;
   border-radius: 14px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.025);
@@ -30,6 +34,7 @@
 
 .colaboradoras-header {
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
@@ -73,9 +78,34 @@
 
 .lista-colaboradoras {
   display: flex;
+  flex: 1 1 auto;
   flex-direction: column;
   gap: 10px;
+  min-height: 0;
   margin-top: 24px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: #cdd9d1 transparent;
+  scrollbar-gutter: stable;
+}
+
+.lista-colaboradoras::-webkit-scrollbar {
+  width: 8px;
+}
+
+.lista-colaboradoras::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.lista-colaboradoras::-webkit-scrollbar-thumb {
+  background-color: #d3ded6;
+  background-clip: padding-box;
+  border: 2px solid transparent;
+  border-radius: 999px;
+}
+
+.lista-colaboradoras::-webkit-scrollbar-thumb:hover {
+  background-color: #b6c6bc;
 }
 
 /* COLABORADORA */
@@ -101,6 +131,7 @@
 
 .colaboradoras-footer {
   display: flex;
+  flex-shrink: 0;
   align-items: center;
   justify-content: space-between;
   margin-top: 20px;

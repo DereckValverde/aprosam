@@ -58,8 +58,8 @@
                                         Karla
                                     </span>
 
-                                    <span class="rol-colaboradora">
-                                        Administradora
+                                    <span class="apellido-colaboradora">
+                                        Madrigal Gómez
                                     </span>
                                 </div>
                             </div>
@@ -90,8 +90,8 @@
                                         María
                                     </span>
 
-                                    <span class="rol-colaboradora">
-                                        Colaboradora
+                                    <span class="apellido-colaboradora">
+                                        Vega Solís
                                     </span>
                                 </div>
                             </div>
@@ -120,8 +120,46 @@
         </main>
 
 
+        <div class="modal-overlay">
+            <div class="form-container modal-editar-colaboradora">
+                <div class="modal-header">
+                    <h2>Editar colaboradora</h2>
+                    <i class="bi bi-x-lg closeModal" role="button" aria-label="Cerrar"></i>
+                </div>
+
+                <form action="#" method="POST">
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input
+                            type="text"
+                            id="nombre"
+                            name="nombre"
+                            value="María"
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rol">Apellidos</label>
+                        <input
+                            type="text"
+                            id="apellidos"
+                            name="apellidos"
+                            value="Hernandez Mora">
+                    </div>
+
+                    <div class="modal-buttons">
+                        <button type="button" class="btn-cancelar">Cancelar</button>
+                        <button type="submit" class="btn-guardar">Guardar cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
     </div>
 
 </body>
+
+<script src="<?= BASE_URL . 'public/assets/js/configuraciones/configuraciones-horario.js' ?>"></script>
 
 </html>

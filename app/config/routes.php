@@ -23,7 +23,7 @@ $router->get('configuraciones/medicamentos', ['ConfiguracionesController', 'medi
 $router->get('configuraciones/inventario', ['ConfiguracionesController', 'inventario']);
 
 //Ruta de prueba para obtener colaboradoras
-$router->get('colaboradoras', ['HorarioController', 'apiColaboradoras']);
+$router->get('colaboradoras', ['ColaboradorasController', 'apiColaboradoras']);
 
 //Rutas de errores
 $router->get('error/404', ['ErrorController', 'error404']);

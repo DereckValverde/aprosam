@@ -1,14 +1,13 @@
 <?php
 
-
-class Horario
+class Colaboradora
 {
 
     private $db;
 
+
     public function __construct()
     {
-
         require_once dirname(__DIR__) . '/config/connection.php';
         $this->db = Database::getInstance()->getConnection();
     }

@@ -18,6 +18,9 @@ $router->get('medicamentos', ['MedicamentosController', 'index']);
 
 //Rutas para el módulo de configuraciones
 $router->get('configuraciones', ['ConfiguracionesController', 'index']);
+$router->get('configuraciones/horario', ['ConfiguracionesController', 'horario']);
+$router->get('configuraciones/medicamentos', ['ConfiguracionesController', 'medicamentos']);
+$router->get('configuraciones/inventario', ['ConfiguracionesController', 'inventario']);
 
 //Ruta de prueba para obtener colaboradoras
 $router->get('colaboradoras', ['HorarioController', 'apiColaboradoras']);

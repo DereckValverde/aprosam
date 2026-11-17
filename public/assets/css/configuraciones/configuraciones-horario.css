@@ -1,0 +1,230 @@
+/* CONTENIDO PRINCIPAL */
+
+.content {
+  display: block;
+  min-height: 100%;
+  background-color: #f8faf9;
+}
+
+/* CONTENEDOR */
+
+.contenedor-principal {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  padding: 20px;
+  min-height: 320px;
+}
+
+/* TARJETA DE COLABORADORAS */
+
+.contenedor-colaboradoras {
+  background-color: #ffffff;
+  padding: 24px;
+  border: 1px solid #e9eeeb;
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.025);
+}
+
+/* ENCABEZADO */
+
+.colaboradoras-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.colaboradoras-header h2 {
+  margin: 0;
+  color: #202923;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.colaboradoras-header p {
+  margin: 6px 0 0;
+  color: #8a948d;
+  font-size: 13px;
+}
+
+/* BOTÓN AGREGAR */
+
+.btn-agregar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 13px;
+  color: #ffffff;
+  background-color: #238653;
+  border: none;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-agregar:hover {
+  background-color: #196c40;
+}
+
+/* LISTA DE COLABORADORAS */
+
+.lista-colaboradoras {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+/* COLABORADORA */
+
+.colaboradora {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px;
+  background-color: #ffffff;
+  border: 1px solid #edf0ee;
+  border-radius: 10px;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.colaboradora:hover {
+  background-color: #fafcfb;
+  border-color: #cbded2;
+}
+
+.colaboradoras-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding-top: 14px;
+  border-top: 1px solid #eef1f6;
+  color: #8a948d;
+  font-size: 12px;
+}
+
+/* INFORMACIÓN DE COLABORADORA */
+
+.colaboradora-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* AVATAR */
+
+.avatar-colaboradora {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  background-color: #e8f4ec;
+  color: #238653;
+  border-radius: 10px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* DATOS */
+
+.datos-colaboradora {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.nombre-colaboradora {
+  color: #27332b;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+/* ROL */
+
+.rol-colaboradora {
+  color: #8a948d;
+  font-size: 12px;
+}
+
+/* ACCIONES */
+
+.acciones-colaboradora {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* BOTONES DE ACCIONES */
+
+.acciones-colaboradora button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background-color: transparent;
+  border: none;
+  border-radius: 7px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* EDITAR */
+
+.btn-editar {
+  color: #64748b;
+}
+
+.btn-editar:hover {
+  color: #238653;
+  background-color: #edf6f0;
+}
+
+/* ELIMINAR */
+
+.btn-eliminar {
+  color: #94a3b8;
+}
+
+.btn-eliminar:hover {
+  color: #dc4545;
+  background-color: #fff0f0;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 768px) {
+  .contenedor-principal {
+    grid-template-columns: 1fr;
+    padding: 12px;
+  }
+
+  .contenedor-colaboradoras {
+    padding: 18px;
+  }
+
+  .colaboradoras-header {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .colaboradoras-header {
+    flex-direction: column;
+  }
+
+  .btn-agregar {
+    width: 100%;
+    justify-content: center;
+  }
+}

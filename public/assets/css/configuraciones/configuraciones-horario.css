@@ -150,7 +150,7 @@
 
 /* ROL */
 
-.rol-colaboradora {
+.apellido-colaboradora {
   color: #8a948d;
   font-size: 12px;
 }
@@ -216,6 +216,134 @@
   .colaboradoras-header {
     align-items: flex-start;
   }
+}
+
+/* Fondo oscuro translúcido que envuelve el modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Contenedor principal del modal */
+.modal-editar-colaboradora {
+  background: #ffffff;
+  width: 100%;
+  max-width: 420px;
+  padding: 24px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  box-sizing: border-box;
+}
+
+/* Cabecera del modal */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.modal-header .closeModal {
+  font-size: 1.1rem;
+  color: #6b7280;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.modal-header .closeModal:hover {
+  color: #111827;
+}
+
+/* Estructura de los campos */
+.form-group {
+  margin-bottom: 16px;
+}
+
+.modal-editar-colaboradora label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 6px;
+}
+
+.modal-editar-colaboradora input[type="text"],
+.modal-editar-colaboradora select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #1f2937;
+  background-color: #f9fafb;
+  box-sizing: border-box;
+  transition: all 0.2s;
+}
+
+.modal-editar-colaboradora input[type="text"]:focus,
+.modal-editar-colaboradora select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+/* Contenedor de botones (alineados a la derecha) */
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+/* Estilo Botón Cancelar */
+.btn-cancelar {
+  background-color: #f3f4f6;
+  color: #4b5563;
+  border: 1px solid #d1d5db;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-cancelar:hover {
+  background-color: #e5e7eb;
+}
+
+/* Estilo Botón Guardar */
+.btn-guardar {
+  background-color: #2563eb;
+  color: #ffffff;
+  border: none;
+  padding: 10px 18px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-guardar:hover {
+  background-color: #1d4ed8;
 }
 
 @media (max-width: 480px) {

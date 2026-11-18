@@ -50,7 +50,7 @@
                     </div>
 
                     <div class="colaboradoras-footer">
-                        <span>2 colaboradoras registradas</span>
+                        <span class="footer-total-colaboradoras">0 colaboradoras registradas</span>
                     </div>
 
                 </div>
@@ -66,7 +66,7 @@
                     <i class="bi bi-x-lg closeModal" role="button" aria-label="Cerrar"></i>
                 </div>
 
-                <form action="#" method="POST">
+                <form action="#" method="POST" id="formActualizarColaboradora">
                     <div class="form-group">
                         <label for="nombre">Nombre</label>
                         <input
@@ -78,12 +78,12 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="rol">Apellidos</label>
+                        <label for="rol">Apellido</label>
                         <input
                             type="text"
-                            id="apellidos"
-                            name="apellidos"
-                            value="Hernandez Mora">
+                            id="apellido"
+                            name="apellido"
+                            value="Hernandez">
                     </div>
 
                     <div class="modal-buttons">
@@ -99,6 +99,7 @@
 
 </body>
 
+<script src="<?= BASE_URL ?>public/assets/js/sweetalert2.all.min.js"></script>
 <script>
     const BASE_URL = "<?= BASE_URL ?>";
 </script>

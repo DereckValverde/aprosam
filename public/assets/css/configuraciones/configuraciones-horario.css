@@ -23,7 +23,7 @@
   flex-direction: column;
   background-color: #ffffff;
   padding: 24px;
-  max-height: 500px;
+  max-height: 542px;
   overflow: hidden;
   border: 1px solid #e9eeeb;
   border-radius: 14px;
@@ -274,6 +274,7 @@
   border-radius: 12px;
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
   box-sizing: border-box;
+  user-select: none;
 }
 
 /* Cabecera del modal */
@@ -299,7 +300,8 @@
 }
 
 .modal-header .closeModal:hover {
-  color: #111827;
+  color: #ff0000;
+  transition: ease 0.35s;
 }
 
 /* Estructura de los campos */
@@ -354,11 +356,14 @@
   font-weight: 500;
   border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s;
+
+  transition: ease 0.2s;
 }
 
 .btn-cancelar:hover {
-  background-color: #e5e7eb;
+  background-color: #f5d4d4;
+  color: #ff0000;
+  border-color: #ff0000;
 }
 
 /* Estilo Botón Guardar */

@@ -85,15 +85,15 @@ FOREIGN KEY (idDistribuidora) REFERENCES Distribuidora(idDistribuidora) ON DELET
 
 
 -- Inserts de las colaboradoras:
-INSERT INTO Colaboradoras (nombre, apellido1, apellido2) VALUES 
-('Heilyn', 'López', 'Oporta'),
-('Karla', 'Madrigal', 'Gómez'),
-('Katherine', 'Quesada', ''),
-('Norman', 'Hidalgo', 'Mora'),
-('Romaneth', 'Céspedes', 'Navarro'),
-('Sandra', 'Mora', 'Méndez'),
-('Xinia', 'Blanco', 'Vargas'),
-('Yocsine', 'Céspedes', 'Navarro');
+INSERT INTO Colaboradoras (nombre, apellido1) VALUES 
+('Heilyn', 'López'),
+('Karla', 'Madrigal'),
+('Katherine', 'Quesada'),
+('Norman', 'Hidalgo'),
+('Romaneth', 'Céspedes'),
+('Sandra', 'Mora'),
+('Xinia', 'Blanco'),
+('Yocsine', 'Céspedes');
 
 
 -- Insertse de las categoriás

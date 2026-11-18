@@ -25,6 +25,9 @@ $router->get('configuraciones/inventario', ['ConfiguracionesController', 'invent
 //Configuraciones: Actualizar una colaboradora
 $router->post('colaboradoras/actualizar', ['ColaboradorasController', 'apiActualizarColaboradora']);
 
+//Configuraciones: eliminar una colaboradora
+$router->post('colaboradoras/eliminar', ['ColaboradorasController', 'apiEliminarColaboradora']);
+
 //Ruta de prueba para obtener colaboradoras
 $router->get('colaboradoras', ['ColaboradorasController', 'apiColaboradoras']);
 

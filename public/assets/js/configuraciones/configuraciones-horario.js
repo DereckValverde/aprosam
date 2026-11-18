@@ -54,7 +54,7 @@ function manejarClicListaColaboradora(event) {
   if (boton.classList.contains("btn-editar")) {
     abrirModalEditar(id);
   } else if (boton.classList.contains("btn-eliminar")) {
-    console.log(`Eliminar: ${id}`);
+    eliminarColaboladora(id);
   }
 }
 
@@ -112,6 +112,62 @@ function cerrarModal() {
   idColaboradoraEditar = null;
 }
 
+async function eliminarColaboladora(idColaboradora) {
+  const colaboradora = arrayListaColaboradoras.find(
+    (c) => c.idColaboradora == idColaboradora,
+  );
+
+  const nombre = colaboradora?.nombre ?? "la colaboradora";
+
+  // Esperar la confirmación del usuario
+  const confirmado = await confirmarEliminado(nombre);
+
+  if (!confirmado) {
+    return;
+  }
+
+  try {
+    const response = await fetch(
+      BASE_URL + `colaboradoras/eliminar/${idColaboradora}`,
+      {
+        method: "POST",
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error(`Error HTTP: ${response.status}`);
+    }
+
+    const resultado = await response.json();
+
+    if (!resultado.success) {
+      throw new Error(resultado.message);
+    }
+
+    await mostrarColaboradoras();
+
+    // Mostrar mensaje de colaboradora eliminada
+    alertaColaboradoraEliminada(nombre);
+  } catch (error) {
+    console.error("Error al eliminar la colaboradora:", error);
+
+    alertaErrorEliminarColaboradora(nombre);
+  }
+}
+
+function confirmarEliminado(nombreColaboradora) {
+  return Swal.fire({
+    title: `¿Quiere eliminar a ${nombreColaboradora}?`,
+    text: "¡Esta acción no se puede revertir!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Sí, eliminar",
+    cancelButtonText: "Cancelar",
+  }).then((result) => result.isConfirmed);
+}
+
 async function cargarListaColaboradoras() {
   //Consultar API
   const response = await fetch(BASE_URL + "colaboradoras");
@@ -160,12 +216,12 @@ async function actualizarDatosColaboradora(id, nombre, apellido) {
     cerrarModal();
 
     //Cambiar este console.log por un alert con SweetAlert2
-    alertaColaboradoraActualizada(resultado.message);
+    alertaColaboradoraActualizada(nombre);
   } catch (error) {
     console.error("Error al actualizar colaboradora:", error);
 
     //cambiar por sweetAlert
-    alertaErrorActualizarColaboradora();
+    alertaErrorActualizarColaboradora(nombre);
   }
 }
 
@@ -239,23 +295,43 @@ function actualizarContadorColaboradoras(cantidad) {
   footer.textContent = `${cantidad} ${texto}`;
 }
 
-function alertaColaboradoraActualizada(mensaje) {
+function alertaColaboradoraEliminada(nombreColaboradora) {
   Swal.fire({
     toast: true,
     position: "bottom-right",
     icon: "success",
-    title: mensaje,
+    title: `Se eliminó a ${nombreColaboradora}`,
     showConfirmButton: false,
     timer: 4000,
     timerProgressBar: true,
   });
 }
 
-function alertaErrorActualizarColaboradora() {
+function alertaErrorEliminarColaboradora(nombreColaboradora) {
   Swal.fire({
     icon: "error",
     title: "Error",
-    text: "Algo falló al actualizar la colaboradora",
+    text: `No se pudo eliminar a ${nombreColaboradora}`,
+  });
+}
+
+function alertaColaboradoraActualizada(nombreColaboradora) {
+  Swal.fire({
+    toast: true,
+    position: "bottom-right",
+    icon: "success",
+    title: `Se actualizó a ${nombreColaboradora} correctamente`,
+    showConfirmButton: false,
+    timer: 4000,
+    timerProgressBar: true,
+  });
+}
+
+function alertaErrorActualizarColaboradora(nombreColaboradora) {
+  Swal.fire({
+    icon: "error",
+    title: "Error",
+    text: `No se pudo actualizar a ${nombreColaboradora}`,
   });
 }
 

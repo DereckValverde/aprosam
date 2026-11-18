@@ -58,14 +58,35 @@ class ColaboradorasController
         if ($actualizada) {
             echo json_encode([
                 'success' => true,
-                'message' => 'Colaboradora actualizada correctamente.'
+                'message' => 'Persona actualizada correctamente.'
             ]);
         } else {
             http_response_code(500);
 
             echo json_encode([
                 'success' => false,
-                'message' => 'Error al actualizar la colaboradora.'
+                'message' => 'Error al actualizar la persona.'
+            ]);
+        }
+    }
+
+    public function apiEliminarColaboradora($idColaboradora)
+    {
+        header('Content-Type: application/json');
+
+        $respuesta = $this->colaboradoraModel->eliminarColaboradora($idColaboradora);
+
+        if ($respuesta) {
+            echo json_encode([
+                'success' => true,
+                'message' => 'Persona eliminada correctamente.'
+            ]);
+        } else {
+            http_response_code(500);
+
+            echo json_encode([
+                'success' => false,
+                'message' => 'Error al eliminar la persona.'
             ]);
         }
     }

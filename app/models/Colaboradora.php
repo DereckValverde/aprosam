@@ -39,4 +39,16 @@ class Colaboradora
             ':id' => $idColaboradora
         ]);
     }
+
+    public function eliminarColaboradora($idColaboradora)
+    {
+        $query = "DELETE FROM Colaboradoras
+        WHERE idColaboradora = :id";
+
+        $stmt = $this->db->prepare($query);
+
+        return $stmt->execute([
+            ':id' => $idColaboradora
+        ]);
+    }
 }

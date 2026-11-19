@@ -7,6 +7,7 @@ let idColaboradoraEditar = null;
 function init() {
   registrarEventos();
   registrarEventosModal();
+  registrarEventosModalCrearColaboradora();
   mostrarColaboradoras();
 }
 
@@ -36,7 +37,7 @@ function registrarEventos() {
 }
 
 function registrarEventosModal() {
-  const modal = document.querySelector(".modal-overlay");
+  const modal = document.querySelector(".modal-overlay-edit");
   const formulario = document.getElementById("formActualizarColaboradora");
 
   if (modal) {
@@ -45,6 +46,14 @@ function registrarEventosModal() {
 
   if (formulario) {
     formulario.addEventListener("submit", manejarSubmitModal);
+  }
+}
+
+function registrarEventosModalCrearColaboradora() {
+  const modal = document.querySelector(".modal-overlay-create");
+
+  if (modal) {
+    modal.addEventListener("click", manejarClicModalCrearColaboradora);
   }
 }
 
@@ -69,12 +78,20 @@ function manejarClicListaColaboradora(event) {
   }
 }
 
+function manejarClicModalCrearColaboradora(event) {
+  const btnCerrar = event.target.closest(".closeModal, .btn-cancelar");
+
+  if (!btnCerrar) return;
+
+  cerrarModal("modal-overlay-create");
+}
+
 function manejarClicModal(event) {
   const btnCerrar = event.target.closest(".closeModal, .btn-cancelar");
 
   if (!btnCerrar) return;
 
-  cerrarModal();
+  cerrarModal("modal-overlay-edit");
 }
 
 async function manejarSubmitModal(event) {
@@ -113,7 +130,7 @@ function abrirModalEditar(idColaboradora) {
   //guardar ID de la colaboradora que se está editando
   idColaboradoraEditar = idColaboradora;
 
-  const modal = document.querySelector(".modal-overlay");
+  const modal = document.querySelector(".modal-overlay-edit");
   const areaNombre = document.getElementById("nombre");
   const areaApellido = document.getElementById("apellido");
 
@@ -125,8 +142,8 @@ function abrirModalEditar(idColaboradora) {
   modal.style.display = "flex";
 }
 
-function cerrarModal() {
-  const modal = document.querySelector(".modal-overlay");
+function cerrarModal(nombreModal) {
+  const modal = document.querySelector(`.${nombreModal}`);
 
   modal.style.display = "none";
 

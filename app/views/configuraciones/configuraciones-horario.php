@@ -59,7 +59,7 @@
         </main>
 
         <!-- Modal editar colaboradora -->
-        <div class="modal-overlay">
+        <div class="modal-overlay-edit">
             <div class="form-container modal-editar-colaboradora">
                 <div class="modal-header">
                     <h2>Editar colaboradora</h2>

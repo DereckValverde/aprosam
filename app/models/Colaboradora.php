@@ -24,6 +24,20 @@ class Colaboradora
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function crearColaboradora($datos)
+    {
+        $query = "INSERT INTO Colaboradoras (nombre,apellido1)
+        VALUES
+        (:nombre,:apellido1)";
+
+        $stmt = $this->db->prepare($query);
+
+        return $stmt->execute([
+            ':nombre' => trim($datos['nombre']),
+            ':apellido1' => trim($datos['apellido1'])
+        ]);
+    }
+
     public function actualizarPorId($idColaboradora, $datos)
     {
         $query = "UPDATE colaboradoras

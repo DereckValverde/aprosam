@@ -38,22 +38,29 @@ function registrarEventos() {
 
 function registrarEventosModal() {
   const modal = document.querySelector(".modal-overlay-edit");
-  const formulario = document.getElementById("formActualizarColaboradora");
+  const formularioEditar = document.getElementById(
+    "formActualizarColaboradora",
+  );
 
   if (modal) {
     modal.addEventListener("click", manejarClicModal);
   }
 
-  if (formulario) {
-    formulario.addEventListener("submit", manejarSubmitModal);
+  if (formularioEditar) {
+    formularioEditar.addEventListener("submit", manejarSubmitModal);
   }
 }
 
 function registrarEventosModalCrearColaboradora() {
   const modal = document.querySelector(".modal-overlay-create");
+  const formularioCrear = document.getElementById("formCrearColaboradora");
 
   if (modal) {
     modal.addEventListener("click", manejarClicModalCrearColaboradora);
+  }
+
+  if (formularioCrear) {
+    formularioCrear.addEventListener("submit", manejarSubmitModalCrear);
   }
 }
 
@@ -104,6 +111,18 @@ async function manejarSubmitModal(event) {
   const apellido1 = datosFormulario.get("apellido").trim();
 
   await actualizarDatosColaboradora(idColaboradoraEditar, nombre, apellido1);
+}
+
+async function manejarSubmitModalCrear(event) {
+  event.preventDefault();
+
+  const formulario = event.target;
+  const datosFormulario = new FormData(formulario);
+
+  const nombre = datosFormulario.get("nombre").trim();
+  const apellido1 = datosFormulario.get("apellido").trim();
+
+  await crearColaboradora(nombre, apellido1);
 }
 
 /****************************
@@ -255,7 +274,7 @@ async function actualizarDatosColaboradora(id, nombre, apellido) {
     await mostrarColaboradoras();
 
     //cerrar Modal
-    cerrarModal();
+    cerrarModal("modal-overlay-edit");
 
     //Cambiar este console.log por un alert con SweetAlert2
     alertaColaboradoraActualizada(nombre);
@@ -264,6 +283,48 @@ async function actualizarDatosColaboradora(id, nombre, apellido) {
 
     //cambiar por sweetAlert
     alertaErrorActualizarColaboradora(nombre);
+  }
+}
+
+async function crearColaboradora(nombre, apellido1) {
+  const datos = {
+    nombre: nombre,
+    apellido1: apellido1,
+  };
+
+  try {
+    const response = await fetch(BASE_URL + "colaboradora/crear", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(datos),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Error HTTP: ${response.status}`);
+    }
+
+    const resultado = await response.json();
+
+    if (!resultado.success) {
+      throw new Error(resultado.message);
+    }
+
+    //actualizar lista colaboradoras
+    await mostrarColaboradoras();
+
+    //cerrar modal de crear
+    cerrarModal("modal-overlay-create");
+
+    //mostrar alerta de colaboradora creada
+    console.log("Colaboradora Creada");
+    //mostrarAlerta();
+  } catch (error) {
+    console.error("Error al crear colaboradora:", error);
+
+    //Mostrar alerta de fallo
+    console.log("Error al crear colaboradora");
   }
 }
 

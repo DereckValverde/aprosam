@@ -22,6 +22,9 @@ $router->get('configuraciones/horario', ['ConfiguracionesController', 'horario']
 $router->get('configuraciones/medicamentos', ['ConfiguracionesController', 'medicamentos']);
 $router->get('configuraciones/inventario', ['ConfiguracionesController', 'inventario']);
 
+//Configuraciones: Crear una colaboradora
+$router->post('colaboradora/crear', ['ColaboradorasController', 'apiCrearColaboradora']);
+
 //Configuraciones: Actualizar una colaboradora
 $router->post('colaboradoras/actualizar', ['ColaboradorasController', 'apiActualizarColaboradora']);
 

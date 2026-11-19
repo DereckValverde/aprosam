@@ -56,7 +56,7 @@
 
 /* BOTÓN AGREGAR */
 
-.btn-agregar {
+.btn-anadir-nueva-colaboradora {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -251,7 +251,8 @@
 }
 
 /* Fondo oscuro translúcido que envuelve el modal */
-.modal-overlay {
+.modal-overlay,
+.modal-overlay-create {
   position: fixed;
   top: 0;
   left: 0;
@@ -267,7 +268,8 @@
 }
 
 /* Contenedor principal del modal */
-.modal-editar-colaboradora {
+.modal-editar-colaboradora,
+.modal-crear-colaboradora {
   background: #ffffff;
   width: 100%;
   max-width: 420px;
@@ -311,7 +313,8 @@
   margin-bottom: 16px;
 }
 
-.modal-editar-colaboradora label {
+.modal-editar-colaboradora label,
+.modal-crear-colaboradora label {
   display: block;
   font-size: 0.875rem;
   font-weight: 500;
@@ -320,7 +323,9 @@
 }
 
 .modal-editar-colaboradora input[type="text"],
-.modal-editar-colaboradora select {
+.modal-editar-colaboradora select,
+.modal-crear-colaboradora input[type="text"],
+.modal-crear-colaboradora select {
   width: 100%;
   padding: 10px 12px;
   border: 1px solid #d1d5db;
@@ -333,7 +338,9 @@
 }
 
 .modal-editar-colaboradora input[type="text"]:focus,
-.modal-editar-colaboradora select:focus {
+.modal-editar-colaboradora select:focus,
+.modal-crear-colaboradora input[type="text"]:focus,
+.modal-crear-colaboradora select:focus {
   outline: none;
   border-color: #3b82f6;
   background-color: #fff;
@@ -381,6 +388,22 @@
   transition: background-color 0.2s;
 }
 
+.btn-anadir-colaboradora {
+  background-color: #319962;
+  color: #ffffff;
+  border: none;
+  padding: 10px 18px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-anadir-colaboradora:hover {
+  background-color: #196c40;
+}
+
 .btn-guardar:hover {
   background-color: #1d4ed8;
 }
@@ -412,7 +435,7 @@
     flex-direction: column;
   }
 
-  .btn-agregar {
+  .btn-anadir-nueva-colaboradora {
     width: 100%;
     justify-content: center;
   }

@@ -37,7 +37,7 @@
                             <p>Administrar las colaboradoras.</p>
                         </div>
 
-                        <button class="btn-agregar">
+                        <button class="btn-anadir-nueva-colaboradora">
                             <i class="bi bi-plus-lg"></i>
                             <span>Añadir colaboradora</span>
                         </button>
@@ -58,7 +58,7 @@
             </div>
         </main>
 
-
+        <!-- Modal editar colaboradora -->
         <div class="modal-overlay">
             <div class="form-container modal-editar-colaboradora">
                 <div class="modal-header">
@@ -89,6 +89,43 @@
                     <div class="modal-buttons">
                         <button type="button" class="btn-cancelar">Cancelar</button>
                         <button type="submit" class="btn-guardar">Guardar cambios</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+        <!-- Modal crear colaboradora -->
+        <div class="modal-overlay-create">
+            <div class="form-container modal-crear-colaboradora">
+                <div class="modal-header">
+                    <h2>Editar colaboradora</h2>
+                    <i class="bi bi-x-lg closeModal" role="button" aria-label="Cerrar"></i>
+                </div>
+
+                <form action="#" method="POST" id="formCrearColaboradora">
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input
+                            type="text"
+                            id="nombre"
+                            name="nombre"
+                            value=""
+                            required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="rol">Apellido</label>
+                        <input
+                            type="text"
+                            id="apellido"
+                            name="apellido"
+                            value="">
+                    </div>
+
+                    <div class="modal-buttons">
+                        <button type="button" class="btn-cancelar">Cancelar</button>
+                        <button type="submit" class="btn-anadir-colaboradora">Añadir colaboradora</button>
                     </div>
                 </form>
             </div>

@@ -11,6 +11,17 @@ function init() {
 }
 
 function registrarEventos() {
+  //Identificar si se hizo clic en btn añadir colaboradora
+  const btnAnadirColaboradora = document.querySelector(
+    ".btn-anadir-nueva-colaboradora",
+  );
+
+  if (btnAnadirColaboradora) {
+    btnAnadirColaboradora.addEventListener(
+      "click",
+      abrirModalCrearColaboradora,
+    );
+  }
   //Identificar si se hizo clic en btn de editar o eliminar
   const contenedorListaColaboradoras = document.querySelector(
     ".lista-colaboradoras",
@@ -81,6 +92,16 @@ async function manejarSubmitModal(event) {
 /****************************
  * Acciones
  ****************************/
+function abrirModalCrearColaboradora() {
+  const abrirModalCrearColaboradora = document.querySelector(
+    ".modal-overlay-create",
+  );
+
+  if (abrirModalCrearColaboradora) {
+    abrirModalCrearColaboradora.style.display = "flex";
+  }
+}
+
 function abrirModalEditar(idColaboradora) {
   //Buscar colaboradora por ID
   const colaboradora = arrayListaColaboradoras.find(

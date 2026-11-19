@@ -366,11 +366,11 @@ async function mostrarColaboradoras() {
 
     <div class="acciones-colaboradora">
         <button class="btn-editar" title="Editar colaboradora">
-            <i class="bi bi-pencil"></i>
+            <i class="bi bi-pencil lapiz-editar-colaboradora"></i>
         </button>
 
         <button class="btn-eliminar" title="Eliminar colaboradora">
-            <i class="bi bi-trash3"></i>
+            <i class="bi bi-trash3 basurero-eliminar-colaboradora"></i>
         </button>
     </div>
     `;

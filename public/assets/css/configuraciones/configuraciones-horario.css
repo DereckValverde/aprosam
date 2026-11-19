@@ -214,22 +214,20 @@
 /* EDITAR */
 
 .btn-editar {
-  color: #64748b;
+  color: #2a79e0;
 }
 
 .btn-editar:hover {
-  color: #238653;
-  background-color: #edf6f0;
+  background-color: #eff6ff;
 }
 
 /* ELIMINAR */
 
 .btn-eliminar {
-  color: #94a3b8;
+  color: #ec3333;
 }
 
 .btn-eliminar:hover {
-  color: #dc4545;
   background-color: #fff0f0;
 }
 

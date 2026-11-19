@@ -251,7 +251,7 @@
 }
 
 /* Fondo oscuro translúcido que envuelve el modal */
-.modal-overlay,
+.modal-overlay-edit,
 .modal-overlay-create {
   position: fixed;
   top: 0;

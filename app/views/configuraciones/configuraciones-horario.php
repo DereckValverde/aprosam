@@ -66,7 +66,7 @@
                     <i class="bi bi-x-lg closeModal" role="button" aria-label="Cerrar"></i>
                 </div>
 
-                <form action="#" method="POST" id="formActualizarColaboradora">
+                <form action="#" method="POST" id="formActualizarColaboradora" autocomplete="off">
                     <div class="form-group">
                         <label for="nombre">Nombre</label>
                         <input
@@ -103,7 +103,7 @@
                     <i class="bi bi-x-lg closeModal" role="button" aria-label="Cerrar"></i>
                 </div>
 
-                <form action="#" method="POST" id="formCrearColaboradora">
+                <form action="#" method="POST" id="formCrearColaboradora" autocomplete="off">
                     <div class="form-group">
                         <label for="nombre">Nombre</label>
                         <input

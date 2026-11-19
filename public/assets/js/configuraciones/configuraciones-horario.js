@@ -145,7 +145,11 @@ function abrirModalEditar(idColaboradora) {
 function cerrarModal(nombreModal) {
   const modal = document.querySelector(`.${nombreModal}`);
 
+  //cierra modal
   modal.style.display = "none";
+
+  //limpia inputs
+  modal.querySelector("form").reset();
 
   idColaboradoraEditar = null;
 }

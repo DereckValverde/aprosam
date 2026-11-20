@@ -132,6 +132,23 @@
         </div>
 
 
+        <div class="modal-overlay-eliminar">
+            <div class="form-container modal-eliminar-colaboradora">
+                <div class="modal-header">
+                    <h2>Eliminar colaboradora</h2>
+                    <i class="bi bi-x-lg closeModal" role="button" aria-label="Cerrar"></i>
+                </div>
+
+                <p class="mensaje-eliminar" id="mensajeEliminarColaboradora"></p>
+
+                <div class="modal-buttons">
+                    <button type="button" class="btn-cancelar">Cancelar</button>
+                    <button type="button" class="btn-confirmar-eliminar">Sí, eliminar</button>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 
 </body>

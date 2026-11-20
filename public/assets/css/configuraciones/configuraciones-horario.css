@@ -250,7 +250,8 @@
 
 /* Fondo oscuro translúcido que envuelve el modal */
 .modal-overlay-edit,
-.modal-overlay-create {
+.modal-overlay-create,
+.modal-overlay-eliminar {
   position: fixed;
   top: 0;
   left: 0;
@@ -267,7 +268,8 @@
 
 /* Contenedor principal del modal */
 .modal-editar-colaboradora,
-.modal-crear-colaboradora {
+.modal-crear-colaboradora,
+.modal-eliminar-colaboradora {
   background: #ffffff;
   width: 100%;
   max-width: 420px;
@@ -304,6 +306,13 @@
 .modal-header .closeModal:hover {
   color: #ff0000;
   transition: ease 0.35s;
+}
+
+.mensaje-eliminar {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #4b5563;
 }
 
 /* Estructura de los campos */
@@ -371,6 +380,22 @@
   background-color: #f5d4d4;
   color: #ff0000;
   border-color: #ff0000;
+}
+
+.btn-confirmar-eliminar {
+  background-color: #dc2626;
+  color: #ffffff;
+  border: none;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-confirmar-eliminar:hover {
+  background-color: #b91c1c;
 }
 
 /* Estilo Botón Guardar */

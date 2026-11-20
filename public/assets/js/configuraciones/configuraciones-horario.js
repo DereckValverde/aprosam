@@ -3,11 +3,13 @@
  ************************/
 let arrayListaColaboradoras = [];
 let idColaboradoraEditar = null;
+let resolverConfirmacionEliminar = null;
 
 function init() {
   registrarEventos();
   registrarEventosModal();
   registrarEventosModalCrearColaboradora();
+  registrarEventosModalEliminarColaboradora();
   mostrarColaboradoras();
 }
 
@@ -64,6 +66,14 @@ function registrarEventosModalCrearColaboradora() {
   }
 }
 
+function registrarEventosModalEliminarColaboradora() {
+  const modal = document.querySelector(".modal-overlay-eliminar");
+
+  if (modal) {
+    modal.addEventListener("click", manejarClicModalEliminarColaboradora);
+  }
+}
+
 /****************************
  * Handlers
  ****************************/
@@ -99,6 +109,21 @@ function manejarClicModal(event) {
   if (!btnCerrar) return;
 
   cerrarModal("modal-overlay-edit");
+}
+
+function manejarClicModalEliminarColaboradora(event) {
+  const btnCerrar = event.target.closest(".closeModal, .btn-cancelar");
+  const btnConfirmar = event.target.closest(".btn-confirmar-eliminar");
+
+  if (!btnCerrar && !btnConfirmar) return;
+
+  const modal = document.querySelector(".modal-overlay-eliminar");
+  modal.style.display = "none";
+
+  if (resolverConfirmacionEliminar) {
+    resolverConfirmacionEliminar(!!btnConfirmar);
+    resolverConfirmacionEliminar = null;
+  }
 }
 
 async function manejarSubmitModal(event) {
@@ -217,16 +242,15 @@ async function eliminarColaboladora(idColaboradora) {
 }
 
 function confirmarEliminado(nombreColaboradora) {
-  return Swal.fire({
-    title: `¿Quiere eliminar a ${nombreColaboradora}?`,
-    text: "¡Esta acción no se puede revertir!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Sí, eliminar",
-    cancelButtonText: "Cancelar",
-  }).then((result) => result.isConfirmed);
+  const modal = document.querySelector(".modal-overlay-eliminar");
+  const mensaje = document.getElementById("mensajeEliminarColaboradora");
+
+  mensaje.textContent = `¿Quiere eliminar a ${nombreColaboradora}? Esta acción no se puede revertir.`;
+  modal.style.display = "flex";
+
+  return new Promise((resolver) => {
+    resolverConfirmacionEliminar = resolver;
+  });
 }
 
 async function cargarListaColaboradoras() {

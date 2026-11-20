@@ -22,11 +22,20 @@ $router->get('configuraciones/horario', ['ConfiguracionesController', 'horario']
 $router->get('configuraciones/medicamentos', ['ConfiguracionesController', 'medicamentos']);
 $router->get('configuraciones/inventario', ['ConfiguracionesController', 'inventario']);
 
+//Configuraciones: Crear una categoría
+$router->post('categoria/crear', ['InventarioController', 'apiCrearCategoria']);
+
 //Configuraciones: Crear una colaboradora
 $router->post('colaboradora/crear', ['ColaboradorasController', 'apiCrearColaboradora']);
 
 //Configuraciones: Actualizar una colaboradora
 $router->post('colaboradoras/actualizar', ['ColaboradorasController', 'apiActualizarColaboradora']);
+
+//Configuraciones: Actualizar una categoría
+$router->post('categorias/actualizar', ['InventarioController', 'apiActualizarCategoria']);
+
+//Configuraciones: eliminar una categoría
+$router->post('categorias/eliminar', ['InventarioController', 'apiEliminarCategoria']);
 
 //Configuraciones: eliminar una colaboradora
 $router->post('colaboradoras/eliminar', ['ColaboradorasController', 'apiEliminarColaboradora']);

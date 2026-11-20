@@ -5,6 +5,19 @@ let arrayListaColaboradoras = [];
 let idColaboradoraEditar = null;
 let resolverConfirmacionEliminar = null;
 
+function formatearNombre(texto) {
+  const valor = String(texto ?? "")
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, " ");
+
+  if (!valor) {
+    return "";
+  }
+
+  return valor.charAt(0).toUpperCase() + valor.slice(1);
+}
+
 function init() {
   registrarEventos();
   registrarEventosModal();
@@ -86,7 +99,9 @@ function registrarValidacionCamposRequired() {
     });
 
     campo.addEventListener("input", () => {
-      campo.setCustomValidity("");
+      campo.setCustomValidity(
+        campo.value.trim() === "" ? "Este campo es obligatorio." : "",
+      );
     });
   });
 
@@ -161,8 +176,8 @@ async function manejarSubmitModal(event) {
   const formulario = event.target;
   const datosFormulario = new FormData(formulario);
 
-  const nombre = datosFormulario.get("nombre").trim();
-  const apellido1 = datosFormulario.get("apellido").trim();
+  const nombre = formatearNombre(datosFormulario.get("nombre"));
+  const apellido1 = formatearNombre(datosFormulario.get("apellido"));
 
   await actualizarDatosColaboradora(idColaboradoraEditar, nombre, apellido1);
 }
@@ -173,8 +188,8 @@ async function manejarSubmitModalCrear(event) {
   const formulario = event.target;
   const datosFormulario = new FormData(formulario);
 
-  const nombre = datosFormulario.get("nombre").trim();
-  const apellido1 = datosFormulario.get("apellido").trim();
+  const nombre = formatearNombre(datosFormulario.get("nombre"));
+  const apellido1 = formatearNombre(datosFormulario.get("apellido"));
 
   await crearColaboradora(nombre, apellido1);
 }
@@ -208,8 +223,8 @@ function abrirModalEditar(idColaboradora) {
   const areaApellido = document.getElementById("apellido");
 
   //colocar datos en los inputs
-  areaNombre.value = colaboradora.nombre ?? "";
-  areaApellido.value = colaboradora.apellido1 ?? "";
+  areaNombre.value = formatearNombre(colaboradora.nombre ?? "");
+  areaApellido.value = formatearNombre(colaboradora.apellido1 ?? "");
 
   //mostrar modal
   modal.style.display = "flex";
@@ -232,7 +247,7 @@ async function eliminarColaboladora(idColaboradora) {
     (c) => c.idColaboradora == idColaboradora,
   );
 
-  const nombre = colaboradora?.nombre ?? "la colaboradora";
+  const nombre = formatearNombre(colaboradora?.nombre ?? "la colaboradora");
 
   // Esperar la confirmación del usuario
   const confirmado = await confirmarEliminado(nombre);
@@ -391,6 +406,10 @@ async function mostrarColaboradoras() {
     listaColaboradoras.innerHTML = "";
 
     arrayListaColaboradoras.forEach((colaboradora) => {
+      const nombre = formatearNombre(colaboradora.nombre);
+      const apellido1 = formatearNombre(colaboradora.apellido1);
+      const apellido2 = formatearNombre(colaboradora.apellido2);
+
       const divColaboradora = document.createElement("div");
 
       divColaboradora.className = "colaboradora";
@@ -399,17 +418,17 @@ async function mostrarColaboradoras() {
       divColaboradora.innerHTML = `
     <div class="colaboradora-info">
         <div class="avatar-colaboradora">
-            ${colaboradora.nombre?.charAt(0).toUpperCase() ?? ""}
+            ${nombre.charAt(0)}
         </div>
 
         <div class="datos-colaboradora">
             <span class="nombre-colaboradora">
-                ${colaboradora.nombre}
+                ${nombre}
             </span>
 
             <span class="apellido-colaboradora">
-                ${colaboradora.apellido1 ?? ""}
-                ${colaboradora.apellido2 ?? ""}
+                ${apellido1}
+                ${apellido2}
             </span>
         </div>
     </div>

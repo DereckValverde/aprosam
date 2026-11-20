@@ -10,6 +10,7 @@ function init() {
   registrarEventosModal();
   registrarEventosModalCrearColaboradora();
   registrarEventosModalEliminarColaboradora();
+  registrarValidacionCamposRequired();
   mostrarColaboradoras();
 }
 
@@ -72,6 +73,34 @@ function registrarEventosModalEliminarColaboradora() {
   if (modal) {
     modal.addEventListener("click", manejarClicModalEliminarColaboradora);
   }
+}
+
+function registrarValidacionCamposRequired() {
+  const campos = document.querySelectorAll(
+    ".modal-overlay-edit input[required], .modal-overlay-create input[required]",
+  );
+
+  campos.forEach((campo) => {
+    campo.addEventListener("invalid", () => {
+      campo.setCustomValidity("Este campo es obligatorio.");
+    });
+
+    campo.addEventListener("input", () => {
+      campo.setCustomValidity("");
+    });
+  });
+
+  const formularios = document.querySelectorAll(
+    "#formActualizarColaboradora, #formCrearColaboradora",
+  );
+
+  formularios.forEach((formulario) => {
+    formulario.addEventListener("reset", () => {
+      formulario.querySelectorAll("input").forEach((campo) => {
+        campo.setCustomValidity("");
+      });
+    });
+  });
 }
 
 /****************************
@@ -341,14 +370,11 @@ async function crearColaboradora(nombre, apellido1) {
     //cerrar modal de crear
     cerrarModal("modal-overlay-create");
 
-    //mostrar alerta de colaboradora creada
-    console.log("Colaboradora Creada");
-    //mostrarAlerta();
+    alertaColaboradoraCreada(nombre);
   } catch (error) {
     console.error("Error al crear colaboradora:", error);
 
-    //Mostrar alerta de fallo
-    console.log("Error al crear colaboradora");
+    alertaErrorCrearColaboradora(nombre);
   }
 }
 
@@ -427,7 +453,7 @@ function alertaColaboradoraEliminada(nombreColaboradora) {
     toast: true,
     position: "bottom-right",
     icon: "success",
-    title: `Se eliminó a ${nombreColaboradora}`,
+    title: `Se eliminó a "${nombreColaboradora}".`,
     showConfirmButton: false,
     timer: 4000,
     timerProgressBar: true,
@@ -438,7 +464,7 @@ function alertaErrorEliminarColaboradora(nombreColaboradora) {
   Swal.fire({
     icon: "error",
     title: "Error",
-    text: `No se pudo eliminar a ${nombreColaboradora}`,
+    text: `No se pudo eliminar a "${nombreColaboradora}".`,
   });
 }
 
@@ -447,7 +473,7 @@ function alertaColaboradoraActualizada(nombreColaboradora) {
     toast: true,
     position: "bottom-right",
     icon: "success",
-    title: `Se actualizó a ${nombreColaboradora} correctamente`,
+    title: `Se actualizó a "${nombreColaboradora}" correctamente.`,
     showConfirmButton: false,
     timer: 4000,
     timerProgressBar: true,
@@ -458,7 +484,27 @@ function alertaErrorActualizarColaboradora(nombreColaboradora) {
   Swal.fire({
     icon: "error",
     title: "Error",
-    text: `No se pudo actualizar a ${nombreColaboradora}`,
+    text: `No se pudo actualizar a "${nombreColaboradora}".`,
+  });
+}
+
+function alertaColaboradoraCreada(nombreColaboradora) {
+  Swal.fire({
+    toast: true,
+    position: "bottom-right",
+    icon: "success",
+    title: `Se creó correctamente a "${nombreColaboradora}".`,
+    showConfirmButton: false,
+    timer: 4000,
+    timerProgressBar: true,
+  });
+}
+
+function alertaErrorCrearColaboradora(nombreColaboradora) {
+  Swal.fire({
+    icon: "error",
+    title: "Error",
+    text: `Hubo un error al añadir a "${nombreColaboradora}".`,
   });
 }
 

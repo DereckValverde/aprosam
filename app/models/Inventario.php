@@ -13,7 +13,8 @@ class Inventario
 
     public function obtenerCategorias()
     {
-        $query = "SELECT * FROM Categorias";
+        $query = "SELECT * FROM Categorias
+        ORDER BY nombre_categoria ASC";
 
         $stmt = $this->db->prepare($query);
         $stmt->execute();

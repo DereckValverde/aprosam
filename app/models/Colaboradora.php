@@ -16,6 +16,7 @@ class Colaboradora
     {
         $query = "
         SELECT * FROM Colaboradoras
+        ORDER BY nombre ASC
         ";
 
         $stmt = $this->db->prepare($query);

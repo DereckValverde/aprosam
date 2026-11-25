@@ -10,6 +10,9 @@
 *.db
 !app/database/database.demo.db
 
+# Esquema con datos reales (solo local)
+app/database/schema.sql
+
 # Logs y archivos temporales
 *.log
 *.tmp

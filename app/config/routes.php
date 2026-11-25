@@ -12,6 +12,8 @@ $router->get('horario', ['HorarioController', 'index']);
 //Rutas para el módulo de Inventario
 $router->get('inventario', ['InventarioController', 'index']);
 $router->get('categorias', ['InventarioController', 'apiObtenerCategorias']);
+$router->get('productos', ['InventarioController', 'apiObtenerProductos']);
+$router->get('distribuidoras', ['InventarioController', 'apiObtenerDistribuidoras']);
 
 //Rutas para el módulo de Medicamento
 $router->get('medicamentos', ['MedicamentosController', 'index']);
@@ -21,6 +23,18 @@ $router->get('configuraciones', ['ConfiguracionesController', 'index']);
 $router->get('configuraciones/horario', ['ConfiguracionesController', 'horario']);
 $router->get('configuraciones/medicamentos', ['ConfiguracionesController', 'medicamentos']);
 $router->get('configuraciones/inventario', ['ConfiguracionesController', 'inventario']);
+
+//Inventario: Crear un producto
+$router->post('producto/crear', ['InventarioController', 'apiCrearProducto']);
+
+//Inventario: Actualizar un producto
+$router->post('productos/actualizar', ['InventarioController', 'apiActualizarProducto']);
+
+//Inventario: Ajustar el stock actual de un producto
+$router->post('productos/actualizar-stock', ['InventarioController', 'apiActualizarStock']);
+
+//Inventario: Eliminar un producto
+$router->post('productos/eliminar', ['InventarioController', 'apiEliminarProducto']);
 
 //Configuraciones: Crear una categoría
 $router->post('categoria/crear', ['InventarioController', 'apiCrearCategoria']);

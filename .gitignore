@@ -8,6 +8,7 @@
 *.sqlite
 *.sqlite3
 *.db
+!app/database/database.demo.db
 
 # Logs y archivos temporales
 *.log
